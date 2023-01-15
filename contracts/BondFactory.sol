@@ -92,10 +92,9 @@ contract BondFactory is ERC1155 {
         BondMetadata memory metadata = _bondMetadata[id];
         uint256 tokenAmount = bondQuantity * metadata.tokenAmountPerBond;
 
-        _baseToken.transferFrom(msg.sender, address(this), tokenAmount);
-
         _purchasedQuantity[id] += bondQuantity;
         _designatedTokenPool[id] += tokenAmount;
+        _baseToken.transferFrom(msg.sender, address(this), tokenAmount);
     }
 
     function withdraw(
@@ -191,7 +190,7 @@ contract BondFactory is ERC1155 {
 
     function markAsDefaulted(uint256 id) external {
         require(
-            !isDefaulted(id) && isDefaultedInTheory(id),
+            !isCompleted(id) && !isDefaulted(id) && isDefaultedInTheory(id),
             "Bond is not defaulted"
         );
         uint256 totalDebt = principalWithInterest(id);
@@ -213,7 +212,7 @@ contract BondFactory is ERC1155 {
 
     function markAsCompleted(uint256 id) external {
         require(
-            !isCompleted(id) && isCompletedInTheory(id),
+            !isDefaulted(id) && !isCompleted(id) && isCompletedInTheory(id),
             "Bond is already completed"
         );
         uint256 totalDebt = principalWithInterest(id);

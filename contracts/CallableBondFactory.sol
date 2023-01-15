@@ -26,6 +26,7 @@ contract CallableBondFactory is BondFactory {
             (_bondMetadata[id].couponRate * timeElapsed(id)) /
             (_bondMetadata[id].durationInDays * 1 days);
         _isCalled[id] = true;
+        _isCompleted[id] = true;
 
         emit Called(id, _bondMetadata[id].couponRate, _couponRateOnCall[id]);
     }

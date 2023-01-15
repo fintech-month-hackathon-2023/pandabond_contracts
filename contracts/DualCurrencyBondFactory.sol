@@ -256,7 +256,7 @@ contract DualCurrencyBondFactory is ERC1155 {
 
     function markAsDefaulted(uint256 id) external {
         require(
-            !isDefaulted(id) && isDefaultedInTheory(id),
+            !isCompleted(id) && !isDefaulted(id) && isDefaultedInTheory(id),
             "Bond is not defaulted"
         );
         uint256 totalDebt = principalWithInterest(id);
@@ -293,8 +293,8 @@ contract DualCurrencyBondFactory is ERC1155 {
 
     function markAsCompleted(uint256 id) external {
         require(
-            !isCompleted(id) && isCompletedInTheory(id),
-            "Bond is already completed"
+            !isDefaulted(id) && !isCompleted(id) && isCompletedInTheory(id),
+            "Bond is not completed"
         );
         uint256 totalDebt = principalWithInterest(id);
         uint256 reward = totalDebt / 1000;
