@@ -43,12 +43,17 @@ contract BondFactory is ERC1155 {
         uint256 indexed id,
         uint256 bondQuantity,
         uint256 tokenAmountPerBond,
-        uint256 couponRate
+        uint256 couponRate,
+        uint256 maturityDate
     );
     event Defaulted(uint256 indexed id, uint256 totalDebt, uint256 paidDebt);
     event Completed(uint256 indexed id, uint256 totalDebt, uint256 paidDebt);
 
-    constructor(string memory uri, address token, address deployer) ERC1155(uri) {
+    constructor(
+        string memory uri,
+        address token,
+        address deployer
+    ) ERC1155(uri) {
         _owner = deployer;
         _baseToken = IERC20(token);
     }
@@ -68,6 +73,7 @@ contract BondFactory is ERC1155 {
             "Active duration should be shorter than duration"
         );
         id = _id + 1;
+        _id+=1;
         _mint(msg.sender, id, bondQuantity, data);
         _bondMetadata[id] = BondMetadata(
             ticker,
@@ -81,7 +87,13 @@ contract BondFactory is ERC1155 {
             minPurchasedQuantity,
             rate
         );
-        emit Issued(id, bondQuantity, tokenAmountPerBond, rate);
+        emit Issued(
+            id,
+            bondQuantity,
+            tokenAmountPerBond,
+            rate,
+            block.timestamp + durationDays * 1 days
+        );
     }
 
     function purchase(uint256 id, uint256 bondQuantity) external {
@@ -354,19 +366,19 @@ contract BondFactory is ERC1155 {
         );
     }
 
-    function baseToken() public view returns(address){
+    function baseToken() public view returns (address) {
         return address(_baseToken);
     }
 
-    function owner() public view returns(address) {
+    function owner() public view returns (address) {
         return _owner;
     }
 
-    function fundsRaised() public view returns(uint256) {
+    function fundsRaised() public view returns (uint256) {
         return _fundsRaised;
     }
 
-    function designatedTokenPool(uint256 id) public view returns(uint256) {
+    function designatedTokenPool(uint256 id) public view returns (uint256) {
         return _designatedTokenPool[id];
     }
 }

@@ -6,8 +6,8 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 contract DualCurrencyBondFactory is ERC1155 {
-    AggregatorV3Interface internal _priceFeedA;
-    AggregatorV3Interface internal _priceFeedB;
+    AggregatorV3Interface immutable _priceFeedA;
+    AggregatorV3Interface immutable _priceFeedB;
 
     address immutable _owner;
     IERC20 immutable _tokenA;
@@ -50,7 +50,8 @@ contract DualCurrencyBondFactory is ERC1155 {
         uint256 bondQuantity,
         uint256 tokenAAmountPerBond,
         uint256 tokenBAmountPerBond,
-        uint256 couponRate
+        uint256 couponRate,
+        uint256 maturityDate
     );
     event Defaulted(
         uint256 indexed id,
@@ -117,6 +118,7 @@ contract DualCurrencyBondFactory is ERC1155 {
             "Active duration should be shorter than duration"
         );
         id = _id + 1;
+        _id+=1;
         _mint(msg.sender, id, bondQuantity, data);
         uint256 exchangeRate = getAtoBExchangeRate();
         uint256 tokenBAmountPerBond = (exchangeRate * tokenAAmountPerBond) /
@@ -140,7 +142,8 @@ contract DualCurrencyBondFactory is ERC1155 {
             bondQuantity,
             tokenAAmountPerBond,
             tokenBAmountPerBond,
-            rate
+            rate,
+            block.timestamp + durationDays * 1 days
         );
     }
 
@@ -444,11 +447,11 @@ contract DualCurrencyBondFactory is ERC1155 {
         );
     }
 
-    function designatedTokenAPool(uint256 id) public view returns(uint256) {
+    function designatedTokenAPool(uint256 id) public view returns (uint256) {
         return _designatedTokenAPool[id];
     }
 
-    function designatedTokenBPool(uint256 id) public view returns(uint256) {
+    function designatedTokenBPool(uint256 id) public view returns (uint256) {
         return _designatedTokenBPool[id];
     }
 }

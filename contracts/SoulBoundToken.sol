@@ -20,14 +20,15 @@ contract SoulBoundToken is ERC721, Ownable {
         _;
     }
 
-    
-
     constructor() ERC721("SoulBoundToken", "SBT") {
         _tokenIdCounter.increment();
     }
 
-
-    function safeMint(address to, uint8 tier, bytes32 hashed) public onlyOwner validLevel(tier) {
+    function safeMint(
+        address to,
+        uint8 tier,
+        bytes32 hashed
+    ) public onlyOwner validLevel(tier) {
         require(_ownerToTokenId[to] == 0, "Token already exists");
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
@@ -39,19 +40,33 @@ contract SoulBoundToken is ERC721, Ownable {
     }
 
     function burn(uint256 tokenId) external {
-        require(ownerOf(tokenId) == msg.sender, "Only the owner of the token can burn it.");
+        require(
+            ownerOf(tokenId) == msg.sender,
+            "Only the owner of the token can burn it."
+        );
         _burn(tokenId);
     }
 
-    function _beforeTokenTransfer(address from, address to, uint256, uint256) pure override internal {
-        require(from == address(0) || to == address(0), "This a Soulbound token. It cannot be transferred. It can only be burned by the token owner.");
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256,
+        uint256
+    ) internal pure override {
+        require(
+            from == address(0) || to == address(0),
+            "This a Soulbound token. It cannot be transferred. It can only be burned by the token owner."
+        );
     }
 
     function _burn(uint256 tokenId) internal override(ERC721) {
         super._burn(tokenId);
     }
 
-    function modifyLevel(uint256 id, uint8 tier) public onlyOwner validLevel(tier) {
+    function modifyLevel(
+        uint256 id,
+        uint8 tier
+    ) public onlyOwner validLevel(tier) {
         _accessTier[id] = tier;
     }
 
@@ -64,27 +79,27 @@ contract SoulBoundToken is ERC721, Ownable {
     }
 
     //getters
-    function accessTier(uint256 id) public view returns(uint8) {
+    function accessTier(uint256 id) public view returns (uint8) {
         return _accessTier[id];
     }
 
-    function accessTier(address owner) public view returns(uint8) {
+    function accessTier(address owner) public view returns (uint8) {
         return accessTier(ownerToTokenId(owner));
     }
 
-    function isActive(uint256 id) public view returns(bool) {
+    function isActive(uint256 id) public view returns (bool) {
         return _isActive[id];
     }
 
-    function hashedIdentity(uint256 id) public view returns(bytes32) {
+    function hashedIdentity(uint256 id) public view returns (bytes32) {
         return _hashedIdentity[id];
     }
 
-    function hasActiveSBT(address owner) public view returns(bool){
+    function hasActiveSBT(address owner) public view returns (bool) {
         return _isActive[ownerToTokenId(owner)];
     }
 
-    function ownerToTokenId(address owner) public view returns(uint256){
+    function ownerToTokenId(address owner) public view returns (uint256) {
         return _ownerToTokenId[owner];
     }
 }

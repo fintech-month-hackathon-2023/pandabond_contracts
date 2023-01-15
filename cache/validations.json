@@ -591,9 +591,9 @@
       "contracts/BondFactory.sol:BondFactory": {
         "src": "contracts\\BondFactory.sol:7",
         "version": {
-          "withMetadata": "9b9d1a8d335100b0337e4aa471a1d687dadcb72bfb0681cd388bc0a6b6ab0734",
-          "withoutMetadata": "33d5bb625f9fcbc181cd3b0ebf974d6b9d9595c8357f5ef0b94fc4a0edfe855e",
-          "linkedWithoutMetadata": "33d5bb625f9fcbc181cd3b0ebf974d6b9d9595c8357f5ef0b94fc4a0edfe855e"
+          "withMetadata": "b9cd958891ad069d1a850d4b43af58c3fc8e0f05559001e94cded8bb24b56ec2",
+          "withoutMetadata": "f7d55012808e7502542a17807ab4303676b6a7dc4dc679cf145160868b52de69",
+          "linkedWithoutMetadata": "f7d55012808e7502542a17807ab4303676b6a7dc4dc679cf145160868b52de69"
         },
         "inherit": [
           "@openzeppelin/contracts/token/ERC1155/ERC1155.sol:ERC1155",
@@ -645,7 +645,7 @@
           {
             "kind": "constructor",
             "contract": "BondFactory",
-            "src": "contracts\\BondFactory.sol:51"
+            "src": "contracts\\BondFactory.sol:52"
           },
           {
             "kind": "state-variable-immutable",
@@ -890,9 +890,9 @@
       "contracts/CallableBondFactory.sol:CallableBondFactory": {
         "src": "contracts\\CallableBondFactory.sol:6",
         "version": {
-          "withMetadata": "bd73194623766a04205ba6d29a02e70e3ac9bc78fddca07d4991fd59e64a1a73",
-          "withoutMetadata": "a8ecf616057acf9c39a46cc3a322a5fbc495985e7058e4b1543b378aaf28f034",
-          "linkedWithoutMetadata": "a8ecf616057acf9c39a46cc3a322a5fbc495985e7058e4b1543b378aaf28f034"
+          "withMetadata": "1c29c4a28af0ec466de4b4d6423b4cfdc77a518f7ac5516c22965e21fa5b667b",
+          "withoutMetadata": "82eeb04c21ccbb1dcebb3c5f794fabca95772c798148df75c1b129aabb8ad5e8",
+          "linkedWithoutMetadata": "82eeb04c21ccbb1dcebb3c5f794fabca95772c798148df75c1b129aabb8ad5e8"
         },
         "inherit": [
           "contracts/BondFactory.sol:BondFactory",
@@ -1172,9 +1172,9 @@
       "contracts/DualCurrencyBondFactory.sol:DualCurrencyBondFactory": {
         "src": "contracts\\DualCurrencyBondFactory.sol:8",
         "version": {
-          "withMetadata": "d2d13734781edbbf2ce6b83d341159fd39fe4ea66de2ddd2e7c7c07453f0d06b",
-          "withoutMetadata": "bc425ea08fc80ff6fd3f7848cc5390a975c3839267f3df817c720cf681c1798e",
-          "linkedWithoutMetadata": "bc425ea08fc80ff6fd3f7848cc5390a975c3839267f3df817c720cf681c1798e"
+          "withMetadata": "92631e146956fda987bb7c70682ec99317202038bd70d8bcbf749b2ef082faa2",
+          "withoutMetadata": "a99fba8fe7bb50af2a59d205c2691d65807528f6a3a5d979a393c2fe1ad90e0f",
+          "linkedWithoutMetadata": "a99fba8fe7bb50af2a59d205c2691d65807528f6a3a5d979a393c2fe1ad90e0f"
         },
         "inherit": [
           "@openzeppelin/contracts/token/ERC1155/ERC1155.sol:ERC1155",
@@ -1229,7 +1229,17 @@
           {
             "kind": "constructor",
             "contract": "DualCurrencyBondFactory",
-            "src": "contracts\\DualCurrencyBondFactory.sol:63"
+            "src": "contracts\\DualCurrencyBondFactory.sol:64"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_priceFeedA",
+            "src": "contracts\\DualCurrencyBondFactory.sol:9"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_priceFeedB",
+            "src": "contracts\\DualCurrencyBondFactory.sol:10"
           },
           {
             "kind": "state-variable-immutable",
@@ -1279,25 +1289,9 @@
               "src": "@openzeppelin\\contracts\\token\\ERC1155\\ERC1155.sol:30"
             },
             {
-              "label": "_priceFeedA",
-              "offset": 0,
-              "slot": "3",
-              "type": "t_contract(AggregatorV3Interface)45",
-              "contract": "DualCurrencyBondFactory",
-              "src": "contracts\\DualCurrencyBondFactory.sol:9"
-            },
-            {
-              "label": "_priceFeedB",
-              "offset": 0,
-              "slot": "4",
-              "type": "t_contract(AggregatorV3Interface)45",
-              "contract": "DualCurrencyBondFactory",
-              "src": "contracts\\DualCurrencyBondFactory.sol:10"
-            },
-            {
               "label": "_id",
               "offset": 0,
-              "slot": "5",
+              "slot": "3",
               "type": "t_uint256",
               "contract": "DualCurrencyBondFactory",
               "src": "contracts\\DualCurrencyBondFactory.sol:15"
@@ -1305,15 +1299,15 @@
             {
               "label": "_bondMetadata",
               "offset": 0,
-              "slot": "6",
-              "type": "t_mapping(t_uint256,t_struct(BondMetadata)5741_storage)",
+              "slot": "4",
+              "type": "t_mapping(t_uint256,t_struct(BondMetadata)5800_storage)",
               "contract": "DualCurrencyBondFactory",
               "src": "contracts\\DualCurrencyBondFactory.sol:31"
             },
             {
               "label": "_purchasedQuantity",
               "offset": 0,
-              "slot": "7",
+              "slot": "5",
               "type": "t_mapping(t_uint256,t_uint256)",
               "contract": "DualCurrencyBondFactory",
               "src": "contracts\\DualCurrencyBondFactory.sol:32"
@@ -1321,7 +1315,7 @@
             {
               "label": "_redeemedQuantity",
               "offset": 0,
-              "slot": "8",
+              "slot": "6",
               "type": "t_mapping(t_uint256,t_uint256)",
               "contract": "DualCurrencyBondFactory",
               "src": "contracts\\DualCurrencyBondFactory.sol:33"
@@ -1329,7 +1323,7 @@
             {
               "label": "_designatedTokenAPool",
               "offset": 0,
-              "slot": "9",
+              "slot": "7",
               "type": "t_mapping(t_uint256,t_uint256)",
               "contract": "DualCurrencyBondFactory",
               "src": "contracts\\DualCurrencyBondFactory.sol:34"
@@ -1337,7 +1331,7 @@
             {
               "label": "_designatedTokenBPool",
               "offset": 0,
-              "slot": "10",
+              "slot": "8",
               "type": "t_mapping(t_uint256,t_uint256)",
               "contract": "DualCurrencyBondFactory",
               "src": "contracts\\DualCurrencyBondFactory.sol:35"
@@ -1345,7 +1339,7 @@
             {
               "label": "_tokenAAmountPerBondAfterDefault",
               "offset": 0,
-              "slot": "11",
+              "slot": "9",
               "type": "t_mapping(t_uint256,t_uint256)",
               "contract": "DualCurrencyBondFactory",
               "src": "contracts\\DualCurrencyBondFactory.sol:36"
@@ -1353,7 +1347,7 @@
             {
               "label": "_tokenBAmountPerBondAfterDefault",
               "offset": 0,
-              "slot": "12",
+              "slot": "10",
               "type": "t_mapping(t_uint256,t_uint256)",
               "contract": "DualCurrencyBondFactory",
               "src": "contracts\\DualCurrencyBondFactory.sol:37"
@@ -1361,7 +1355,7 @@
             {
               "label": "_tokenBAmountPerBondAfterComplete",
               "offset": 0,
-              "slot": "13",
+              "slot": "11",
               "type": "t_mapping(t_uint256,t_uint256)",
               "contract": "DualCurrencyBondFactory",
               "src": "contracts\\DualCurrencyBondFactory.sol:38"
@@ -1369,7 +1363,7 @@
             {
               "label": "_isDefaulted",
               "offset": 0,
-              "slot": "14",
+              "slot": "12",
               "type": "t_mapping(t_uint256,t_bool)",
               "contract": "DualCurrencyBondFactory",
               "src": "contracts\\DualCurrencyBondFactory.sol:40"
@@ -1377,7 +1371,7 @@
             {
               "label": "_isCompleted",
               "offset": 0,
-              "slot": "15",
+              "slot": "13",
               "type": "t_mapping(t_uint256,t_bool)",
               "contract": "DualCurrencyBondFactory",
               "src": "contracts\\DualCurrencyBondFactory.sol:41"
@@ -1391,10 +1385,6 @@
             "t_bool": {
               "label": "bool",
               "numberOfBytes": "1"
-            },
-            "t_contract(AggregatorV3Interface)45": {
-              "label": "contract AggregatorV3Interface",
-              "numberOfBytes": "20"
             },
             "t_mapping(t_address,t_bool)": {
               "label": "mapping(address => bool)",
@@ -1416,7 +1406,7 @@
               "label": "mapping(uint256 => mapping(address => uint256))",
               "numberOfBytes": "32"
             },
-            "t_mapping(t_uint256,t_struct(BondMetadata)5741_storage)": {
+            "t_mapping(t_uint256,t_struct(BondMetadata)5800_storage)": {
               "label": "mapping(uint256 => struct DualCurrencyBondFactory.BondMetadata)",
               "numberOfBytes": "32"
             },
@@ -1428,7 +1418,7 @@
               "label": "string",
               "numberOfBytes": "32"
             },
-            "t_struct(BondMetadata)5741_storage": {
+            "t_struct(BondMetadata)5800_storage": {
               "label": "struct DualCurrencyBondFactory.BondMetadata",
               "members": [
                 {
@@ -1513,9 +1503,9 @@
       "contracts/InstallmentBondFactory.sol:InstallmentBondFactory": {
         "src": "contracts\\InstallmentBondFactory.sol:6",
         "version": {
-          "withMetadata": "ecbd2bbccdf21586fbda7c34be6fa21a5fdcf0d52803a96e893d4cd7bccb48ab",
-          "withoutMetadata": "8a7b109f6674e5fdfd299a06deb69b4054e061f9eba0f440627f9ddb2f15c4ee",
-          "linkedWithoutMetadata": "8a7b109f6674e5fdfd299a06deb69b4054e061f9eba0f440627f9ddb2f15c4ee"
+          "withMetadata": "cec5b1cb85c2825a35d44e7dd13052564e531d11092ae192c10ab721a5562266",
+          "withoutMetadata": "3e35263c02a2ecb342301a2eb8f9f0f21be5f13779fdd645fc085de4b03f7eb5",
+          "linkedWithoutMetadata": "3e35263c02a2ecb342301a2eb8f9f0f21be5f13779fdd645fc085de4b03f7eb5"
         },
         "inherit": [
           "contracts/BondFactory.sol:BondFactory",
@@ -1856,9 +1846,9 @@
       "contracts/Mainframe.sol:Mainframe": {
         "src": "contracts\\Mainframe.sol:11",
         "version": {
-          "withMetadata": "87ee0462b7ea5fd6edd3622e0f1c6e789f233a5e59aea09f84b2fe309541571f",
-          "withoutMetadata": "c72c5ec518212561cf2596c8827c6bc679fd8a987da981c8ddc05dac99f3748e",
-          "linkedWithoutMetadata": "c72c5ec518212561cf2596c8827c6bc679fd8a987da981c8ddc05dac99f3748e"
+          "withMetadata": "9e2b5dc9c4e5f76ccafa840e2dd8abd540d9dd03ae1c1ec3f9c655d57c1a75fa",
+          "withoutMetadata": "bc9596dfb93cb023680b0b051b97658d36af208ddf37bbb13b3dee31cf00fae7",
+          "linkedWithoutMetadata": "bc9596dfb93cb023680b0b051b97658d36af208ddf37bbb13b3dee31cf00fae7"
         },
         "inherit": [],
         "libraries": [],
@@ -1888,28 +1878,25 @@
           {
             "kind": "constructor",
             "contract": "Mainframe",
-            "src": "contracts\\Mainframe.sol:50"
+            "src": "contracts\\Mainframe.sol:70"
           },
           {
             "kind": "state-variable-immutable",
             "name": "_owner",
             "src": "contracts\\Mainframe.sol:12"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_sbt",
+            "src": "contracts\\Mainframe.sol:13"
           }
         ],
         "layout": {
           "storage": [
             {
-              "label": "_sbt",
-              "offset": 0,
-              "slot": "0",
-              "type": "t_contract(SoulBoundToken)8760",
-              "contract": "Mainframe",
-              "src": "contracts\\Mainframe.sol:13"
-            },
-            {
               "label": "_entities",
               "offset": 0,
-              "slot": "1",
+              "slot": "0",
               "type": "t_array(t_address)dyn_storage",
               "contract": "Mainframe",
               "src": "contracts\\Mainframe.sol:15"
@@ -1917,7 +1904,7 @@
             {
               "label": "_priceFeeds",
               "offset": 0,
-              "slot": "2",
+              "slot": "1",
               "type": "t_mapping(t_address,t_address)",
               "contract": "Mainframe",
               "src": "contracts\\Mainframe.sol:17"
@@ -1925,7 +1912,7 @@
             {
               "label": "_isRegistered",
               "offset": 0,
-              "slot": "3",
+              "slot": "2",
               "type": "t_mapping(t_address,t_bool)",
               "contract": "Mainframe",
               "src": "contracts\\Mainframe.sol:18"
@@ -1933,7 +1920,7 @@
             {
               "label": "_bondFactories",
               "offset": 0,
-              "slot": "4",
+              "slot": "3",
               "type": "t_mapping(t_address,t_array(t_address)dyn_storage)",
               "contract": "Mainframe",
               "src": "contracts\\Mainframe.sol:20"
@@ -1941,7 +1928,7 @@
             {
               "label": "_callableBondFactories",
               "offset": 0,
-              "slot": "5",
+              "slot": "4",
               "type": "t_mapping(t_address,t_array(t_address)dyn_storage)",
               "contract": "Mainframe",
               "src": "contracts\\Mainframe.sol:21"
@@ -1949,7 +1936,7 @@
             {
               "label": "_installmentBondFactories",
               "offset": 0,
-              "slot": "6",
+              "slot": "5",
               "type": "t_mapping(t_address,t_array(t_address)dyn_storage)",
               "contract": "Mainframe",
               "src": "contracts\\Mainframe.sol:22"
@@ -1957,7 +1944,7 @@
             {
               "label": "_dualCurrencyBondFactories",
               "offset": 0,
-              "slot": "7",
+              "slot": "6",
               "type": "t_mapping(t_address,t_array(t_address)dyn_storage)",
               "contract": "Mainframe",
               "src": "contracts\\Mainframe.sol:23"
@@ -1965,7 +1952,7 @@
             {
               "label": "_bondFactoryIsInitialized",
               "offset": 0,
-              "slot": "8",
+              "slot": "7",
               "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
               "contract": "Mainframe",
               "src": "contracts\\Mainframe.sol:25"
@@ -1973,7 +1960,7 @@
             {
               "label": "_callableBondFactoryIsInitialized",
               "offset": 0,
-              "slot": "9",
+              "slot": "8",
               "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
               "contract": "Mainframe",
               "src": "contracts\\Mainframe.sol:26"
@@ -1981,7 +1968,7 @@
             {
               "label": "_installmentBondFactoryIsInitialized",
               "offset": 0,
-              "slot": "10",
+              "slot": "9",
               "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
               "contract": "Mainframe",
               "src": "contracts\\Mainframe.sol:27"
@@ -1989,7 +1976,7 @@
             {
               "label": "_dualCurrencyBondFactoryIsInitialized",
               "offset": 0,
-              "slot": "11",
+              "slot": "10",
               "type": "t_mapping(t_address,t_mapping(t_address,t_mapping(t_address,t_bool)))",
               "contract": "Mainframe",
               "src": "contracts\\Mainframe.sol:28"
@@ -2007,10 +1994,6 @@
             "t_bool": {
               "label": "bool",
               "numberOfBytes": "1"
-            },
-            "t_contract(SoulBoundToken)8760": {
-              "label": "contract SoulBoundToken",
-              "numberOfBytes": "20"
             },
             "t_mapping(t_address,t_address)": {
               "label": "mapping(address => address)",
@@ -2041,7 +2024,7 @@
       "contracts/SoulBoundToken.sol:SoulBoundToken": {
         "src": "contracts\\SoulBoundToken.sol:8",
         "version": {
-          "withMetadata": "3307ef8871c441bb0b1580bbcbedffb808b1bcb37d01a860dd279ff2438c2b05",
+          "withMetadata": "ac1d66e2662c275ed2b8df4ddc72772b74e8fcc9e4593a54d71118277bfedb05",
           "withoutMetadata": "5b3f364d9cdc78f8f4d8ac1089dba8bbb74bb8e7fc09c735b79471296086b6df",
           "linkedWithoutMetadata": "5b3f364d9cdc78f8f4d8ac1089dba8bbb74bb8e7fc09c735b79471296086b6df"
         },
@@ -2076,7 +2059,7 @@
           {
             "kind": "constructor",
             "contract": "SoulBoundToken",
-            "src": "contracts\\SoulBoundToken.sol:25"
+            "src": "contracts\\SoulBoundToken.sol:23"
           }
         ],
         "layout": {

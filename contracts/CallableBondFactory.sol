@@ -14,7 +14,11 @@ contract CallableBondFactory is BondFactory {
         uint256 couponRateOnCall
     );
 
-    constructor(string memory uri, address token, address deployer) BondFactory(uri, token, deployer) {}
+    constructor(
+        string memory uri,
+        address token,
+        address deployer
+    ) BondFactory(uri, token, deployer) {}
 
     function call(uint256 id) external {
         require(!isCompleted(id), "Bond is completed");
@@ -41,17 +45,34 @@ contract CallableBondFactory is BondFactory {
         uint256 rate, // coupon rate
         bytes memory data
     ) external override onlyOwner returns (uint256 id) {
-        id = BondFactory(address(this)).issue(
+        require(
+            activeDurationInDays < durationDays,
+            "Active duration should be shorter than duration"
+        );
+        id = _id + 1;
+        _id+=1;
+        _mint(msg.sender, id, bondQuantity, data);
+        _bondMetadata[id] = BondMetadata(
+            ticker,
+            tokenAmountPerBond,
+            block.timestamp,
+            block.timestamp + durationDays * 1 days,
+            block.timestamp + activeDurationInDays * 1 days,
+            activeDurationInDays,
+            durationDays,
             bondQuantity,
             minPurchasedQuantity,
-            tokenAmountPerBond,
-            ticker,
-            durationDays,
-            activeDurationInDays,
-            rate,
-            data
+            rate
         );
+        
         _minObligationPeriod[id] = durationDays / 2;
+        emit Issued(
+            id,
+            bondQuantity,
+            tokenAmountPerBond,
+            rate,
+            block.timestamp + durationDays * 1 days
+        );
     }
 
     //getter
