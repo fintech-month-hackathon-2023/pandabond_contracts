@@ -110,16 +110,15 @@ contract DualCurrencyBondFactory is ERC1155 {
         string calldata ticker,
         uint256 durationDays,
         uint256 activeDurationInDays,
-        uint256 rate, // coupon rate
-        bytes memory data
+        uint256 rate // coupon rate
     ) external virtual onlyOwner returns (uint256 id) {
         require(
             activeDurationInDays < durationDays,
             "Active duration should be shorter than duration"
         );
         id = _id + 1;
-        _id+=1;
-        _mint(msg.sender, id, bondQuantity, data);
+        _id += 1;
+        _mint(address(this), id, bondQuantity, "");
         uint256 exchangeRate = getAtoBExchangeRate();
         uint256 tokenBAmountPerBond = (exchangeRate * tokenAAmountPerBond) /
             1e9;
@@ -162,6 +161,7 @@ contract DualCurrencyBondFactory is ERC1155 {
 
         // requires approve
         _tokenA.transferFrom(msg.sender, address(this), tokenAmount);
+        safeTransferFrom(address(this), msg.sender, id, bondQuantity, "");
     }
 
     function withdraw(

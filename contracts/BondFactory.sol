@@ -65,16 +65,15 @@ contract BondFactory is ERC1155 {
         string memory ticker,
         uint256 durationDays,
         uint256 activeDurationInDays,
-        uint256 rate, // coupon rate
-        bytes memory data
+        uint256 rate // coupon rate
     ) external virtual onlyOwner returns (uint256 id) {
         require(
             activeDurationInDays < durationDays,
             "Active duration should be shorter than duration"
         );
         id = _id + 1;
-        _id+=1;
-        _mint(msg.sender, id, bondQuantity, data);
+        _id += 1;
+        _mint(address(this), id, bondQuantity, "");
         _bondMetadata[id] = BondMetadata(
             ticker,
             tokenAmountPerBond,
@@ -109,6 +108,7 @@ contract BondFactory is ERC1155 {
         _purchasedQuantity[id] += bondQuantity;
         _designatedTokenPool[id] += tokenAmount;
         _fundsRaised += tokenAmount;
+        safeTransferFrom(address(this), msg.sender, id, bondQuantity, "");
         _baseToken.transferFrom(msg.sender, address(this), tokenAmount);
     }
 

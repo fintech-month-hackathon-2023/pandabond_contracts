@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\BondFactory.sol": {
-      "lastModificationDate": 1673781104164,
-      "contentHash": "fe9186df3148db2d0821b8a051919b89",
+      "lastModificationDate": 1673784836962,
+      "contentHash": "c6a1db071fd3ef599871b9f30c7bcc98",
       "sourceName": "contracts/BondFactory.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -38,42 +38,6 @@
       ],
       "artifacts": [
         "BondFactory"
-      ]
-    },
-    "C:\\Users\\SJ\\pandabond-smart-contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\IERC20.sol": {
-      "lastModificationDate": 1673662677035,
-      "contentHash": "ad7c2d0af148c8f9f097d65deeb4da6b",
-      "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-      "solcConfig": {
-        "version": "0.8.17",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC20"
       ]
     },
     "C:\\Users\\SJ\\pandabond-smart-contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC1155\\ERC1155.sol": {
@@ -117,6 +81,42 @@
       ],
       "artifacts": [
         "ERC1155"
+      ]
+    },
+    "C:\\Users\\SJ\\pandabond-smart-contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\IERC20.sol": {
+      "lastModificationDate": 1673662677035,
+      "contentHash": "ad7c2d0af148c8f9f097d65deeb4da6b",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC20"
       ]
     },
     "C:\\Users\\SJ\\pandabond-smart-contracts\\node_modules\\@openzeppelin\\contracts\\utils\\Address.sol": {
@@ -379,90 +379,9 @@
         "IERC165"
       ]
     },
-    "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\Mainframe.sol": {
-      "lastModificationDate": 1673781169915,
-      "contentHash": "12891e7c321fcfd940435bf720ff9168",
-      "sourceName": "contracts/Mainframe.sol",
-      "solcConfig": {
-        "version": "0.8.17",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-        "./BondFactory.sol",
-        "./CallableBondFactory.sol",
-        "./InstallmentBondFactory.sol",
-        "./DualCurrencyBondFactory.sol",
-        "./SoulBoundToken.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.17"
-      ],
-      "artifacts": [
-        "Mainframe"
-      ]
-    },
-    "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\CallableBondFactory.sol": {
-      "lastModificationDate": 1673781302327,
-      "contentHash": "c383727b1ece5e902b5478ea20c75f54",
-      "sourceName": "contracts/CallableBondFactory.sol",
-      "solcConfig": {
-        "version": "0.8.17",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./BondFactory.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.17"
-      ],
-      "artifacts": [
-        "CallableBondFactory"
-      ]
-    },
     "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\InstallmentBondFactory.sol": {
-      "lastModificationDate": 1673780892657,
-      "contentHash": "16fb0494807e46ba70bdae02e8998f07",
+      "lastModificationDate": 1673785072043,
+      "contentHash": "7135968e8ff554a125576a1f8d6948d9",
       "sourceName": "contracts/InstallmentBondFactory.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -498,10 +417,10 @@
         "InstallmentBondFactory"
       ]
     },
-    "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\DualCurrencyBondFactory.sol": {
-      "lastModificationDate": 1673781121019,
-      "contentHash": "c58586c238048db62bcaf65be98febc6",
-      "sourceName": "contracts/DualCurrencyBondFactory.sol",
+    "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\InstallmentBondPeriphery.sol": {
+      "lastModificationDate": 1673785162604,
+      "contentHash": "6425994e7165f7638b05394fc0605f47",
+      "sourceName": "contracts/InstallmentBondPeriphery.sol",
       "solcConfig": {
         "version": "0.8.17",
         "settings": {
@@ -527,19 +446,19 @@
         }
       },
       "imports": [
-        "@openzeppelin/contracts/token/ERC1155/ERC1155.sol",
         "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-        "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol"
+        "./InstallmentBondFactory.sol",
+        "./SoulBoundToken.sol"
       ],
       "versionPragmas": [
         "^0.8.17"
       ],
       "artifacts": [
-        "DualCurrencyBondFactory"
+        "InstallmentBondPeriphery"
       ]
     },
     "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\SoulBoundToken.sol": {
-      "lastModificationDate": 1673780854950,
+      "lastModificationDate": 1673784965938,
       "contentHash": "a077f2e4c7527863c3d6c1534418ff51",
       "sourceName": "contracts/SoulBoundToken.sol",
       "solcConfig": {
@@ -578,10 +497,10 @@
         "SoulBoundToken"
       ]
     },
-    "C:\\Users\\SJ\\pandabond-smart-contracts\\node_modules\\@chainlink\\contracts\\src\\v0.8\\interfaces\\AggregatorV3Interface.sol": {
-      "lastModificationDate": 1673700463425,
-      "contentHash": "d9654a0fc044a31d4106ee6bca772add",
-      "sourceName": "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol",
+    "C:\\Users\\SJ\\pandabond-smart-contracts\\node_modules\\@openzeppelin\\contracts\\utils\\Counters.sol": {
+      "lastModificationDate": 1673662676852,
+      "contentHash": "74654e3ae5d7f39555055dfe244dab7a",
+      "sourceName": "@openzeppelin/contracts/utils/Counters.sol",
       "solcConfig": {
         "version": "0.8.17",
         "settings": {
@@ -611,7 +530,7 @@
         "^0.8.0"
       ],
       "artifacts": [
-        "AggregatorV3Interface"
+        "Counters"
       ]
     },
     "C:\\Users\\SJ\\pandabond-smart-contracts\\node_modules\\@openzeppelin\\contracts\\access\\Ownable.sol": {
@@ -650,42 +569,6 @@
       ],
       "artifacts": [
         "Ownable"
-      ]
-    },
-    "C:\\Users\\SJ\\pandabond-smart-contracts\\node_modules\\@openzeppelin\\contracts\\utils\\Counters.sol": {
-      "lastModificationDate": 1673662676852,
-      "contentHash": "74654e3ae5d7f39555055dfe244dab7a",
-      "sourceName": "@openzeppelin/contracts/utils/Counters.sol",
-      "solcConfig": {
-        "version": "0.8.17",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "Counters"
       ]
     },
     "C:\\Users\\SJ\\pandabond-smart-contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol": {
@@ -916,6 +799,240 @@
       ],
       "artifacts": [
         "Math"
+      ]
+    },
+    "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\DualCurrencyBondPeriphery.sol": {
+      "lastModificationDate": 1673784903841,
+      "contentHash": "9914a7bed1f9c087ded118a5cc1d2752",
+      "sourceName": "contracts/DualCurrencyBondPeriphery.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "./DualCurrencyBondFactory.sol",
+        "./SoulBoundToken.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.17"
+      ],
+      "artifacts": [
+        "Mainframe"
+      ]
+    },
+    "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\DualCurrencyBondFactory.sol": {
+      "lastModificationDate": 1673785053707,
+      "contentHash": "9bb91ce694345dd6edb6e2ff33b539c0",
+      "sourceName": "contracts/DualCurrencyBondFactory.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC1155/ERC1155.sol",
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.17"
+      ],
+      "artifacts": [
+        "DualCurrencyBondFactory"
+      ]
+    },
+    "C:\\Users\\SJ\\pandabond-smart-contracts\\node_modules\\@chainlink\\contracts\\src\\v0.8\\interfaces\\AggregatorV3Interface.sol": {
+      "lastModificationDate": 1673700463425,
+      "contentHash": "d9654a0fc044a31d4106ee6bca772add",
+      "sourceName": "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "AggregatorV3Interface"
+      ]
+    },
+    "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\CallableBondPeriphery.sol": {
+      "lastModificationDate": 1673784964698,
+      "contentHash": "81ef4ba7552fc7274808ef9f78564cee",
+      "sourceName": "contracts/CallableBondPeriphery.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "./CallableBondFactory.sol",
+        "./SoulBoundToken.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.17"
+      ],
+      "artifacts": [
+        "CallableBondPeriphery"
+      ]
+    },
+    "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\CallableBondFactory.sol": {
+      "lastModificationDate": 1673785063250,
+      "contentHash": "7f64cc4ddda3949a5836b8a517cc51a9",
+      "sourceName": "contracts/CallableBondFactory.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./BondFactory.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.17"
+      ],
+      "artifacts": [
+        "CallableBondFactory"
+      ]
+    },
+    "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\BondPeriphery.sol": {
+      "lastModificationDate": 1673784906169,
+      "contentHash": "eb594943ccab229bce384e0b5f1fb44f",
+      "sourceName": "contracts/BondPeriphery.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "./BondFactory.sol",
+        "./SoulBoundToken.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.17"
+      ],
+      "artifacts": [
+        "BondPeriphery"
       ]
     }
   }

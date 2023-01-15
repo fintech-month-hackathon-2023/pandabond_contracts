@@ -32,8 +32,7 @@ contract InstallmentBondFactory is BondFactory {
         string calldata ticker,
         uint256 yearOption,
         uint256 activeDurationInDays,
-        uint256 rate, // coupon rate
-        bytes memory data
+        uint256 rate // coupon rate
     )
         external
         override
@@ -49,7 +48,7 @@ contract InstallmentBondFactory is BondFactory {
         uint256 durationDays = yearOptionToDays(yearOption);
 
         id = _id + 1;
-        _mint(msg.sender, id, bondQuantity, data);
+        _mint(msg.sender, id, bondQuantity, "");
         _bondMetadata[id] = BondMetadata(
             ticker,
             tokenAmountPerBond,

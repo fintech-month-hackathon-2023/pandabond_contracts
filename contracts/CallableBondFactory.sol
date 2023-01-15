@@ -42,16 +42,15 @@ contract CallableBondFactory is BondFactory {
         string calldata ticker,
         uint256 durationDays,
         uint256 activeDurationInDays,
-        uint256 rate, // coupon rate
-        bytes memory data
+        uint256 rate // coupon rate
     ) external override onlyOwner returns (uint256 id) {
         require(
             activeDurationInDays < durationDays,
             "Active duration should be shorter than duration"
         );
         id = _id + 1;
-        _id+=1;
-        _mint(msg.sender, id, bondQuantity, data);
+        _id += 1;
+        _mint(msg.sender, id, bondQuantity, "");
         _bondMetadata[id] = BondMetadata(
             ticker,
             tokenAmountPerBond,
@@ -64,7 +63,7 @@ contract CallableBondFactory is BondFactory {
             minPurchasedQuantity,
             rate
         );
-        
+
         _minObligationPeriod[id] = durationDays / 2;
         emit Issued(
             id,
