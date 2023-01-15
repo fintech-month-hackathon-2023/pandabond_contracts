@@ -14,7 +14,7 @@ contract CallableBondFactory is BondFactory {
         uint256 couponRateOnCall
     );
 
-    constructor(string memory uri, address token) BondFactory(uri, token) {}
+    constructor(string memory uri, address token, address deployer) BondFactory(uri, token, deployer) {}
 
     function call(uint256 id) external {
         require(!isCompleted(id), "Bond is completed");
@@ -67,5 +67,13 @@ contract CallableBondFactory is BondFactory {
 
     function couponRateOnCall(uint256 id) public view returns (uint256) {
         return _couponRateOnCall[id];
+    }
+
+    function isCalled(uint256 id) public view returns (bool) {
+        return _isCalled[id];
+    }
+
+    function minObligationPeriod(uint256 id) public view returns (uint256) {
+        return _minObligationPeriod[id];
     }
 }

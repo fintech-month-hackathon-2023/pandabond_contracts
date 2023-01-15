@@ -19,7 +19,7 @@ contract InstallmentBondFactory is BondFactory {
         _;
     }
 
-    constructor(string memory uri, address token) BondFactory(uri, token) {}
+    constructor(string memory uri, address token, address deployer) BondFactory(uri, token, deployer) {}
 
     function issue(
         uint256 bondQuantity,
@@ -141,10 +141,6 @@ contract InstallmentBondFactory is BondFactory {
         return cond1 || cond2;
     }
 
-    function lockedTokenAmount(uint256 id) public view returns (uint256) {
-        return _lockedTokenAmount[id];
-    }
-
     function lockedTokenAmountPerBond(
         uint256 id
     ) public view returns (uint256) {
@@ -195,5 +191,21 @@ contract InstallmentBondFactory is BondFactory {
                 100;
         }
         return obligationPerBondList;
+    }
+
+    function nextObligationDate(uint256 id) public view returns(uint256) {
+        return _nextObligationDate[id];
+    }
+
+    function minObligationTokenAmountPerBondList(uint256 id) public view returns(uint256[] memory) {
+        return _minObligationTokenAmountPerBondList[id];
+    }
+
+    function lockedTokenAmount(uint256 id) public view returns(uint256) {
+        return _lockedTokenAmount[id];
+    }
+
+    function numberOfTimesFulfilled(uint256 id) public view returns(uint256) {
+        return _numberOfTimesFulfilled[id];
     }
 }

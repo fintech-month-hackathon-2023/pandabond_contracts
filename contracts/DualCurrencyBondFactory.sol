@@ -65,9 +65,10 @@ contract DualCurrencyBondFactory is ERC1155 {
         address tokenA,
         address tokenB,
         address priceFeedA,
-        address priceFeedB
+        address priceFeedB,
+        address deployer
     ) ERC1155(uri) {
-        _owner = msg.sender;
+        _owner = deployer;
         _tokenA = IERC20(tokenA);
         _tokenB = IERC20(tokenB);
 
@@ -441,5 +442,13 @@ contract DualCurrencyBondFactory is ERC1155 {
             bm.minPurchasedQuantity,
             bm.couponRate
         );
+    }
+
+    function designatedTokenAPool(uint256 id) public view returns(uint256) {
+        return _designatedTokenAPool[id];
+    }
+
+    function designatedTokenBPool(uint256 id) public view returns(uint256) {
+        return _designatedTokenBPool[id];
     }
 }

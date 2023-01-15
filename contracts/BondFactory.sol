@@ -9,6 +9,8 @@ contract BondFactory is ERC1155 {
     IERC20 immutable _baseToken;
     uint256 _id = 0;
 
+    uint256 _fundsRaised;
+
     struct BondMetadata {
         string ticker;
         uint256 tokenAmountPerBond;
@@ -46,8 +48,8 @@ contract BondFactory is ERC1155 {
     event Defaulted(uint256 indexed id, uint256 totalDebt, uint256 paidDebt);
     event Completed(uint256 indexed id, uint256 totalDebt, uint256 paidDebt);
 
-    constructor(string memory uri, address token) ERC1155(uri) {
-        _owner = msg.sender;
+    constructor(string memory uri, address token, address deployer) ERC1155(uri) {
+        _owner = deployer;
         _baseToken = IERC20(token);
     }
 
@@ -55,7 +57,7 @@ contract BondFactory is ERC1155 {
         uint256 bondQuantity,
         uint256 minPurchasedQuantity,
         uint256 tokenAmountPerBond,
-        string calldata ticker,
+        string memory ticker,
         uint256 durationDays,
         uint256 activeDurationInDays,
         uint256 rate, // coupon rate
@@ -94,6 +96,7 @@ contract BondFactory is ERC1155 {
 
         _purchasedQuantity[id] += bondQuantity;
         _designatedTokenPool[id] += tokenAmount;
+        _fundsRaised += tokenAmount;
         _baseToken.transferFrom(msg.sender, address(this), tokenAmount);
     }
 
@@ -317,7 +320,7 @@ contract BondFactory is ERC1155 {
         return _isDefaulted[id];
     }
 
-    function bondmetaData(
+    function bondMetadata(
         uint256 id
     )
         public
@@ -349,5 +352,21 @@ contract BondFactory is ERC1155 {
             bm.minPurchasedQuantity,
             bm.couponRate
         );
+    }
+
+    function baseToken() public view returns(address){
+        return address(_baseToken);
+    }
+
+    function owner() public view returns(address) {
+        return _owner;
+    }
+
+    function fundsRaised() public view returns(uint256) {
+        return _fundsRaised;
+    }
+
+    function designatedTokenPool(uint256 id) public view returns(uint256) {
+        return _designatedTokenPool[id];
     }
 }
