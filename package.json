@@ -4,7 +4,8 @@
   "description": "pandabond core contracts",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "npx prettier --write \"contracts/**/*.sol\""
   },
   "author": "",
   "license": "ISC",
@@ -13,7 +14,9 @@
     "@nomiclabs/hardhat-ethers": "^2.2.2",
     "@openzeppelin/hardhat-upgrades": "^1.22.0",
     "ethers": "^5.7.2",
-    "hardhat": "^2.12.6"
+    "hardhat": "^2.12.6",
+    "prettier": "^2.8.3",
+    "prettier-plugin-solidity": "^1.1.1"
   },
   "dependencies": {
     "@chainlink/contracts": "^0.6.0",
