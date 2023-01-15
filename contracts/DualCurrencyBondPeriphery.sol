@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./DualCurrencyBondFactory.sol";
 import "./SoulBoundToken.sol";
 
-contract Mainframe {
+contract DualCurrencyBondPeriphery {
     address immutable _owner;
     SoulBoundToken immutable _sbt;
 
