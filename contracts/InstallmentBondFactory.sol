@@ -6,8 +6,8 @@ import "./BondFactory.sol";
 contract InstallmentBondFactory is BondFactory {
     uint256 constant FACTOR = 180;
     uint256[] THREE = [5, 5, 10, 15, 15];
-    uint256[] FIVE = [2, 3, 5, 5, 5, 10, 10, 15, 15];
-    uint256[] TEN = [2, 2, 2, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 10];
+    uint256[] FIVE = [2, 2, 2, 2, 2, 5, 10, 10, 15];
+    uint256[] TEN = [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 5, 5, 5, 5];
 
     mapping(uint256 => uint256) _nextObligationDate;
     mapping(uint256 => uint256[]) _minObligationTokenAmountPerBondList;
@@ -15,7 +15,7 @@ contract InstallmentBondFactory is BondFactory {
     mapping(uint256 => uint256) _numberOfTimesFulfilled;
 
     modifier validYearOption(uint256 option) {
-        require(option >= 0 && option <= 2, "Year option out of range");
+        require(option >= 0 && option <= 2, "IYO");
         _;
     }
 
@@ -40,10 +40,8 @@ contract InstallmentBondFactory is BondFactory {
         validYearOption(yearOption)
         returns (uint256 id)
     {
-        require(
-            activeDurationInDays < FACTOR,
-            "Active duration should be shorter than 180 days"
-        );
+        require(minPurchasedQuantity < bondQuantity, "MPQGTBQ");
+        require(activeDurationInDays <= 7, "ADA7D");
 
         uint256 durationDays = yearOptionToDays(yearOption);
 
@@ -81,21 +79,18 @@ contract InstallmentBondFactory is BondFactory {
         uint256 id,
         uint256 tokenAmountPerBond
     ) external onlyOwner {
-        require(
-            !(isDefaulted(id) || isDefaultedInTheory(id)),
-            "Withdraw not allowed when defaulted"
-        );
+        require(!(isDefaulted(id) || isDefaultedInTheory(id)), "WNA");
         require(
             (_numberOfTimesFulfilled[id] + 1) * FACTOR !=
                 _bondMetadata[id].durationInDays,
-            "All obligations fulfilled"
+            "OAF"
         );
         require(
             tokenAmountPerBond >=
                 _minObligationTokenAmountPerBondList[id][
                     _numberOfTimesFulfilled[id]
                 ],
-            "Minimum obligation not fulfilled"
+            "MONF"
         );
         require(
             (((tokenAmountPerBond -
@@ -105,7 +100,7 @@ contract InstallmentBondFactory is BondFactory {
                 _minObligationTokenAmountPerBondList[id][
                     _numberOfTimesFulfilled[id]
                 ]) <= 5e16,
-            "Fulfillment should not exceed 5% above obligation"
+            "EMF"
         );
 
         uint256 tokenAmount = tokenAmountPerBond *
@@ -120,16 +115,16 @@ contract InstallmentBondFactory is BondFactory {
         uint256 id,
         uint256 tokenAmount
     ) external override onlyOwner {
-        require(!isActive(id), "Withdraw not allowed when active");
-        require(!isCanceled(id), "Withdraw not allowed when active");
-        require(!isCompleted(id), "Withdraw not allowed after completion");
         require(
-            !(isDefaulted(id) || isDefaultedInTheory(id)),
-            "Withdraw not allowed when defaulted"
+            !isActive(id) &&
+                !isCanceled(id) &&
+                !isCompleted(id) &&
+                !(isDefaulted(id) || isDefaultedInTheory(id)),
+            "WNA"
         );
         require(
             tokenAmount <= _designatedTokenPool[id] - _lockedTokenAmount[id],
-            "Withdrawal token amount exceeds token amount in contract"
+            "WAE"
         );
 
         _designatedTokenPool[id] -= tokenAmount;

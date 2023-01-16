@@ -21,10 +21,10 @@ contract CallableBondFactory is BondFactory {
     ) BondFactory(uri, token, deployer) {}
 
     function call(uint256 id) external {
-        require(!isCompleted(id), "Bond is completed");
+        require(!isCompleted(id) && !isCanceled(id) && !isDefaulted(id), "CBC");
         require(
             timeElapsed(id) > _minObligationPeriod[id] * 1 days,
-            "Minimum obligation period not reached"
+            "MOPNW"
         );
         _couponRateOnCall[id] =
             (_bondMetadata[id].couponRate * timeElapsed(id)) /
@@ -44,10 +44,9 @@ contract CallableBondFactory is BondFactory {
         uint256 activeDurationInDays,
         uint256 rate // coupon rate
     ) external override onlyOwner returns (uint256 id) {
-        require(
-            activeDurationInDays < durationDays,
-            "Active duration should be shorter than duration"
-        );
+        require(minPurchasedQuantity < bondQuantity, "MPQGTBQ");
+        require(durationDays >= 180, "DB6M");
+        require(activeDurationInDays <= 7, "ADA7D");
         id = _id + 1;
         _id += 1;
         _mint(msg.sender, id, bondQuantity, "");

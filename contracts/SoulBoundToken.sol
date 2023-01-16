@@ -4,8 +4,9 @@ pragma solidity ^0.8.17;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "./interfaces/ISoulBoundToken.sol";
 
-contract SoulBoundToken is ERC721, Ownable {
+contract SoulBoundToken is ERC721, Ownable, ISoulBoundToken {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIdCounter;
@@ -16,7 +17,7 @@ contract SoulBoundToken is ERC721, Ownable {
     mapping(address => uint256) _ownerToTokenId;
 
     modifier validLevel(uint8 tier) {
-        require(tier >= 1 && tier <= 3, "Invalid tier");
+        require(tier >= 1 && tier <= 3, "IT");
         _;
     }
 
@@ -29,7 +30,7 @@ contract SoulBoundToken is ERC721, Ownable {
         uint8 tier,
         bytes32 hashed
     ) public onlyOwner validLevel(tier) {
-        require(_ownerToTokenId[to] == 0, "Token already exists");
+        require(_ownerToTokenId[to] == 0, "STAE");
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _isActive[tokenId] = true;
@@ -42,7 +43,7 @@ contract SoulBoundToken is ERC721, Ownable {
     function burn(uint256 tokenId) external {
         require(
             ownerOf(tokenId) == msg.sender,
-            "Only the owner of the token can burn it."
+            "NO"
         );
         _burn(tokenId);
     }
@@ -55,7 +56,7 @@ contract SoulBoundToken is ERC721, Ownable {
     ) internal pure override {
         require(
             from == address(0) || to == address(0),
-            "This a Soulbound token. It cannot be transferred. It can only be burned by the token owner."
+            "SBTCT"
         );
     }
 

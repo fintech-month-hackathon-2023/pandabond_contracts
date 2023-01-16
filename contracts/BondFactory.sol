@@ -2,9 +2,10 @@
 pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
+import "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract BondFactory is ERC1155 {
+contract BondFactory is ERC1155, IERC1155Receiver {
     address immutable _owner;
     IERC20 immutable _baseToken;
     uint256 _id = 0;
@@ -35,7 +36,7 @@ contract BondFactory is ERC1155 {
     mapping(uint256 => bool) _isCompleted;
 
     modifier onlyOwner() {
-        require(msg.sender == _owner, "Caller is not the owner");
+        require(msg.sender == _owner, "NTO");
         _;
     }
 
@@ -48,6 +49,12 @@ contract BondFactory is ERC1155 {
     );
     event Defaulted(uint256 indexed id, uint256 totalDebt, uint256 paidDebt);
     event Completed(uint256 indexed id, uint256 totalDebt, uint256 paidDebt);
+    event Redeemed(
+        uint256 indexed id,
+        address buyer,
+        uint256 bondQuantity,
+        uint256 state
+    );
 
     constructor(
         string memory uri,
@@ -67,10 +74,9 @@ contract BondFactory is ERC1155 {
         uint256 activeDurationInDays,
         uint256 rate // coupon rate
     ) external virtual onlyOwner returns (uint256 id) {
-        require(
-            activeDurationInDays < durationDays,
-            "Active duration should be shorter than duration"
-        );
+        require(minPurchasedQuantity < bondQuantity, "MPQGTBQ");
+        require(durationDays >= 180, "DB6M");
+        require(activeDurationInDays <= 7, "ADA7D");
         id = _id + 1;
         _id += 1;
         _mint(address(this), id, bondQuantity, "");
@@ -96,11 +102,8 @@ contract BondFactory is ERC1155 {
     }
 
     function purchase(uint256 id, uint256 bondQuantity) external {
-        require(isActive(id), "Bond is inactive");
-        require(
-            remainingQuantity(id) >= bondQuantity,
-            "Insufficient bond quantity remaining"
-        );
+        require(isActive(id), "IB");
+        require(remainingQuantity(id) >= bondQuantity, "IQ");
 
         BondMetadata memory metadata = _bondMetadata[id];
         uint256 tokenAmount = bondQuantity * metadata.tokenAmountPerBond;
@@ -116,136 +119,127 @@ contract BondFactory is ERC1155 {
         uint256 id,
         uint256 tokenAmount
     ) external virtual onlyOwner {
-        require(!isActive(id), "Withdraw not allowed when active");
-        require(!isCanceled(id), "Withdraw not allowed when active");
-        require(!isCompleted(id), "Withdraw not allowed after completion");
         require(
-            !(isDefaulted(id) || isDefaultedInTheory(id)),
-            "Withdraw not allowed when defaulted"
+            !isActive(id) &&
+                !isCanceled(id) &&
+                !isCompleted(id) &&
+                !(isDefaulted(id) || isDefaultedInTheory(id)),
+            "WNA"
         );
 
-        require(
-            tokenAmount <= _designatedTokenPool[id],
-            "Withdrawal token amount exceeds token amount in contract"
-        );
+        require(tokenAmount <= _designatedTokenPool[id], "WAE");
 
         _designatedTokenPool[id] -= tokenAmount;
         _baseToken.transfer(msg.sender, tokenAmount);
     }
 
     function withdrawExcess(uint256 id) external onlyOwner {
-        require(
-            isCompleted(id) && isFullyRedeemed(id),
-            "Cannot withdraw excess"
-        );
-        require(
-            _designatedTokenPool[id] > 0,
-            "Cannot withdraw from empty pool"
-        );
+        require(isCompleted(id) && isFullyRedeemed(id), "WNA");
+        require(_designatedTokenPool[id] > 0, "WFE");
 
         _designatedTokenPool[id] = 0;
         _baseToken.transfer(msg.sender, _designatedTokenPool[id]);
     }
 
     function redeem(uint256 id, uint256 bondQuantity) external {
-        require(isCompleted(id), "Bond is not completed");
-        require(
-            balanceOf(msg.sender, id) >= bondQuantity,
-            "Insufficient bond quantity"
-        );
+        require(balanceOf(msg.sender, id) >= bondQuantity, "IQ");
+
+        require(isCompleted(id) || isCanceled(id) || isDefaulted(id), "RNA");
+
+        uint256 tokenAmountPerBond;
+        uint256 state;
+
+        if (isCompleted(id)) {
+            tokenAmountPerBond = _tokenAmountPerBondAfterComplete[id];
+            state = 0;
+        } else if (isCanceled(id)) {
+            tokenAmountPerBond = _bondMetadata[id].tokenAmountPerBond;
+            state = 1;
+        } else if (isDefaulted(id)) {
+            tokenAmountPerBond = _tokenAmountPerBondAfterDefault[id];
+            state = 2;
+        } else {
+            revert();
+        }
+
         _burn(msg.sender, id, bondQuantity);
         _redeemedQuantity[id] += bondQuantity;
-        uint256 tokenAmount = bondQuantity *
-            _tokenAmountPerBondAfterComplete[id];
-
-        _baseToken.transfer(msg.sender, tokenAmount);
+        uint256 tokenAmount = bondQuantity * tokenAmountPerBond;
         _designatedTokenPool[id] -= tokenAmount;
-    }
-
-    function redeemCanceled(uint256 id, uint256 bondQuantity) external {
-        require(isCanceled(id), "Bond is not canceled");
-        require(
-            balanceOf(msg.sender, id) >= bondQuantity,
-            "Insufficient bond quantity"
-        );
-        _burn(msg.sender, id, bondQuantity);
-        _redeemedQuantity[id] += bondQuantity;
-        uint256 tokenAmount = bondQuantity *
-            _bondMetadata[id].tokenAmountPerBond;
-
         _baseToken.transfer(msg.sender, tokenAmount);
-        _designatedTokenPool[id] -= tokenAmount;
-    }
 
-    function redeemDefaulted(uint256 id, uint256 bondQuantity) external {
-        require(isDefaulted(id), "Bond is not defaulted");
-        require(
-            balanceOf(msg.sender, id) >= bondQuantity,
-            "Insufficient bond quantity"
-        );
-        _burn(msg.sender, id, bondQuantity);
-        _redeemedQuantity[id] += bondQuantity;
-        uint256 tokenAmount = bondQuantity *
-            _tokenAmountPerBondAfterDefault[id];
-
-        _baseToken.transfer(msg.sender, tokenAmount);
-        _designatedTokenPool[id] -= tokenAmount;
+        emit Redeemed(id, msg.sender, bondQuantity, state);
     }
 
     function deposit(uint256 id, uint256 tokenAmount) external onlyOwner {
         require(
-            !(isDefaulted(id) || isDefaultedInTheory(id)),
-            "bond is defaulted"
+            !(isDefaulted(id) || isDefaultedInTheory(id)) && !isCompleted(id),
+            "DNA"
         );
-        require(!isCompleted(id), "bond is completed");
 
         _designatedTokenPool[id] += tokenAmount;
         _baseToken.transferFrom(msg.sender, address(this), tokenAmount);
     }
 
+    function preMaturityDefault(uint256 id) external onlyOwner {
+        require(
+            !isCompleted(id) &&
+                !isDefaulted(id) &&
+                (_designatedTokenPool[id] < principalWithInterest(id)),
+            "PMDNA"
+        );
+
+        uint256 paidDebt = _designatedTokenPool[id];
+        _tokenAmountPerBondAfterDefault[id] = paidDebt / _purchasedQuantity[id];
+
+        _isDefaulted[id] = true;
+
+        emit Defaulted(id, principalWithInterest(id), paidDebt);
+    }
+
     function markAsDefaulted(uint256 id) external {
         require(
             !isCompleted(id) && !isDefaulted(id) && isDefaultedInTheory(id),
-            "Bond is not defaulted"
+            "MADNA"
         );
-        uint256 totalDebt = principalWithInterest(id);
-        uint256 reward = _designatedTokenPool[id] / 1000;
-        uint256 paidDebt = _designatedTokenPool[id] - reward;
+        uint256 callerReward = _designatedTokenPool[id] / 1000;
+        uint256 paidDebt = _designatedTokenPool[id] - callerReward;
 
         _tokenAmountPerBondAfterDefault[id] = paidDebt / _purchasedQuantity[id];
-        uint256 residuals = paidDebt -
-            _tokenAmountPerBondAfterDefault[id] *
-            _purchasedQuantity[id]; //if residuals exist
-        uint256 toCaller = reward + residuals;
-        _designatedTokenPool[id] -= toCaller;
+        _designatedTokenPool[id] -= callerReward;
 
         _isDefaulted[id] = true;
-        _baseToken.transfer(msg.sender, toCaller);
+        _baseToken.transfer(msg.sender, callerReward);
 
-        emit Defaulted(id, totalDebt, paidDebt);
+        emit Defaulted(id, principalWithInterest(id), paidDebt);
     }
 
     function markAsCompleted(uint256 id) external {
         require(
             !isDefaulted(id) && !isCompleted(id) && isCompletedInTheory(id),
-            "Bond is already completed"
+            "MACNA"
         );
         uint256 totalDebt = principalWithInterest(id);
-        uint256 reward = totalDebt / 1000;
-        uint256 paidDebt = totalDebt - reward;
+        uint256 callerReward = totalDebt / 1000;
+        uint256 paidDebt = totalDebt - callerReward;
         _tokenAmountPerBondAfterComplete[id] =
             paidDebt /
             _purchasedQuantity[id];
-        uint256 residuals = paidDebt -
-            _tokenAmountPerBondAfterComplete[id] *
-            _purchasedQuantity[id];
-        uint256 toCaller = reward + residuals;
-        _designatedTokenPool[id] -= toCaller;
+        _designatedTokenPool[id] -= callerReward;
         _isCompleted[id] = true;
-        _baseToken.transfer(msg.sender, toCaller);
+        _baseToken.transfer(msg.sender, callerReward);
 
         emit Completed(id, totalDebt, paidDebt);
     }
+
+    function onERC1155Received(address, address, uint256, uint256, bytes memory) public virtual returns (bytes4) {
+        return this.onERC1155Received.selector;
+    }
+
+    function onERC1155BatchReceived(address, address, uint256[] memory, uint256[] memory, bytes memory) public virtual returns (bytes4) {
+        return this.onERC1155BatchReceived.selector;
+    }
+
 
     function remainingQuantity(uint256 id) public view returns (uint256) {
         return _bondMetadata[id].issuedQuantity - _purchasedQuantity[id];
@@ -256,13 +250,13 @@ contract BondFactory is ERC1155 {
     }
 
     function timeRemainingToMaturity(uint256 id) public view returns (uint256) {
-        return _bondMetadata[id].durationInDays - timeElapsed(id);
+        return _bondMetadata[id].maturityBlock - block.timestamp;
     }
 
     function timeRemainingToEndOfActive(
         uint256 id
     ) public view returns (uint256) {
-        return _bondMetadata[id].activeDurationInDays - timeElapsed(id);
+        return _bondMetadata[id].endOfActiveBlock - block.timestamp;
     }
 
     function couponRate(uint256 id) public view returns (uint256) {
@@ -380,5 +374,9 @@ contract BondFactory is ERC1155 {
 
     function designatedTokenPool(uint256 id) public view returns (uint256) {
         return _designatedTokenPool[id];
+    }
+
+    function numBondsIssued() public view returns (uint256) {
+        return _id;
     }
 }

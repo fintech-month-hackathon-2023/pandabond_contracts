@@ -3,11 +3,11 @@ pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./DualCurrencyBondFactory.sol";
-import "./SoulBoundToken.sol";
+import "./interfaces/ISoulBoundToken.sol";
 
-contract Mainframe {
+contract DualCurrencyBondPeriphery {
     address immutable _owner;
-    SoulBoundToken immutable _sbt;
+    ISoulBoundToken immutable _sbt;
 
     address[] _entities;
 
@@ -25,26 +25,23 @@ contract Mainframe {
     );
 
     modifier onlyOwner() {
-        require(msg.sender == _owner, "Caller is not the owner");
+        require(msg.sender == _owner, "NTO");
         _;
     }
 
     modifier onlyIsRegistered() {
-        require(_isRegistered[msg.sender] == true, "Caller is not registered");
+        require(_isRegistered[msg.sender], "NR");
         _;
     }
 
     modifier hasActiveSBT() {
-        require(
-            _sbt.hasActiveSBT(msg.sender),
-            "Caller requires an active SoulBound Token"
-        );
+        require(_sbt.hasActiveSBT(msg.sender), "NAST");
         _;
     }
 
     constructor(address sbt) {
         _owner = msg.sender;
-        _sbt = SoulBoundToken(sbt);
+        _sbt = ISoulBoundToken(sbt);
         _priceFeeds[
             0x21C8a148933E6CA502B47D729a485579c22E8A69
         ] = 0x0d79df66BE487753B02D015Fb622DED7f0E9798d; // DAI/USD
@@ -63,11 +60,8 @@ contract Mainframe {
     }
 
     function register() external hasActiveSBT {
-        require(
-            _sbt.accessTier(msg.sender) >= 3,
-            "Caller does not have valid access tier"
-        );
-        require(!_isRegistered[msg.sender], "Caller is already registered");
+        require(!_isRegistered[msg.sender], "AR");
+        require(_sbt.accessTier(msg.sender) >= 3, "NVAT");
         _isRegistered[msg.sender] = true;
         _entities.push(msg.sender);
     }
@@ -77,18 +71,15 @@ contract Mainframe {
         address tokenA,
         address tokenB
     ) external onlyIsRegistered hasActiveSBT returns (address factory) {
-        require(
-            _sbt.accessTier(msg.sender) >= 3,
-            "Caller does not have valid access tier"
-        );
+        require(_sbt.accessTier(msg.sender) >= 3, "NVAT");
         require(
             _priceFeeds[tokenA] != address(0) &&
                 _priceFeeds[tokenB] != address(0),
-            "Price feed(s) not available"
+            "ICP"
         );
         require(
             !_dualCurrencyBondFactoryIsInitialized[msg.sender][tokenA][tokenB],
-            "Factory is already initialized"
+            "AI"
         );
 
         factory = address(
