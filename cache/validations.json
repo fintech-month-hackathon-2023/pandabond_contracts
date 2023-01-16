@@ -591,9 +591,9 @@
       "contracts/BondFactory.sol:BondFactory": {
         "src": "contracts\\BondFactory.sol:8",
         "version": {
-          "withMetadata": "b9f6e8a3ce7261a740fe58e7268c6c6f256d8d0ad9708c4968776669acf9a640",
-          "withoutMetadata": "50bdb985220165f1ffa0ae1457494ab64df10c9758bfa00139471e6e125c3c9f",
-          "linkedWithoutMetadata": "50bdb985220165f1ffa0ae1457494ab64df10c9758bfa00139471e6e125c3c9f"
+          "withMetadata": "bc31d4d74fdb6d41d9d174884918f35d6215a793a47a07d98e353ef9463cb169",
+          "withoutMetadata": "ae53b9ddb3cd1ec0427645b1e9265e7272f005544151bab8e099ef4d5577d068",
+          "linkedWithoutMetadata": "ae53b9ddb3cd1ec0427645b1e9265e7272f005544151bab8e099ef4d5577d068"
         },
         "inherit": [
           "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol:IERC1155Receiver",
@@ -640,7 +640,8 @@
           "baseToken()",
           "owner()",
           "fundsRaised()",
-          "designatedTokenPool(uint256)"
+          "designatedTokenPool(uint256)",
+          "numBondsIssued()"
         ],
         "linkReferences": [],
         "errors": [
@@ -892,9 +893,9 @@
       "contracts/BondPeriphery.sol:BondPeriphery": {
         "src": "contracts\\BondPeriphery.sol:8",
         "version": {
-          "withMetadata": "e64e6b4c52ba0149edce330228b8f0f039c2c8d94f1937a701c22c73693884a1",
-          "withoutMetadata": "3530dfa50d979e672e3e14c837a83dd606918958b9390b9df48d49f38286d25e",
-          "linkedWithoutMetadata": "3530dfa50d979e672e3e14c837a83dd606918958b9390b9df48d49f38286d25e"
+          "withMetadata": "41ace95a70b26fe38ec0478ae89678679b39bf012eddac9bb30ab875be0a79f7",
+          "withoutMetadata": "61f85ef6c4e5130a850a9d22e7fc6f8c8261b22bc9aab394b4269caf1f889e58",
+          "linkedWithoutMetadata": "61f85ef6c4e5130a850a9d22e7fc6f8c8261b22bc9aab394b4269caf1f889e58"
         },
         "inherit": [],
         "libraries": [],
@@ -1003,9 +1004,9 @@
       "contracts/CallableBondFactory.sol:CallableBondFactory": {
         "src": "contracts\\CallableBondFactory.sol:6",
         "version": {
-          "withMetadata": "5f6d823a75cb2f1f9ea36b0a9795b013110153642f050a49a9a409a4ad16f9bc",
-          "withoutMetadata": "171f4351cfa96f52e14475c9020c50e3d2bc21b34734dfbd0323cf76685619bb",
-          "linkedWithoutMetadata": "171f4351cfa96f52e14475c9020c50e3d2bc21b34734dfbd0323cf76685619bb"
+          "withMetadata": "1dcfe41dfb78d44465a200d6933a8115c9b6ead13454fdf92c99c30023b83ea1",
+          "withoutMetadata": "b721fb9b90743231b171a9fdfba02d46463a37aa7b5f46037dc56bd31136b0e9",
+          "linkedWithoutMetadata": "b721fb9b90743231b171a9fdfba02d46463a37aa7b5f46037dc56bd31136b0e9"
         },
         "inherit": [
           "contracts/BondFactory.sol:BondFactory",
@@ -1286,9 +1287,9 @@
       "contracts/CallableBondPeriphery.sol:CallableBondPeriphery": {
         "src": "contracts\\CallableBondPeriphery.sol:9",
         "version": {
-          "withMetadata": "c0a845f833a226061f76f7b8558c47df9c7ec9c8beec7132335223a1f2444044",
-          "withoutMetadata": "b8337be7ad4ded51e2b8f9e254260bc60f0c038fed22833aa8f1a4e4ef566879",
-          "linkedWithoutMetadata": "b8337be7ad4ded51e2b8f9e254260bc60f0c038fed22833aa8f1a4e4ef566879"
+          "withMetadata": "9ca3bef74d10e9e9e4e74ad81f26fedcffe0c95d1ffa1a62691bc4bd230e2739",
+          "withoutMetadata": "f9ec831e5118567ce353b676d41b6efa6f8a435282291cd56f67f06e3178b816",
+          "linkedWithoutMetadata": "f9ec831e5118567ce353b676d41b6efa6f8a435282291cd56f67f06e3178b816"
         },
         "inherit": [
           "contracts/BondPeriphery.sol:BondPeriphery"
@@ -1384,9 +1385,9 @@
       "contracts/DualCurrencyBondFactory.sol:DualCurrencyBondFactory": {
         "src": "contracts\\DualCurrencyBondFactory.sol:9",
         "version": {
-          "withMetadata": "b678b2db9f5c3b27efd593e3363ebe2b9b60967fedb95b8c67432fa138f35727",
-          "withoutMetadata": "b681e57d22b9fd2bc180c70d5074f73bb10ae1eba2469ba7dbd52fb41c4e4a2f",
-          "linkedWithoutMetadata": "b681e57d22b9fd2bc180c70d5074f73bb10ae1eba2469ba7dbd52fb41c4e4a2f"
+          "withMetadata": "0d0cc81d50a48e6505185b12e9b260aa57c88d482dd7a0ae8855bd1de841ca81",
+          "withoutMetadata": "f275f4b0051c185439b911e5d7d5d9d13333def8071ac277fa4dff7c9f4148c5",
+          "linkedWithoutMetadata": "f275f4b0051c185439b911e5d7d5d9d13333def8071ac277fa4dff7c9f4148c5"
         },
         "inherit": [
           "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol:IERC1155Receiver",
@@ -1440,7 +1441,8 @@
           "tokenA()",
           "tokenB()",
           "owner()",
-          "fundsRaised()"
+          "fundsRaised()",
+          "numBondsIssued()"
         ],
         "linkReferences": [],
         "errors": [
@@ -1526,7 +1528,7 @@
               "label": "_bondMetadata",
               "offset": 0,
               "slot": "5",
-              "type": "t_mapping(t_uint256,t_struct(BondMetadata)6295_storage)",
+              "type": "t_mapping(t_uint256,t_struct(BondMetadata)6315_storage)",
               "contract": "DualCurrencyBondFactory",
               "src": "contracts\\DualCurrencyBondFactory.sol:34"
             },
@@ -1632,7 +1634,7 @@
               "label": "mapping(uint256 => mapping(address => uint256))",
               "numberOfBytes": "32"
             },
-            "t_mapping(t_uint256,t_struct(BondMetadata)6295_storage)": {
+            "t_mapping(t_uint256,t_struct(BondMetadata)6315_storage)": {
               "label": "mapping(uint256 => struct DualCurrencyBondFactory.BondMetadata)",
               "numberOfBytes": "32"
             },
@@ -1644,7 +1646,7 @@
               "label": "string",
               "numberOfBytes": "32"
             },
-            "t_struct(BondMetadata)6295_storage": {
+            "t_struct(BondMetadata)6315_storage": {
               "label": "struct DualCurrencyBondFactory.BondMetadata",
               "members": [
                 {
@@ -1729,9 +1731,9 @@
       "contracts/DualCurrencyBondPeriphery.sol:DualCurrencyBondPeriphery": {
         "src": "contracts\\DualCurrencyBondPeriphery.sol:8",
         "version": {
-          "withMetadata": "9097dc44bfa562946518f99d9d7d97d629d2fd96bd248ac508fe3a7ab73b6ec9",
-          "withoutMetadata": "7bf1892da40e439f7f465c137ab4965f29002ff056231b0429ff14589ad15286",
-          "linkedWithoutMetadata": "7bf1892da40e439f7f465c137ab4965f29002ff056231b0429ff14589ad15286"
+          "withMetadata": "500776039f374512bcb04c6e1b95a067813d9cab6aeb049e98082ac027dc572f",
+          "withoutMetadata": "f6691e9c95bacddd39216ea6423361730cfeee00357fa975e91ea8fa90217934",
+          "linkedWithoutMetadata": "f6691e9c95bacddd39216ea6423361730cfeee00357fa975e91ea8fa90217934"
         },
         "inherit": [],
         "libraries": [],
@@ -1850,9 +1852,9 @@
       "contracts/InstallmentBondFactory.sol:InstallmentBondFactory": {
         "src": "contracts\\InstallmentBondFactory.sol:6",
         "version": {
-          "withMetadata": "6d47a3ac847a3199c8d8f8520bb00b72644da1677a84a8bff66d74ef086cccfc",
-          "withoutMetadata": "3df98f33176646ad45a0a4fed310987a177e316c8b73b861eded10a7a8c5b889",
-          "linkedWithoutMetadata": "3df98f33176646ad45a0a4fed310987a177e316c8b73b861eded10a7a8c5b889"
+          "withMetadata": "fe15f788c499d8d473ef13c945b17c6cc92028a3e560433defd5bf445caf744a",
+          "withoutMetadata": "896981c1ed587aaeb46d8359f8aafba5d090c3448ab905565f5ee8bb18c1a4f2",
+          "linkedWithoutMetadata": "896981c1ed587aaeb46d8359f8aafba5d090c3448ab905565f5ee8bb18c1a4f2"
         },
         "inherit": [
           "contracts/BondFactory.sol:BondFactory",
@@ -2194,9 +2196,9 @@
       "contracts/InstallmentBondPeriphery.sol:InstallmentBondPeriphery": {
         "src": "contracts\\InstallmentBondPeriphery.sol:10",
         "version": {
-          "withMetadata": "162bd97831d05584d4613161a7faf9fc37c94d60b0e2ece1955576cf89de108e",
-          "withoutMetadata": "2bbfab9097eadb4d5b1ca58463ed2c56650f5775bb6bc825e55ab2e4a3de8ab4",
-          "linkedWithoutMetadata": "2bbfab9097eadb4d5b1ca58463ed2c56650f5775bb6bc825e55ab2e4a3de8ab4"
+          "withMetadata": "9a90a54409df567711bb1be32533fe52da2f3e633bd643f2d77c4b6bc595e41d",
+          "withoutMetadata": "d75577a42100fd1e82f1118fb944fea847faf2cd05695431383622e8531d2d71",
+          "linkedWithoutMetadata": "d75577a42100fd1e82f1118fb944fea847faf2cd05695431383622e8531d2d71"
         },
         "inherit": [
           "contracts/BondPeriphery.sol:BondPeriphery"
@@ -2292,7 +2294,7 @@
       "contracts/SoulBoundToken.sol:SoulBoundToken": {
         "src": "contracts\\SoulBoundToken.sol:9",
         "version": {
-          "withMetadata": "f109814e10a1d557623f733eeb848e8bf08f797a9a605eb1ff27136bc7e95a59",
+          "withMetadata": "a962e1e858b211fecf7c59a7cfc1f552663f5485f0c8e1765d6e63ae23673045",
           "withoutMetadata": "2200f3c3b87ce3ac9d734e188263e566c788d86488257f147197e7c7e4b0a32c",
           "linkedWithoutMetadata": "2200f3c3b87ce3ac9d734e188263e566c788d86488257f147197e7c7e4b0a32c"
         },

@@ -22,10 +22,7 @@ contract CallableBondFactory is BondFactory {
 
     function call(uint256 id) external {
         require(!isCompleted(id) && !isCanceled(id) && !isDefaulted(id), "CBC");
-        require(
-            timeElapsed(id) > _minObligationPeriod[id] * 1 days,
-            "MOPNW"
-        );
+        require(timeElapsed(id) > _minObligationPeriod[id] * 1 days, "MOPNW");
         _couponRateOnCall[id] =
             (_bondMetadata[id].couponRate * timeElapsed(id)) /
             (_bondMetadata[id].durationInDays * 1 days);

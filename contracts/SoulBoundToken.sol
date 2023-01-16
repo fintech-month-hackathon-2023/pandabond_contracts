@@ -41,10 +41,7 @@ contract SoulBoundToken is ERC721, Ownable, ISoulBoundToken {
     }
 
     function burn(uint256 tokenId) external {
-        require(
-            ownerOf(tokenId) == msg.sender,
-            "NO"
-        );
+        require(ownerOf(tokenId) == msg.sender, "NO");
         _burn(tokenId);
     }
 
@@ -54,10 +51,7 @@ contract SoulBoundToken is ERC721, Ownable, ISoulBoundToken {
         uint256,
         uint256
     ) internal pure override {
-        require(
-            from == address(0) || to == address(0),
-            "SBTCT"
-        );
+        require(from == address(0) || to == address(0), "SBTCT");
     }
 
     function _burn(uint256 tokenId) internal override(ERC721) {
