@@ -4,10 +4,12 @@ pragma solidity ^0.8.17;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./DualCurrencyBondFactory.sol";
 import "./interfaces/ISoulBoundToken.sol";
+import "./interfaces/IBondDB.sol";
 
 contract DualCurrencyBondPeriphery {
     address immutable _owner;
     ISoulBoundToken immutable _sbt;
+    IBondDB immutable _bondDB;
 
     address[] _entities;
 
@@ -39,9 +41,10 @@ contract DualCurrencyBondPeriphery {
         _;
     }
 
-    constructor(address sbt) {
+    constructor(address sbt, address db) {
         _owner = msg.sender;
         _sbt = ISoulBoundToken(sbt);
+        _bondDB = IBondDB(db);
         _priceFeeds[
             0x21C8a148933E6CA502B47D729a485579c22E8A69
         ] = 0x0d79df66BE487753B02D015Fb622DED7f0E9798d; // DAI/USD
@@ -89,6 +92,7 @@ contract DualCurrencyBondPeriphery {
                 tokenB,
                 _priceFeeds[tokenA],
                 _priceFeeds[tokenB],
+                address(_bondDB),
                 msg.sender
             )
         );
@@ -96,6 +100,8 @@ contract DualCurrencyBondPeriphery {
         _dualCurrencyBondFactoryIsInitialized[msg.sender][tokenA][
             tokenB
         ] = true;
+
+        _bondDB.registerFactory(factory);
 
         emit DualCurrencyBondFactoryInitialized(msg.sender, tokenA, tokenB);
     }

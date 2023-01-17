@@ -4,6 +4,11 @@ pragma solidity ^0.8.17;
 import "./BondFactory.sol";
 
 contract CallableBondFactory is BondFactory {
+    using Counters for Counters.Counter;
+    Counters.Counter private _id;
+
+    uint256 private constant CATEGORY = 2;
+
     mapping(uint256 => uint256) _minObligationPeriod; // in days
     mapping(uint256 => uint256) _couponRateOnCall;
     mapping(uint256 => bool) _isCalled;
@@ -17,8 +22,9 @@ contract CallableBondFactory is BondFactory {
     constructor(
         string memory uri,
         address token,
+        address db,
         address deployer
-    ) BondFactory(uri, token, deployer) {}
+    ) BondFactory(uri, token, db, deployer) {}
 
     function call(uint256 id) external {
         require(!isCompleted(id) && !isCanceled(id) && !isDefaulted(id), "CBC");
@@ -44,8 +50,8 @@ contract CallableBondFactory is BondFactory {
         require(minPurchasedQuantity < bondQuantity, "MPQGTBQ");
         require(durationDays >= 180, "DB6M");
         require(activeDurationInDays <= 7, "ADA7D");
-        id = _id + 1;
-        _id += 1;
+        id = _id.current();
+        _id.increment();
         _mint(msg.sender, id, bondQuantity, "");
         _bondMetadata[id] = BondMetadata(
             ticker,
@@ -61,6 +67,13 @@ contract CallableBondFactory is BondFactory {
         );
 
         _minObligationPeriod[id] = durationDays / 2;
+
+        _bondDB.incrementNumberOfIssuedBondsByCategory(CATEGORY);
+        _bondDB.incrementNumberOfIssuedBondsByCompanyAndCategory(
+            _owner,
+            CATEGORY
+        );
+
         emit Issued(
             id,
             bondQuantity,

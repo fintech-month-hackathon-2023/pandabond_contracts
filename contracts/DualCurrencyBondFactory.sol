@@ -5,17 +5,22 @@ import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+import "./interfaces/IBondDB.sol";
 
 contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
+    using Counters for Counters.Counter;
+    Counters.Counter private _id;
+
     AggregatorV3Interface immutable _priceFeedA;
     AggregatorV3Interface immutable _priceFeedB;
 
     address immutable _owner;
     IERC20 immutable _tokenA;
     IERC20 immutable _tokenB;
-    uint256 _id = 0;
+    IBondDB immutable _bondDB;
 
-    uint256 _fundsRaised;
+    uint256 private constant CATEGORY = 4;
 
     struct BondMetadata {
         string ticker;
@@ -76,14 +81,17 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
         address b,
         address priceFeedA,
         address priceFeedB,
+        address db,
         address deployer
     ) ERC1155(uri) {
         _owner = deployer;
         _tokenA = IERC20(a);
         _tokenB = IERC20(b);
+        _bondDB = IBondDB(db);
 
         _priceFeedA = AggregatorV3Interface(priceFeedA);
         _priceFeedB = AggregatorV3Interface(priceFeedB);
+        _id.increment();
     }
 
     function getLatestPriceA() public view returns (int) {
@@ -124,8 +132,8 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
         require(minPurchasedQuantity < bondQuantity, "MPQGTBQ");
         require(durationDays >= 180, "DB6M");
         require(activeDurationInDays <= 7, "ADA7D");
-        id = _id + 1;
-        _id += 1;
+        id = _id.current();
+        _id.increment();
         _mint(address(this), id, bondQuantity, "");
         uint256 exchangeRate = getAtoBExchangeRate();
         uint256 tokenBAmountPerBond = (exchangeRate * tokenAAmountPerBond) /
@@ -142,6 +150,12 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
             bondQuantity,
             minPurchasedQuantity,
             rate
+        );
+
+        _bondDB.incrementNumberOfIssuedBondsByCategory(CATEGORY);
+        _bondDB.incrementNumberOfIssuedBondsByCompanyAndCategory(
+            _owner,
+            CATEGORY
         );
 
         emit Issued(
@@ -163,7 +177,24 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
 
         _purchasedQuantity[id] += bondQuantity;
         _designatedTokenAPool[id] += tokenAmount;
-        _fundsRaised += tokenAmount;
+
+        _bondDB.incrementFundsRaisedByToken(tokenAmount, address(_tokenA));
+        _bondDB.incrementFundsRaisedByCompanyAndToken(
+            tokenAmount,
+            _owner,
+            address(_tokenA)
+        );
+        _bondDB.incrementFundsRaisedByCompanyAndTokenAndCategory(
+            tokenAmount,
+            _owner,
+            address(_tokenA),
+            CATEGORY
+        );
+        _bondDB.incrementFundsRaisedByTokenAndCategory(
+            tokenAmount,
+            address(_tokenA),
+            CATEGORY
+        );
 
         // requires approve
         _tokenA.transferFrom(msg.sender, address(this), tokenAmount);
@@ -289,6 +320,12 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
 
         _isDefaulted[id] = true;
 
+        _bondDB.incrementNumberOfTimesDefaultedByCompany(_owner);
+        _bondDB.incrementNumberOfTimesDefaultedByCompanyAndCategory(
+            _owner,
+            CATEGORY
+        );
+
         emit Defaulted(id, principalWithInterest(id), paidDebtB, paidDebtA);
     }
 
@@ -312,6 +349,12 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
         _designatedTokenAPool[id] -= callerRewardA;
         _designatedTokenBPool[id] -= callerRewardB;
         _isDefaulted[id] = true;
+
+        _bondDB.incrementNumberOfTimesDefaultedByCompany(_owner);
+        _bondDB.incrementNumberOfTimesDefaultedByCompanyAndCategory(
+            _owner,
+            CATEGORY
+        );
 
         _tokenA.transfer(msg.sender, callerRewardA);
         _tokenB.transfer(msg.sender, callerRewardB);
@@ -511,11 +554,7 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
         return _owner;
     }
 
-    function fundsRaised() public view returns (uint256) {
-        return _fundsRaised;
-    }
-
     function numBondsIssued() public view returns (uint256) {
-        return _id;
+        return _id.current() - 1;
     }
 }

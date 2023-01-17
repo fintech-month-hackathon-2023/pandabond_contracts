@@ -4,10 +4,12 @@ pragma solidity ^0.8.17;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./BondFactory.sol";
 import "./interfaces/ISoulBoundToken.sol";
+import "./interfaces/IBondDB.sol";
 
 contract BondPeriphery {
     address immutable _owner;
     ISoulBoundToken immutable _sbt;
+    IBondDB immutable _bondDB;
 
     address[] _entities;
 
@@ -41,9 +43,10 @@ contract BondPeriphery {
         _;
     }
 
-    constructor(address sbt) {
+    constructor(address sbt, address db) {
         _owner = msg.sender;
         _sbt = ISoulBoundToken(sbt);
+        _bondDB = IBondDB(db);
         _isAllowedCurrency[0x21C8a148933E6CA502B47D729a485579c22E8A69] = true; // DAI
         _isAllowedCurrency[0x07865c6E87B9F70255377e024ace6630C1Eaa37F] = true; // USDC
         _isAllowedCurrency[0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6] = true; // WETH
@@ -71,9 +74,12 @@ contract BondPeriphery {
     {
         require(_sbt.accessTier(msg.sender) >= 2, "NVAT");
         require(!_bondFactoryIsInitialized[msg.sender][token], "AI");
-        factory = address(new BondFactory(uri, token, msg.sender));
+        factory = address(
+            new BondFactory(uri, token, address(_bondDB), msg.sender)
+        );
         _bondFactories[msg.sender].push(factory);
         _bondFactoryIsInitialized[msg.sender][token] = true;
+        _bondDB.registerFactory(factory);
 
         emit FactoryInitialized(msg.sender, token);
     }
@@ -102,5 +108,9 @@ contract BondPeriphery {
         address token
     ) public view returns (bool) {
         return _bondFactoryIsInitialized[caller][token];
+    }
+
+    function bondDB() public view returns (address) {
+        return address(_bondDB);
     }
 }

@@ -4,13 +4,19 @@ pragma solidity ^0.8.17;
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+
+import "./interfaces/IBondDB.sol";
 
 contract BondFactory is ERC1155, IERC1155Receiver {
+    using Counters for Counters.Counter;
+    Counters.Counter private _id;
+
     address immutable _owner;
     IERC20 immutable _baseToken;
-    uint256 _id = 0;
+    IBondDB immutable _bondDB;
 
-    uint256 _fundsRaised;
+    uint256 private constant CATEGORY = 1;
 
     struct BondMetadata {
         string ticker;
@@ -59,10 +65,13 @@ contract BondFactory is ERC1155, IERC1155Receiver {
     constructor(
         string memory uri,
         address token,
+        address db,
         address deployer
     ) ERC1155(uri) {
         _owner = deployer;
         _baseToken = IERC20(token);
+        _bondDB = IBondDB(db);
+        _id.increment();
     }
 
     function issue(
@@ -77,8 +86,8 @@ contract BondFactory is ERC1155, IERC1155Receiver {
         require(minPurchasedQuantity < bondQuantity, "MPQGTBQ");
         require(durationDays >= 180, "DB6M");
         require(activeDurationInDays <= 7, "ADA7D");
-        id = _id + 1;
-        _id += 1;
+        id = _id.current();
+        _id.increment();
         _mint(address(this), id, bondQuantity, "");
         _bondMetadata[id] = BondMetadata(
             ticker,
@@ -92,6 +101,13 @@ contract BondFactory is ERC1155, IERC1155Receiver {
             minPurchasedQuantity,
             rate
         );
+
+        _bondDB.incrementNumberOfIssuedBondsByCategory(CATEGORY);
+        _bondDB.incrementNumberOfIssuedBondsByCompanyAndCategory(
+            _owner,
+            CATEGORY
+        );
+
         emit Issued(
             id,
             bondQuantity,
@@ -110,7 +126,24 @@ contract BondFactory is ERC1155, IERC1155Receiver {
 
         _purchasedQuantity[id] += bondQuantity;
         _designatedTokenPool[id] += tokenAmount;
-        _fundsRaised += tokenAmount;
+        _bondDB.incrementFundsRaisedByToken(tokenAmount, address(_baseToken));
+        _bondDB.incrementFundsRaisedByCompanyAndToken(
+            tokenAmount,
+            _owner,
+            address(_baseToken)
+        );
+        _bondDB.incrementFundsRaisedByCompanyAndTokenAndCategory(
+            tokenAmount,
+            _owner,
+            address(_baseToken),
+            CATEGORY
+        );
+        _bondDB.incrementFundsRaisedByTokenAndCategory(
+            tokenAmount,
+            address(_baseToken),
+            CATEGORY
+        );
+
         safeTransferFrom(address(this), msg.sender, id, bondQuantity, "");
         _baseToken.transferFrom(msg.sender, address(this), tokenAmount);
     }
@@ -194,6 +227,12 @@ contract BondFactory is ERC1155, IERC1155Receiver {
 
         _isDefaulted[id] = true;
 
+        _bondDB.incrementNumberOfTimesDefaultedByCompany(_owner);
+        _bondDB.incrementNumberOfTimesDefaultedByCompanyAndCategory(
+            _owner,
+            CATEGORY
+        );
+
         emit Defaulted(id, principalWithInterest(id), paidDebt);
     }
 
@@ -209,6 +248,13 @@ contract BondFactory is ERC1155, IERC1155Receiver {
         _designatedTokenPool[id] -= callerReward;
 
         _isDefaulted[id] = true;
+
+        _bondDB.incrementNumberOfTimesDefaultedByCompany(_owner);
+        _bondDB.incrementNumberOfTimesDefaultedByCompanyAndCategory(
+            _owner,
+            CATEGORY
+        );
+
         _baseToken.transfer(msg.sender, callerReward);
 
         emit Defaulted(id, principalWithInterest(id), paidDebt);
@@ -379,15 +425,11 @@ contract BondFactory is ERC1155, IERC1155Receiver {
         return _owner;
     }
 
-    function fundsRaised() public view returns (uint256) {
-        return _fundsRaised;
-    }
-
     function designatedTokenPool(uint256 id) public view returns (uint256) {
         return _designatedTokenPool[id];
     }
 
     function numBondsIssued() public view returns (uint256) {
-        return _id;
+        return _id.current() - 1;
     }
 }

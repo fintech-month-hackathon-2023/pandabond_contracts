@@ -588,12 +588,184 @@
         },
         "solcVersion": "0.8.17"
       },
-      "contracts/BondFactory.sol:BondFactory": {
-        "src": "contracts\\BondFactory.sol:8",
+      "contracts/BondDB.sol:BondDB": {
+        "src": "contracts\\BondDB.sol:16",
         "version": {
-          "withMetadata": "bc31d4d74fdb6d41d9d174884918f35d6215a793a47a07d98e353ef9463cb169",
-          "withoutMetadata": "ae53b9ddb3cd1ec0427645b1e9265e7272f005544151bab8e099ef4d5577d068",
-          "linkedWithoutMetadata": "ae53b9ddb3cd1ec0427645b1e9265e7272f005544151bab8e099ef4d5577d068"
+          "withMetadata": "132425d4ee426a2ea0bfb68bf3d27af4b25fcb533320e223b8491370fc04590f",
+          "withoutMetadata": "ddd73e8605d4a1d2652fec4f4113adc8c887250e7b744d388400cae0307d1570",
+          "linkedWithoutMetadata": "ddd73e8605d4a1d2652fec4f4113adc8c887250e7b744d388400cae0307d1570"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "()",
+          "registerPeriphery(address[])",
+          "registerFactory(address)",
+          "incrementFundsRaisedByToken(uint256,address)",
+          "incrementFundsRaisedByTokenAndCategory(uint256,address,uint256)",
+          "incrementFundsRaisedByCompanyAndToken(uint256,address,address)",
+          "incrementFundsRaisedByCompanyAndTokenAndCategory(uint256,address,address,uint256)",
+          "incrementNumberOfIssuedBondsByCategory(uint256)",
+          "incrementNumberOfIssuedBondsByCompanyAndCategory(address,uint256)",
+          "incrementNumberOfTimesDefaultedByCompany(address)",
+          "incrementNumberOfTimesDefaultedByCompanyAndCategory(address,uint256)",
+          "owner()",
+          "isPeriphery(address)",
+          "isFactory(address)",
+          "fundsRaisedByToken(address)",
+          "fundsRaisedByTokenAndCategory(address,uint256)",
+          "fundsRaisedByCompanyAndToken(address,address)",
+          "fundsRaisedByCompanyAndTokenAndCategory(address,address,uint256)",
+          "numberOfIssuedBondsByCategory(uint256)",
+          "numberOfIssuedBondsByCompanyAndCategory(address,uint256)",
+          "numberOfTimesDefaultedByCompany(address)",
+          "numberOfTimesDefaultedByCompanyAndCategory(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "BondDB",
+            "src": "contracts\\BondDB.sol:31"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_owner",
+            "src": "contracts\\BondDB.sol:17"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_isPeriphery",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "BondDB",
+              "src": "contracts\\BondDB.sol:19"
+            },
+            {
+              "label": "_isFactory",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "BondDB",
+              "src": "contracts\\BondDB.sol:20"
+            },
+            {
+              "label": "_fundsRaisedByToken",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "BondDB",
+              "src": "contracts\\BondDB.sol:22"
+            },
+            {
+              "label": "_fundsRaisedByTokenAndCategory",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_mapping(t_address,t_mapping(t_uint256,t_uint256))",
+              "contract": "BondDB",
+              "src": "contracts\\BondDB.sol:23"
+            },
+            {
+              "label": "_fundsRaisedByCompanyAndToken",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+              "contract": "BondDB",
+              "src": "contracts\\BondDB.sol:24"
+            },
+            {
+              "label": "_fundsRaisedByCompanyAndTokenAndCategory",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_mapping(t_uint256,t_uint256)))",
+              "contract": "BondDB",
+              "src": "contracts\\BondDB.sol:25"
+            },
+            {
+              "label": "_numberOfIssuedBondsByCategory",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondDB",
+              "src": "contracts\\BondDB.sol:26"
+            },
+            {
+              "label": "_numberOfIssuedBondsByCompanyAndCategory",
+              "offset": 0,
+              "slot": "7",
+              "type": "t_mapping(t_address,t_mapping(t_uint256,t_uint256))",
+              "contract": "BondDB",
+              "src": "contracts\\BondDB.sol:27"
+            },
+            {
+              "label": "_numberOfTimesDefaultedByCompany",
+              "offset": 0,
+              "slot": "8",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "BondDB",
+              "src": "contracts\\BondDB.sol:28"
+            },
+            {
+              "label": "_numberOfTimesDefaultedByCompanyAndCategory",
+              "offset": 0,
+              "slot": "9",
+              "type": "t_mapping(t_address,t_mapping(t_uint256,t_uint256))",
+              "contract": "BondDB",
+              "src": "contracts\\BondDB.sol:29"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_mapping(t_uint256,t_uint256)))": {
+              "label": "mapping(address => mapping(address => mapping(uint256 => uint256)))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(address => mapping(address => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_uint256,t_uint256))": {
+              "label": "mapping(address => mapping(uint256 => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_uint256)": {
+              "label": "mapping(uint256 => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/BondFactory.sol:BondFactory": {
+        "src": "contracts\\BondFactory.sol:11",
+        "version": {
+          "withMetadata": "d81ed8f8c4d102dfa4b67689c38901205174fd34c28c72f79dbdf5711cedefb3",
+          "withoutMetadata": "6f051f3debcd397473272358af48538838d9bce84cf0f1dcfc32fb94caf3fa31",
+          "linkedWithoutMetadata": "6f051f3debcd397473272358af48538838d9bce84cf0f1dcfc32fb94caf3fa31"
         },
         "inherit": [
           "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol:IERC1155Receiver",
@@ -604,9 +776,11 @@
           "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
           "@openzeppelin/contracts/utils/Context.sol:Context"
         ],
-        "libraries": [],
+        "libraries": [
+          "@openzeppelin/contracts/utils/Counters.sol:Counters"
+        ],
         "methods": [
-          "(string,address,address)",
+          "(string,address,address,address)",
           "issue(uint256,uint256,uint256,string,uint256,uint256,uint256)",
           "purchase(uint256,uint256)",
           "withdraw(uint256,uint256)",
@@ -639,7 +813,6 @@
           "bondMetadata(uint256)",
           "baseToken()",
           "owner()",
-          "fundsRaised()",
           "designatedTokenPool(uint256)",
           "numBondsIssued()"
         ],
@@ -648,22 +821,22 @@
           {
             "kind": "constructor",
             "contract": "BondFactory",
-            "src": "contracts\\BondFactory.sol:59"
+            "src": "contracts\\BondFactory.sol:65"
           },
           {
             "kind": "state-variable-immutable",
             "name": "_owner",
-            "src": "contracts\\BondFactory.sol:9"
+            "src": "contracts\\BondFactory.sol:15"
           },
           {
             "kind": "state-variable-immutable",
             "name": "_baseToken",
-            "src": "contracts\\BondFactory.sol:10"
+            "src": "contracts\\BondFactory.sol:16"
           },
           {
-            "kind": "state-variable-assignment",
-            "name": "_id",
-            "src": "contracts\\BondFactory.sol:11"
+            "kind": "state-variable-immutable",
+            "name": "_bondDB",
+            "src": "contracts\\BondFactory.sol:17"
           }
         ],
         "layout": {
@@ -696,81 +869,73 @@
               "label": "_id",
               "offset": 0,
               "slot": "3",
-              "type": "t_uint256",
-              "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:11"
-            },
-            {
-              "label": "_fundsRaised",
-              "offset": 0,
-              "slot": "4",
-              "type": "t_uint256",
+              "type": "t_struct(Counter)3101_storage",
               "contract": "BondFactory",
               "src": "contracts\\BondFactory.sol:13"
             },
             {
               "label": "_bondMetadata",
               "offset": 0,
-              "slot": "5",
-              "type": "t_mapping(t_uint256,t_struct(BondMetadata)4285_storage)",
+              "slot": "4",
+              "type": "t_mapping(t_uint256,t_struct(BondMetadata)4802_storage)",
               "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:28"
+              "src": "contracts\\BondFactory.sol:34"
             },
             {
               "label": "_purchasedQuantity",
               "offset": 0,
-              "slot": "6",
+              "slot": "5",
               "type": "t_mapping(t_uint256,t_uint256)",
-              "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:29"
-            },
-            {
-              "label": "_redeemedQuantity",
-              "offset": 0,
-              "slot": "7",
-              "type": "t_mapping(t_uint256,t_uint256)",
-              "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:30"
-            },
-            {
-              "label": "_designatedTokenPool",
-              "offset": 0,
-              "slot": "8",
-              "type": "t_mapping(t_uint256,t_uint256)",
-              "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:31"
-            },
-            {
-              "label": "_tokenAmountPerBondAfterDefault",
-              "offset": 0,
-              "slot": "9",
-              "type": "t_mapping(t_uint256,t_uint256)",
-              "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:32"
-            },
-            {
-              "label": "_tokenAmountPerBondAfterComplete",
-              "offset": 0,
-              "slot": "10",
-              "type": "t_mapping(t_uint256,t_uint256)",
-              "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:33"
-            },
-            {
-              "label": "_isDefaulted",
-              "offset": 0,
-              "slot": "11",
-              "type": "t_mapping(t_uint256,t_bool)",
               "contract": "BondFactory",
               "src": "contracts\\BondFactory.sol:35"
             },
             {
-              "label": "_isCompleted",
+              "label": "_redeemedQuantity",
               "offset": 0,
-              "slot": "12",
-              "type": "t_mapping(t_uint256,t_bool)",
+              "slot": "6",
+              "type": "t_mapping(t_uint256,t_uint256)",
               "contract": "BondFactory",
               "src": "contracts\\BondFactory.sol:36"
+            },
+            {
+              "label": "_designatedTokenPool",
+              "offset": 0,
+              "slot": "7",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:37"
+            },
+            {
+              "label": "_tokenAmountPerBondAfterDefault",
+              "offset": 0,
+              "slot": "8",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:38"
+            },
+            {
+              "label": "_tokenAmountPerBondAfterComplete",
+              "offset": 0,
+              "slot": "9",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:39"
+            },
+            {
+              "label": "_isDefaulted",
+              "offset": 0,
+              "slot": "10",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:41"
+            },
+            {
+              "label": "_isCompleted",
+              "offset": 0,
+              "slot": "11",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:42"
             }
           ],
           "types": {
@@ -802,7 +967,7 @@
               "label": "mapping(uint256 => mapping(address => uint256))",
               "numberOfBytes": "32"
             },
-            "t_mapping(t_uint256,t_struct(BondMetadata)4285_storage)": {
+            "t_mapping(t_uint256,t_struct(BondMetadata)4802_storage)": {
               "label": "mapping(uint256 => struct BondFactory.BondMetadata)",
               "numberOfBytes": "32"
             },
@@ -814,7 +979,7 @@
               "label": "string",
               "numberOfBytes": "32"
             },
-            "t_struct(BondMetadata)4285_storage": {
+            "t_struct(BondMetadata)4802_storage": {
               "label": "struct BondFactory.BondMetadata",
               "members": [
                 {
@@ -880,6 +1045,18 @@
               ],
               "numberOfBytes": "320"
             },
+            "t_struct(Counter)3101_storage": {
+              "label": "struct Counters.Counter",
+              "members": [
+                {
+                  "label": "_value",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "0"
+                }
+              ],
+              "numberOfBytes": "32"
+            },
             "t_uint256": {
               "label": "uint256",
               "numberOfBytes": "32"
@@ -891,40 +1068,46 @@
         "solcVersion": "0.8.17"
       },
       "contracts/BondPeriphery.sol:BondPeriphery": {
-        "src": "contracts\\BondPeriphery.sol:8",
+        "src": "contracts\\BondPeriphery.sol:9",
         "version": {
-          "withMetadata": "41ace95a70b26fe38ec0478ae89678679b39bf012eddac9bb30ab875be0a79f7",
-          "withoutMetadata": "61f85ef6c4e5130a850a9d22e7fc6f8c8261b22bc9aab394b4269caf1f889e58",
-          "linkedWithoutMetadata": "61f85ef6c4e5130a850a9d22e7fc6f8c8261b22bc9aab394b4269caf1f889e58"
+          "withMetadata": "acdf24c12a4a2f5dbca58867538070fba58b404ee0bc9c0e6f77dd02c0050e7b",
+          "withoutMetadata": "fdba5b775ba8f3b16d5bba560115cc8eaa168dd34766a85d96140972b72cb479",
+          "linkedWithoutMetadata": "fdba5b775ba8f3b16d5bba560115cc8eaa168dd34766a85d96140972b72cb479"
         },
         "inherit": [],
         "libraries": [],
         "methods": [
-          "(address)",
+          "(address,address)",
           "register()",
           "createBondFactory(string,address)",
           "owner()",
           "entities()",
           "isRegistered(address)",
           "bondFactories(address)",
-          "bondFactoryIsInitialized(address,address)"
+          "bondFactoryIsInitialized(address,address)",
+          "bondDB()"
         ],
         "linkReferences": [],
         "errors": [
           {
             "kind": "constructor",
             "contract": "BondPeriphery",
-            "src": "contracts\\BondPeriphery.sol:44"
+            "src": "contracts\\BondPeriphery.sol:46"
           },
           {
             "kind": "state-variable-immutable",
             "name": "_owner",
-            "src": "contracts\\BondPeriphery.sol:9"
+            "src": "contracts\\BondPeriphery.sol:10"
           },
           {
             "kind": "state-variable-immutable",
             "name": "_sbt",
-            "src": "contracts\\BondPeriphery.sol:10"
+            "src": "contracts\\BondPeriphery.sol:11"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_bondDB",
+            "src": "contracts\\BondPeriphery.sol:12"
           }
         ],
         "layout": {
@@ -935,7 +1118,7 @@
               "slot": "0",
               "type": "t_array(t_address)dyn_storage",
               "contract": "BondPeriphery",
-              "src": "contracts\\BondPeriphery.sol:12"
+              "src": "contracts\\BondPeriphery.sol:14"
             },
             {
               "label": "_isRegistered",
@@ -943,7 +1126,7 @@
               "slot": "1",
               "type": "t_mapping(t_address,t_bool)",
               "contract": "BondPeriphery",
-              "src": "contracts\\BondPeriphery.sol:14"
+              "src": "contracts\\BondPeriphery.sol:16"
             },
             {
               "label": "_isAllowedCurrency",
@@ -951,7 +1134,7 @@
               "slot": "2",
               "type": "t_mapping(t_address,t_bool)",
               "contract": "BondPeriphery",
-              "src": "contracts\\BondPeriphery.sol:16"
+              "src": "contracts\\BondPeriphery.sol:18"
             },
             {
               "label": "_bondFactories",
@@ -959,7 +1142,7 @@
               "slot": "3",
               "type": "t_mapping(t_address,t_array(t_address)dyn_storage)",
               "contract": "BondPeriphery",
-              "src": "contracts\\BondPeriphery.sol:18"
+              "src": "contracts\\BondPeriphery.sol:20"
             },
             {
               "label": "_bondFactoryIsInitialized",
@@ -967,7 +1150,7 @@
               "slot": "4",
               "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
               "contract": "BondPeriphery",
-              "src": "contracts\\BondPeriphery.sol:20"
+              "src": "contracts\\BondPeriphery.sol:22"
             }
           ],
           "types": {
@@ -1004,9 +1187,9 @@
       "contracts/CallableBondFactory.sol:CallableBondFactory": {
         "src": "contracts\\CallableBondFactory.sol:6",
         "version": {
-          "withMetadata": "1dcfe41dfb78d44465a200d6933a8115c9b6ead13454fdf92c99c30023b83ea1",
-          "withoutMetadata": "b721fb9b90743231b171a9fdfba02d46463a37aa7b5f46037dc56bd31136b0e9",
-          "linkedWithoutMetadata": "b721fb9b90743231b171a9fdfba02d46463a37aa7b5f46037dc56bd31136b0e9"
+          "withMetadata": "1d9f8afb023b6d6506a0aab9a9be210fb695b8a401f9b8bcbd9529c714281125",
+          "withoutMetadata": "38d48a3420a75f1328c5208320cbd95968bbf190500d396ce0c52e7d5ec3d4ac",
+          "linkedWithoutMetadata": "38d48a3420a75f1328c5208320cbd95968bbf190500d396ce0c52e7d5ec3d4ac"
         },
         "inherit": [
           "contracts/BondFactory.sol:BondFactory",
@@ -1018,9 +1201,11 @@
           "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
           "@openzeppelin/contracts/utils/Context.sol:Context"
         ],
-        "libraries": [],
+        "libraries": [
+          "@openzeppelin/contracts/utils/Counters.sol:Counters"
+        ],
         "methods": [
-          "(string,address,address)",
+          "(string,address,address,address)",
           "call(uint256)",
           "issue(uint256,uint256,uint256,string,uint256,uint256,uint256)",
           "principalWithInterest(uint256)",
@@ -1033,7 +1218,7 @@
           {
             "kind": "constructor",
             "contract": "CallableBondFactory",
-            "src": "contracts\\CallableBondFactory.sol:17"
+            "src": "contracts\\CallableBondFactory.sol:22"
           }
         ],
         "layout": {
@@ -1066,81 +1251,81 @@
               "label": "_id",
               "offset": 0,
               "slot": "3",
-              "type": "t_uint256",
-              "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:11"
-            },
-            {
-              "label": "_fundsRaised",
-              "offset": 0,
-              "slot": "4",
-              "type": "t_uint256",
+              "type": "t_struct(Counter)3101_storage",
               "contract": "BondFactory",
               "src": "contracts\\BondFactory.sol:13"
             },
             {
               "label": "_bondMetadata",
               "offset": 0,
-              "slot": "5",
-              "type": "t_mapping(t_uint256,t_struct(BondMetadata)4285_storage)",
+              "slot": "4",
+              "type": "t_mapping(t_uint256,t_struct(BondMetadata)4802_storage)",
               "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:28"
+              "src": "contracts\\BondFactory.sol:34"
             },
             {
               "label": "_purchasedQuantity",
               "offset": 0,
-              "slot": "6",
+              "slot": "5",
               "type": "t_mapping(t_uint256,t_uint256)",
-              "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:29"
-            },
-            {
-              "label": "_redeemedQuantity",
-              "offset": 0,
-              "slot": "7",
-              "type": "t_mapping(t_uint256,t_uint256)",
-              "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:30"
-            },
-            {
-              "label": "_designatedTokenPool",
-              "offset": 0,
-              "slot": "8",
-              "type": "t_mapping(t_uint256,t_uint256)",
-              "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:31"
-            },
-            {
-              "label": "_tokenAmountPerBondAfterDefault",
-              "offset": 0,
-              "slot": "9",
-              "type": "t_mapping(t_uint256,t_uint256)",
-              "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:32"
-            },
-            {
-              "label": "_tokenAmountPerBondAfterComplete",
-              "offset": 0,
-              "slot": "10",
-              "type": "t_mapping(t_uint256,t_uint256)",
-              "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:33"
-            },
-            {
-              "label": "_isDefaulted",
-              "offset": 0,
-              "slot": "11",
-              "type": "t_mapping(t_uint256,t_bool)",
               "contract": "BondFactory",
               "src": "contracts\\BondFactory.sol:35"
             },
             {
-              "label": "_isCompleted",
+              "label": "_redeemedQuantity",
               "offset": 0,
-              "slot": "12",
-              "type": "t_mapping(t_uint256,t_bool)",
+              "slot": "6",
+              "type": "t_mapping(t_uint256,t_uint256)",
               "contract": "BondFactory",
               "src": "contracts\\BondFactory.sol:36"
+            },
+            {
+              "label": "_designatedTokenPool",
+              "offset": 0,
+              "slot": "7",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:37"
+            },
+            {
+              "label": "_tokenAmountPerBondAfterDefault",
+              "offset": 0,
+              "slot": "8",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:38"
+            },
+            {
+              "label": "_tokenAmountPerBondAfterComplete",
+              "offset": 0,
+              "slot": "9",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:39"
+            },
+            {
+              "label": "_isDefaulted",
+              "offset": 0,
+              "slot": "10",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:41"
+            },
+            {
+              "label": "_isCompleted",
+              "offset": 0,
+              "slot": "11",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:42"
+            },
+            {
+              "label": "_id",
+              "offset": 0,
+              "slot": "12",
+              "type": "t_struct(Counter)3101_storage",
+              "contract": "CallableBondFactory",
+              "src": "contracts\\CallableBondFactory.sol:8"
             },
             {
               "label": "_minObligationPeriod",
@@ -1148,7 +1333,7 @@
               "slot": "13",
               "type": "t_mapping(t_uint256,t_uint256)",
               "contract": "CallableBondFactory",
-              "src": "contracts\\CallableBondFactory.sol:7"
+              "src": "contracts\\CallableBondFactory.sol:12"
             },
             {
               "label": "_couponRateOnCall",
@@ -1156,7 +1341,7 @@
               "slot": "14",
               "type": "t_mapping(t_uint256,t_uint256)",
               "contract": "CallableBondFactory",
-              "src": "contracts\\CallableBondFactory.sol:8"
+              "src": "contracts\\CallableBondFactory.sol:13"
             },
             {
               "label": "_isCalled",
@@ -1164,7 +1349,7 @@
               "slot": "15",
               "type": "t_mapping(t_uint256,t_bool)",
               "contract": "CallableBondFactory",
-              "src": "contracts\\CallableBondFactory.sol:9"
+              "src": "contracts\\CallableBondFactory.sol:14"
             }
           ],
           "types": {
@@ -1196,7 +1381,7 @@
               "label": "mapping(uint256 => mapping(address => uint256))",
               "numberOfBytes": "32"
             },
-            "t_mapping(t_uint256,t_struct(BondMetadata)4285_storage)": {
+            "t_mapping(t_uint256,t_struct(BondMetadata)4802_storage)": {
               "label": "mapping(uint256 => struct BondFactory.BondMetadata)",
               "numberOfBytes": "32"
             },
@@ -1208,7 +1393,7 @@
               "label": "string",
               "numberOfBytes": "32"
             },
-            "t_struct(BondMetadata)4285_storage": {
+            "t_struct(BondMetadata)4802_storage": {
               "label": "struct BondFactory.BondMetadata",
               "members": [
                 {
@@ -1274,6 +1459,18 @@
               ],
               "numberOfBytes": "320"
             },
+            "t_struct(Counter)3101_storage": {
+              "label": "struct Counters.Counter",
+              "members": [
+                {
+                  "label": "_value",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "0"
+                }
+              ],
+              "numberOfBytes": "32"
+            },
             "t_uint256": {
               "label": "uint256",
               "numberOfBytes": "32"
@@ -1287,16 +1484,16 @@
       "contracts/CallableBondPeriphery.sol:CallableBondPeriphery": {
         "src": "contracts\\CallableBondPeriphery.sol:9",
         "version": {
-          "withMetadata": "9ca3bef74d10e9e9e4e74ad81f26fedcffe0c95d1ffa1a62691bc4bd230e2739",
-          "withoutMetadata": "f9ec831e5118567ce353b676d41b6efa6f8a435282291cd56f67f06e3178b816",
-          "linkedWithoutMetadata": "f9ec831e5118567ce353b676d41b6efa6f8a435282291cd56f67f06e3178b816"
+          "withMetadata": "a208fd9780202de5e5640238b8c5beacef83f3202126bb37f28f0b0c1efdc86b",
+          "withoutMetadata": "cdd50f8cd3be9efa73a5b4ab3cf855419828f3d3c5a9b6b65b58bfe0d2376867",
+          "linkedWithoutMetadata": "cdd50f8cd3be9efa73a5b4ab3cf855419828f3d3c5a9b6b65b58bfe0d2376867"
         },
         "inherit": [
           "contracts/BondPeriphery.sol:BondPeriphery"
         ],
         "libraries": [],
         "methods": [
-          "(address)",
+          "(address,address)",
           "register()",
           "createBondFactory(string,address)"
         ],
@@ -1316,7 +1513,7 @@
               "slot": "0",
               "type": "t_array(t_address)dyn_storage",
               "contract": "BondPeriphery",
-              "src": "contracts\\BondPeriphery.sol:12"
+              "src": "contracts\\BondPeriphery.sol:14"
             },
             {
               "label": "_isRegistered",
@@ -1324,7 +1521,7 @@
               "slot": "1",
               "type": "t_mapping(t_address,t_bool)",
               "contract": "BondPeriphery",
-              "src": "contracts\\BondPeriphery.sol:14"
+              "src": "contracts\\BondPeriphery.sol:16"
             },
             {
               "label": "_isAllowedCurrency",
@@ -1332,7 +1529,7 @@
               "slot": "2",
               "type": "t_mapping(t_address,t_bool)",
               "contract": "BondPeriphery",
-              "src": "contracts\\BondPeriphery.sol:16"
+              "src": "contracts\\BondPeriphery.sol:18"
             },
             {
               "label": "_bondFactories",
@@ -1340,7 +1537,7 @@
               "slot": "3",
               "type": "t_mapping(t_address,t_array(t_address)dyn_storage)",
               "contract": "BondPeriphery",
-              "src": "contracts\\BondPeriphery.sol:18"
+              "src": "contracts\\BondPeriphery.sol:20"
             },
             {
               "label": "_bondFactoryIsInitialized",
@@ -1348,7 +1545,7 @@
               "slot": "4",
               "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
               "contract": "BondPeriphery",
-              "src": "contracts\\BondPeriphery.sol:20"
+              "src": "contracts\\BondPeriphery.sol:22"
             }
           ],
           "types": {
@@ -1382,12 +1579,142 @@
         },
         "solcVersion": "0.8.17"
       },
-      "contracts/DualCurrencyBondFactory.sol:DualCurrencyBondFactory": {
-        "src": "contracts\\DualCurrencyBondFactory.sol:9",
+      "contracts/CompanyDB.sol:CompanyDB": {
+        "src": "contracts\\CompanyDB.sol:6",
         "version": {
-          "withMetadata": "0d0cc81d50a48e6505185b12e9b260aa57c88d482dd7a0ae8855bd1de841ca81",
-          "withoutMetadata": "f275f4b0051c185439b911e5d7d5d9d13333def8071ac277fa4dff7c9f4148c5",
-          "linkedWithoutMetadata": "f275f4b0051c185439b911e5d7d5d9d13333def8071ac277fa4dff7c9f4148c5"
+          "withMetadata": "34afa656a7c79cc4ff42314547b9a20445e1a76cbe5bf5643d6f69e238d5fbed",
+          "withoutMetadata": "fc56059663bcd0b8667c3e683286e74463c694c6edf8599e368d5a35b08ae0a0",
+          "linkedWithoutMetadata": "fc56059663bcd0b8667c3e683286e74463c694c6edf8599e368d5a35b08ae0a0"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "(address)",
+          "registerCompany(address,string,bytes32,uint8)",
+          "reissueSBT(address,bytes32,uint8)",
+          "deactivateSBT(address)",
+          "activateSBT(address)",
+          "modifyTier(address,uint8)",
+          "isRegisteredCompany(address)",
+          "registeredCompanies()",
+          "companyMetadata(address)",
+          "owner()",
+          "soulBoundToken()"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "CompanyDB",
+            "src": "contracts\\CompanyDB.sol:30"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_owner",
+            "src": "contracts\\CompanyDB.sol:17"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_soulBoundToken",
+            "src": "contracts\\CompanyDB.sol:18"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_registeredCompanies",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_array(t_address)dyn_storage",
+              "contract": "CompanyDB",
+              "src": "contracts\\CompanyDB.sol:13"
+            },
+            {
+              "label": "_isRegisteredCompany",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "CompanyDB",
+              "src": "contracts\\CompanyDB.sol:14"
+            },
+            {
+              "label": "_companyMetadata",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_address,t_struct(CompanyMetadata)6952_storage)",
+              "contract": "CompanyDB",
+              "src": "contracts\\CompanyDB.sol:15"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_array(t_address)dyn_storage": {
+              "label": "address[]",
+              "numberOfBytes": "32"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_struct(CompanyMetadata)6952_storage)": {
+              "label": "mapping(address => struct CompanyDB.CompanyMetadata)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_struct(CompanyMetadata)6952_storage": {
+              "label": "struct CompanyDB.CompanyMetadata",
+              "members": [
+                {
+                  "label": "name",
+                  "type": "t_string_storage",
+                  "offset": 0,
+                  "slot": "0"
+                },
+                {
+                  "label": "hashedIdentity",
+                  "type": "t_bytes32",
+                  "offset": 0,
+                  "slot": "1"
+                },
+                {
+                  "label": "tier",
+                  "type": "t_uint8",
+                  "offset": 0,
+                  "slot": "2"
+                }
+              ],
+              "numberOfBytes": "96"
+            },
+            "t_uint8": {
+              "label": "uint8",
+              "numberOfBytes": "1"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/DualCurrencyBondFactory.sol:DualCurrencyBondFactory": {
+        "src": "contracts\\DualCurrencyBondFactory.sol:11",
+        "version": {
+          "withMetadata": "79293fbb17d1eff2a09a276d7a9755d4a904891533a5501d8f28cfc36851ebcf",
+          "withoutMetadata": "939f5e881e6e9ff142fa1a803e8355e434741077441221ca687acdf250bf715b",
+          "linkedWithoutMetadata": "939f5e881e6e9ff142fa1a803e8355e434741077441221ca687acdf250bf715b"
         },
         "inherit": [
           "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol:IERC1155Receiver",
@@ -1398,9 +1725,11 @@
           "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
           "@openzeppelin/contracts/utils/Context.sol:Context"
         ],
-        "libraries": [],
+        "libraries": [
+          "@openzeppelin/contracts/utils/Counters.sol:Counters"
+        ],
         "methods": [
-          "(string,address,address,address,address,address)",
+          "(string,address,address,address,address,address,address)",
           "getLatestPriceA()",
           "getLatestPriceB()",
           "getAtoBExchangeRate()",
@@ -1441,7 +1770,6 @@
           "tokenA()",
           "tokenB()",
           "owner()",
-          "fundsRaised()",
           "numBondsIssued()"
         ],
         "linkReferences": [],
@@ -1449,37 +1777,37 @@
           {
             "kind": "constructor",
             "contract": "DualCurrencyBondFactory",
-            "src": "contracts\\DualCurrencyBondFactory.sol:73"
+            "src": "contracts\\DualCurrencyBondFactory.sol:78"
           },
           {
             "kind": "state-variable-immutable",
             "name": "_priceFeedA",
-            "src": "contracts\\DualCurrencyBondFactory.sol:10"
+            "src": "contracts\\DualCurrencyBondFactory.sol:15"
           },
           {
             "kind": "state-variable-immutable",
             "name": "_priceFeedB",
-            "src": "contracts\\DualCurrencyBondFactory.sol:11"
+            "src": "contracts\\DualCurrencyBondFactory.sol:16"
           },
           {
             "kind": "state-variable-immutable",
             "name": "_owner",
-            "src": "contracts\\DualCurrencyBondFactory.sol:13"
+            "src": "contracts\\DualCurrencyBondFactory.sol:18"
           },
           {
             "kind": "state-variable-immutable",
             "name": "_tokenA",
-            "src": "contracts\\DualCurrencyBondFactory.sol:14"
+            "src": "contracts\\DualCurrencyBondFactory.sol:19"
           },
           {
             "kind": "state-variable-immutable",
             "name": "_tokenB",
-            "src": "contracts\\DualCurrencyBondFactory.sol:15"
+            "src": "contracts\\DualCurrencyBondFactory.sol:20"
           },
           {
-            "kind": "state-variable-assignment",
-            "name": "_id",
-            "src": "contracts\\DualCurrencyBondFactory.sol:16"
+            "kind": "state-variable-immutable",
+            "name": "_bondDB",
+            "src": "contracts\\DualCurrencyBondFactory.sol:21"
           }
         ],
         "layout": {
@@ -1512,97 +1840,89 @@
               "label": "_id",
               "offset": 0,
               "slot": "3",
-              "type": "t_uint256",
+              "type": "t_struct(Counter)3101_storage",
               "contract": "DualCurrencyBondFactory",
-              "src": "contracts\\DualCurrencyBondFactory.sol:16"
-            },
-            {
-              "label": "_fundsRaised",
-              "offset": 0,
-              "slot": "4",
-              "type": "t_uint256",
-              "contract": "DualCurrencyBondFactory",
-              "src": "contracts\\DualCurrencyBondFactory.sol:18"
+              "src": "contracts\\DualCurrencyBondFactory.sol:13"
             },
             {
               "label": "_bondMetadata",
               "offset": 0,
-              "slot": "5",
-              "type": "t_mapping(t_uint256,t_struct(BondMetadata)6315_storage)",
-              "contract": "DualCurrencyBondFactory",
-              "src": "contracts\\DualCurrencyBondFactory.sol:34"
-            },
-            {
-              "label": "_purchasedQuantity",
-              "offset": 0,
-              "slot": "6",
-              "type": "t_mapping(t_uint256,t_uint256)",
-              "contract": "DualCurrencyBondFactory",
-              "src": "contracts\\DualCurrencyBondFactory.sol:35"
-            },
-            {
-              "label": "_redeemedQuantity",
-              "offset": 0,
-              "slot": "7",
-              "type": "t_mapping(t_uint256,t_uint256)",
-              "contract": "DualCurrencyBondFactory",
-              "src": "contracts\\DualCurrencyBondFactory.sol:36"
-            },
-            {
-              "label": "_designatedTokenAPool",
-              "offset": 0,
-              "slot": "8",
-              "type": "t_mapping(t_uint256,t_uint256)",
-              "contract": "DualCurrencyBondFactory",
-              "src": "contracts\\DualCurrencyBondFactory.sol:37"
-            },
-            {
-              "label": "_designatedTokenBPool",
-              "offset": 0,
-              "slot": "9",
-              "type": "t_mapping(t_uint256,t_uint256)",
-              "contract": "DualCurrencyBondFactory",
-              "src": "contracts\\DualCurrencyBondFactory.sol:38"
-            },
-            {
-              "label": "_tokenAAmountPerBondAfterDefault",
-              "offset": 0,
-              "slot": "10",
-              "type": "t_mapping(t_uint256,t_uint256)",
+              "slot": "4",
+              "type": "t_mapping(t_uint256,t_struct(BondMetadata)7338_storage)",
               "contract": "DualCurrencyBondFactory",
               "src": "contracts\\DualCurrencyBondFactory.sol:39"
             },
             {
-              "label": "_tokenBAmountPerBondAfterDefault",
+              "label": "_purchasedQuantity",
               "offset": 0,
-              "slot": "11",
+              "slot": "5",
               "type": "t_mapping(t_uint256,t_uint256)",
               "contract": "DualCurrencyBondFactory",
               "src": "contracts\\DualCurrencyBondFactory.sol:40"
             },
             {
-              "label": "_tokenBAmountPerBondAfterComplete",
+              "label": "_redeemedQuantity",
               "offset": 0,
-              "slot": "12",
+              "slot": "6",
               "type": "t_mapping(t_uint256,t_uint256)",
               "contract": "DualCurrencyBondFactory",
               "src": "contracts\\DualCurrencyBondFactory.sol:41"
             },
             {
-              "label": "_isDefaulted",
+              "label": "_designatedTokenAPool",
               "offset": 0,
-              "slot": "13",
-              "type": "t_mapping(t_uint256,t_bool)",
+              "slot": "7",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "DualCurrencyBondFactory",
+              "src": "contracts\\DualCurrencyBondFactory.sol:42"
+            },
+            {
+              "label": "_designatedTokenBPool",
+              "offset": 0,
+              "slot": "8",
+              "type": "t_mapping(t_uint256,t_uint256)",
               "contract": "DualCurrencyBondFactory",
               "src": "contracts\\DualCurrencyBondFactory.sol:43"
             },
             {
-              "label": "_isCompleted",
+              "label": "_tokenAAmountPerBondAfterDefault",
               "offset": 0,
-              "slot": "14",
-              "type": "t_mapping(t_uint256,t_bool)",
+              "slot": "9",
+              "type": "t_mapping(t_uint256,t_uint256)",
               "contract": "DualCurrencyBondFactory",
               "src": "contracts\\DualCurrencyBondFactory.sol:44"
+            },
+            {
+              "label": "_tokenBAmountPerBondAfterDefault",
+              "offset": 0,
+              "slot": "10",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "DualCurrencyBondFactory",
+              "src": "contracts\\DualCurrencyBondFactory.sol:45"
+            },
+            {
+              "label": "_tokenBAmountPerBondAfterComplete",
+              "offset": 0,
+              "slot": "11",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "DualCurrencyBondFactory",
+              "src": "contracts\\DualCurrencyBondFactory.sol:46"
+            },
+            {
+              "label": "_isDefaulted",
+              "offset": 0,
+              "slot": "12",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "DualCurrencyBondFactory",
+              "src": "contracts\\DualCurrencyBondFactory.sol:48"
+            },
+            {
+              "label": "_isCompleted",
+              "offset": 0,
+              "slot": "13",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "DualCurrencyBondFactory",
+              "src": "contracts\\DualCurrencyBondFactory.sol:49"
             }
           ],
           "types": {
@@ -1634,7 +1954,7 @@
               "label": "mapping(uint256 => mapping(address => uint256))",
               "numberOfBytes": "32"
             },
-            "t_mapping(t_uint256,t_struct(BondMetadata)6315_storage)": {
+            "t_mapping(t_uint256,t_struct(BondMetadata)7338_storage)": {
               "label": "mapping(uint256 => struct DualCurrencyBondFactory.BondMetadata)",
               "numberOfBytes": "32"
             },
@@ -1646,7 +1966,7 @@
               "label": "string",
               "numberOfBytes": "32"
             },
-            "t_struct(BondMetadata)6315_storage": {
+            "t_struct(BondMetadata)7338_storage": {
               "label": "struct DualCurrencyBondFactory.BondMetadata",
               "members": [
                 {
@@ -1718,6 +2038,18 @@
               ],
               "numberOfBytes": "352"
             },
+            "t_struct(Counter)3101_storage": {
+              "label": "struct Counters.Counter",
+              "members": [
+                {
+                  "label": "_value",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "0"
+                }
+              ],
+              "numberOfBytes": "32"
+            },
             "t_uint256": {
               "label": "uint256",
               "numberOfBytes": "32"
@@ -1729,16 +2061,16 @@
         "solcVersion": "0.8.17"
       },
       "contracts/DualCurrencyBondPeriphery.sol:DualCurrencyBondPeriphery": {
-        "src": "contracts\\DualCurrencyBondPeriphery.sol:8",
+        "src": "contracts\\DualCurrencyBondPeriphery.sol:9",
         "version": {
-          "withMetadata": "500776039f374512bcb04c6e1b95a067813d9cab6aeb049e98082ac027dc572f",
-          "withoutMetadata": "f6691e9c95bacddd39216ea6423361730cfeee00357fa975e91ea8fa90217934",
-          "linkedWithoutMetadata": "f6691e9c95bacddd39216ea6423361730cfeee00357fa975e91ea8fa90217934"
+          "withMetadata": "e3ec4c34e1ddac5a99fde6818a5f3742dfe5f6690360f56b422520a2c05d1176",
+          "withoutMetadata": "2e5278f1786485c2430c333a1c5632df69ef3feadc8f46e398177a3bbc98890e",
+          "linkedWithoutMetadata": "2e5278f1786485c2430c333a1c5632df69ef3feadc8f46e398177a3bbc98890e"
         },
         "inherit": [],
         "libraries": [],
         "methods": [
-          "(address)",
+          "(address,address)",
           "register()",
           "createDualCurrencyBondFactory(string,address,address)",
           "registerPriceFeed(address,address)",
@@ -1754,17 +2086,22 @@
           {
             "kind": "constructor",
             "contract": "DualCurrencyBondPeriphery",
-            "src": "contracts\\DualCurrencyBondPeriphery.sol:42"
+            "src": "contracts\\DualCurrencyBondPeriphery.sol:44"
           },
           {
             "kind": "state-variable-immutable",
             "name": "_owner",
-            "src": "contracts\\DualCurrencyBondPeriphery.sol:9"
+            "src": "contracts\\DualCurrencyBondPeriphery.sol:10"
           },
           {
             "kind": "state-variable-immutable",
             "name": "_sbt",
-            "src": "contracts\\DualCurrencyBondPeriphery.sol:10"
+            "src": "contracts\\DualCurrencyBondPeriphery.sol:11"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_bondDB",
+            "src": "contracts\\DualCurrencyBondPeriphery.sol:12"
           }
         ],
         "layout": {
@@ -1775,7 +2112,7 @@
               "slot": "0",
               "type": "t_array(t_address)dyn_storage",
               "contract": "DualCurrencyBondPeriphery",
-              "src": "contracts\\DualCurrencyBondPeriphery.sol:12"
+              "src": "contracts\\DualCurrencyBondPeriphery.sol:14"
             },
             {
               "label": "_priceFeeds",
@@ -1783,7 +2120,7 @@
               "slot": "1",
               "type": "t_mapping(t_address,t_address)",
               "contract": "DualCurrencyBondPeriphery",
-              "src": "contracts\\DualCurrencyBondPeriphery.sol:14"
+              "src": "contracts\\DualCurrencyBondPeriphery.sol:16"
             },
             {
               "label": "_isRegistered",
@@ -1791,7 +2128,7 @@
               "slot": "2",
               "type": "t_mapping(t_address,t_bool)",
               "contract": "DualCurrencyBondPeriphery",
-              "src": "contracts\\DualCurrencyBondPeriphery.sol:15"
+              "src": "contracts\\DualCurrencyBondPeriphery.sol:17"
             },
             {
               "label": "_dualCurrencyBondFactories",
@@ -1799,7 +2136,7 @@
               "slot": "3",
               "type": "t_mapping(t_address,t_array(t_address)dyn_storage)",
               "contract": "DualCurrencyBondPeriphery",
-              "src": "contracts\\DualCurrencyBondPeriphery.sol:17"
+              "src": "contracts\\DualCurrencyBondPeriphery.sol:19"
             },
             {
               "label": "_dualCurrencyBondFactoryIsInitialized",
@@ -1807,7 +2144,7 @@
               "slot": "4",
               "type": "t_mapping(t_address,t_mapping(t_address,t_mapping(t_address,t_bool)))",
               "contract": "DualCurrencyBondPeriphery",
-              "src": "contracts\\DualCurrencyBondPeriphery.sol:19"
+              "src": "contracts\\DualCurrencyBondPeriphery.sol:21"
             }
           ],
           "types": {
@@ -1852,9 +2189,9 @@
       "contracts/InstallmentBondFactory.sol:InstallmentBondFactory": {
         "src": "contracts\\InstallmentBondFactory.sol:6",
         "version": {
-          "withMetadata": "fe15f788c499d8d473ef13c945b17c6cc92028a3e560433defd5bf445caf744a",
-          "withoutMetadata": "896981c1ed587aaeb46d8359f8aafba5d090c3448ab905565f5ee8bb18c1a4f2",
-          "linkedWithoutMetadata": "896981c1ed587aaeb46d8359f8aafba5d090c3448ab905565f5ee8bb18c1a4f2"
+          "withMetadata": "4d1735e4fd82941d465f9e930cd34db2d028daeede10ed00e47d442cfbe18d3b",
+          "withoutMetadata": "205a704589031901ae09d2b9dd51ba872cfd0713361948f53567e26e1ba6a6f8",
+          "linkedWithoutMetadata": "205a704589031901ae09d2b9dd51ba872cfd0713361948f53567e26e1ba6a6f8"
         },
         "inherit": [
           "contracts/BondFactory.sol:BondFactory",
@@ -1866,9 +2203,11 @@
           "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
           "@openzeppelin/contracts/utils/Context.sol:Context"
         ],
-        "libraries": [],
+        "libraries": [
+          "@openzeppelin/contracts/utils/Counters.sol:Counters"
+        ],
         "methods": [
-          "(string,address,address)",
+          "(string,address,address,address)",
           "issue(uint256,uint256,uint256,string,uint256,uint256,uint256)",
           "fulfillObligationsAndLock(uint256,uint256)",
           "withdraw(uint256,uint256)",
@@ -1887,22 +2226,22 @@
           {
             "kind": "constructor",
             "contract": "InstallmentBondFactory",
-            "src": "contracts\\InstallmentBondFactory.sol:22"
+            "src": "contracts\\InstallmentBondFactory.sol:27"
           },
           {
             "kind": "state-variable-assignment",
             "name": "THREE",
-            "src": "contracts\\InstallmentBondFactory.sol:8"
+            "src": "contracts\\InstallmentBondFactory.sol:13"
           },
           {
             "kind": "state-variable-assignment",
             "name": "FIVE",
-            "src": "contracts\\InstallmentBondFactory.sol:9"
+            "src": "contracts\\InstallmentBondFactory.sol:14"
           },
           {
             "kind": "state-variable-assignment",
             "name": "TEN",
-            "src": "contracts\\InstallmentBondFactory.sol:10"
+            "src": "contracts\\InstallmentBondFactory.sol:15"
           }
         ],
         "layout": {
@@ -1935,81 +2274,81 @@
               "label": "_id",
               "offset": 0,
               "slot": "3",
-              "type": "t_uint256",
-              "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:11"
-            },
-            {
-              "label": "_fundsRaised",
-              "offset": 0,
-              "slot": "4",
-              "type": "t_uint256",
+              "type": "t_struct(Counter)3101_storage",
               "contract": "BondFactory",
               "src": "contracts\\BondFactory.sol:13"
             },
             {
               "label": "_bondMetadata",
               "offset": 0,
-              "slot": "5",
-              "type": "t_mapping(t_uint256,t_struct(BondMetadata)4285_storage)",
+              "slot": "4",
+              "type": "t_mapping(t_uint256,t_struct(BondMetadata)4802_storage)",
               "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:28"
+              "src": "contracts\\BondFactory.sol:34"
             },
             {
               "label": "_purchasedQuantity",
               "offset": 0,
-              "slot": "6",
+              "slot": "5",
               "type": "t_mapping(t_uint256,t_uint256)",
-              "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:29"
-            },
-            {
-              "label": "_redeemedQuantity",
-              "offset": 0,
-              "slot": "7",
-              "type": "t_mapping(t_uint256,t_uint256)",
-              "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:30"
-            },
-            {
-              "label": "_designatedTokenPool",
-              "offset": 0,
-              "slot": "8",
-              "type": "t_mapping(t_uint256,t_uint256)",
-              "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:31"
-            },
-            {
-              "label": "_tokenAmountPerBondAfterDefault",
-              "offset": 0,
-              "slot": "9",
-              "type": "t_mapping(t_uint256,t_uint256)",
-              "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:32"
-            },
-            {
-              "label": "_tokenAmountPerBondAfterComplete",
-              "offset": 0,
-              "slot": "10",
-              "type": "t_mapping(t_uint256,t_uint256)",
-              "contract": "BondFactory",
-              "src": "contracts\\BondFactory.sol:33"
-            },
-            {
-              "label": "_isDefaulted",
-              "offset": 0,
-              "slot": "11",
-              "type": "t_mapping(t_uint256,t_bool)",
               "contract": "BondFactory",
               "src": "contracts\\BondFactory.sol:35"
             },
             {
-              "label": "_isCompleted",
+              "label": "_redeemedQuantity",
               "offset": 0,
-              "slot": "12",
-              "type": "t_mapping(t_uint256,t_bool)",
+              "slot": "6",
+              "type": "t_mapping(t_uint256,t_uint256)",
               "contract": "BondFactory",
               "src": "contracts\\BondFactory.sol:36"
+            },
+            {
+              "label": "_designatedTokenPool",
+              "offset": 0,
+              "slot": "7",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:37"
+            },
+            {
+              "label": "_tokenAmountPerBondAfterDefault",
+              "offset": 0,
+              "slot": "8",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:38"
+            },
+            {
+              "label": "_tokenAmountPerBondAfterComplete",
+              "offset": 0,
+              "slot": "9",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:39"
+            },
+            {
+              "label": "_isDefaulted",
+              "offset": 0,
+              "slot": "10",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:41"
+            },
+            {
+              "label": "_isCompleted",
+              "offset": 0,
+              "slot": "11",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:42"
+            },
+            {
+              "label": "_id",
+              "offset": 0,
+              "slot": "12",
+              "type": "t_struct(Counter)3101_storage",
+              "contract": "InstallmentBondFactory",
+              "src": "contracts\\InstallmentBondFactory.sol:8"
             },
             {
               "label": "THREE",
@@ -2017,7 +2356,7 @@
               "slot": "13",
               "type": "t_array(t_uint256)dyn_storage",
               "contract": "InstallmentBondFactory",
-              "src": "contracts\\InstallmentBondFactory.sol:8"
+              "src": "contracts\\InstallmentBondFactory.sol:13"
             },
             {
               "label": "FIVE",
@@ -2025,7 +2364,7 @@
               "slot": "14",
               "type": "t_array(t_uint256)dyn_storage",
               "contract": "InstallmentBondFactory",
-              "src": "contracts\\InstallmentBondFactory.sol:9"
+              "src": "contracts\\InstallmentBondFactory.sol:14"
             },
             {
               "label": "TEN",
@@ -2033,7 +2372,7 @@
               "slot": "15",
               "type": "t_array(t_uint256)dyn_storage",
               "contract": "InstallmentBondFactory",
-              "src": "contracts\\InstallmentBondFactory.sol:10"
+              "src": "contracts\\InstallmentBondFactory.sol:15"
             },
             {
               "label": "_nextObligationDate",
@@ -2041,7 +2380,7 @@
               "slot": "16",
               "type": "t_mapping(t_uint256,t_uint256)",
               "contract": "InstallmentBondFactory",
-              "src": "contracts\\InstallmentBondFactory.sol:12"
+              "src": "contracts\\InstallmentBondFactory.sol:17"
             },
             {
               "label": "_minObligationTokenAmountPerBondList",
@@ -2049,7 +2388,7 @@
               "slot": "17",
               "type": "t_mapping(t_uint256,t_array(t_uint256)dyn_storage)",
               "contract": "InstallmentBondFactory",
-              "src": "contracts\\InstallmentBondFactory.sol:13"
+              "src": "contracts\\InstallmentBondFactory.sol:18"
             },
             {
               "label": "_lockedTokenAmount",
@@ -2057,7 +2396,7 @@
               "slot": "18",
               "type": "t_mapping(t_uint256,t_uint256)",
               "contract": "InstallmentBondFactory",
-              "src": "contracts\\InstallmentBondFactory.sol:14"
+              "src": "contracts\\InstallmentBondFactory.sol:19"
             },
             {
               "label": "_numberOfTimesFulfilled",
@@ -2065,7 +2404,7 @@
               "slot": "19",
               "type": "t_mapping(t_uint256,t_uint256)",
               "contract": "InstallmentBondFactory",
-              "src": "contracts\\InstallmentBondFactory.sol:15"
+              "src": "contracts\\InstallmentBondFactory.sol:20"
             }
           ],
           "types": {
@@ -2105,7 +2444,7 @@
               "label": "mapping(uint256 => mapping(address => uint256))",
               "numberOfBytes": "32"
             },
-            "t_mapping(t_uint256,t_struct(BondMetadata)4285_storage)": {
+            "t_mapping(t_uint256,t_struct(BondMetadata)4802_storage)": {
               "label": "mapping(uint256 => struct BondFactory.BondMetadata)",
               "numberOfBytes": "32"
             },
@@ -2117,7 +2456,7 @@
               "label": "string",
               "numberOfBytes": "32"
             },
-            "t_struct(BondMetadata)4285_storage": {
+            "t_struct(BondMetadata)4802_storage": {
               "label": "struct BondFactory.BondMetadata",
               "members": [
                 {
@@ -2183,6 +2522,18 @@
               ],
               "numberOfBytes": "320"
             },
+            "t_struct(Counter)3101_storage": {
+              "label": "struct Counters.Counter",
+              "members": [
+                {
+                  "label": "_value",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "0"
+                }
+              ],
+              "numberOfBytes": "32"
+            },
             "t_uint256": {
               "label": "uint256",
               "numberOfBytes": "32"
@@ -2196,16 +2547,16 @@
       "contracts/InstallmentBondPeriphery.sol:InstallmentBondPeriphery": {
         "src": "contracts\\InstallmentBondPeriphery.sol:10",
         "version": {
-          "withMetadata": "9a90a54409df567711bb1be32533fe52da2f3e633bd643f2d77c4b6bc595e41d",
-          "withoutMetadata": "d75577a42100fd1e82f1118fb944fea847faf2cd05695431383622e8531d2d71",
-          "linkedWithoutMetadata": "d75577a42100fd1e82f1118fb944fea847faf2cd05695431383622e8531d2d71"
+          "withMetadata": "3342eed597f6677924d2954bbc6caed27737f73adaa832a2072147e3f91637d6",
+          "withoutMetadata": "8d73c239b9b4da9fbe798544989dfcf7f1e55ab192dc54417489ccb387228699",
+          "linkedWithoutMetadata": "8d73c239b9b4da9fbe798544989dfcf7f1e55ab192dc54417489ccb387228699"
         },
         "inherit": [
           "contracts/BondPeriphery.sol:BondPeriphery"
         ],
         "libraries": [],
         "methods": [
-          "(address)",
+          "(address,address)",
           "register()",
           "createBondFactory(string,address)"
         ],
@@ -2225,7 +2576,7 @@
               "slot": "0",
               "type": "t_array(t_address)dyn_storage",
               "contract": "BondPeriphery",
-              "src": "contracts\\BondPeriphery.sol:12"
+              "src": "contracts\\BondPeriphery.sol:14"
             },
             {
               "label": "_isRegistered",
@@ -2233,7 +2584,7 @@
               "slot": "1",
               "type": "t_mapping(t_address,t_bool)",
               "contract": "BondPeriphery",
-              "src": "contracts\\BondPeriphery.sol:14"
+              "src": "contracts\\BondPeriphery.sol:16"
             },
             {
               "label": "_isAllowedCurrency",
@@ -2241,7 +2592,7 @@
               "slot": "2",
               "type": "t_mapping(t_address,t_bool)",
               "contract": "BondPeriphery",
-              "src": "contracts\\BondPeriphery.sol:16"
+              "src": "contracts\\BondPeriphery.sol:18"
             },
             {
               "label": "_bondFactories",
@@ -2249,7 +2600,7 @@
               "slot": "3",
               "type": "t_mapping(t_address,t_array(t_address)dyn_storage)",
               "contract": "BondPeriphery",
-              "src": "contracts\\BondPeriphery.sol:18"
+              "src": "contracts\\BondPeriphery.sol:20"
             },
             {
               "label": "_bondFactoryIsInitialized",
@@ -2257,7 +2608,7 @@
               "slot": "4",
               "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
               "contract": "BondPeriphery",
-              "src": "contracts\\BondPeriphery.sol:20"
+              "src": "contracts\\BondPeriphery.sol:22"
             }
           ],
           "types": {
@@ -2292,11 +2643,11 @@
         "solcVersion": "0.8.17"
       },
       "contracts/SoulBoundToken.sol:SoulBoundToken": {
-        "src": "contracts\\SoulBoundToken.sol:9",
+        "src": "contracts\\SoulBoundToken.sol:10",
         "version": {
-          "withMetadata": "a962e1e858b211fecf7c59a7cfc1f552663f5485f0c8e1765d6e63ae23673045",
-          "withoutMetadata": "2200f3c3b87ce3ac9d734e188263e566c788d86488257f147197e7c7e4b0a32c",
-          "linkedWithoutMetadata": "2200f3c3b87ce3ac9d734e188263e566c788d86488257f147197e7c7e4b0a32c"
+          "withMetadata": "b2c9695df8198a03777571ca62d289d76b81e1c0a9becbca93be8ec56a24e45c",
+          "withoutMetadata": "333d2347543a1b4a80ddad02fc64ad434a98e10034b2c60420d5ccd11840b1e1",
+          "linkedWithoutMetadata": "333d2347543a1b4a80ddad02fc64ad434a98e10034b2c60420d5ccd11840b1e1"
         },
         "inherit": [
           "contracts/interfaces/ISoulBoundToken.sol:ISoulBoundToken",
@@ -2313,24 +2664,26 @@
         ],
         "methods": [
           "()",
+          "registerDbAdmin(address)",
           "safeMint(address,uint8,bytes32)",
-          "burn(uint256)",
-          "modifyLevel(uint256,uint8)",
+          "modifyTier(uint256,uint8)",
           "deactivate(uint256)",
-          "reactivate(uint256)",
+          "activate(uint256)",
           "accessTier(uint256)",
           "accessTier(address)",
           "isActive(uint256)",
           "hashedIdentity(uint256)",
           "hasActiveSBT(address)",
-          "ownerToTokenId(address)"
+          "hasSBT(address)",
+          "ownerToTokenId(address)",
+          "dbAdmin()"
         ],
         "linkReferences": [],
         "errors": [
           {
             "kind": "constructor",
             "contract": "SoulBoundToken",
-            "src": "contracts\\SoulBoundToken.sol:24"
+            "src": "contracts\\SoulBoundToken.sol:27"
           }
         ],
         "layout": {
@@ -2397,39 +2750,47 @@
               "slot": "7",
               "type": "t_struct(Counter)3101_storage",
               "contract": "SoulBoundToken",
-              "src": "contracts\\SoulBoundToken.sol:12"
+              "src": "contracts\\SoulBoundToken.sol:13"
             },
             {
-              "label": "_accessTier",
+              "label": "_dbAdmin",
               "offset": 0,
               "slot": "8",
-              "type": "t_mapping(t_uint256,t_uint8)",
-              "contract": "SoulBoundToken",
-              "src": "contracts\\SoulBoundToken.sol:14"
-            },
-            {
-              "label": "_isActive",
-              "offset": 0,
-              "slot": "9",
-              "type": "t_mapping(t_uint256,t_bool)",
+              "type": "t_contract(CompanyDB)7276",
               "contract": "SoulBoundToken",
               "src": "contracts\\SoulBoundToken.sol:15"
             },
             {
-              "label": "_hashedIdentity",
+              "label": "_accessTier",
+              "offset": 0,
+              "slot": "9",
+              "type": "t_mapping(t_uint256,t_uint8)",
+              "contract": "SoulBoundToken",
+              "src": "contracts\\SoulBoundToken.sol:17"
+            },
+            {
+              "label": "_isActive",
               "offset": 0,
               "slot": "10",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "SoulBoundToken",
+              "src": "contracts\\SoulBoundToken.sol:18"
+            },
+            {
+              "label": "_hashedIdentity",
+              "offset": 0,
+              "slot": "11",
               "type": "t_mapping(t_uint256,t_bytes32)",
               "contract": "SoulBoundToken",
-              "src": "contracts\\SoulBoundToken.sol:16"
+              "src": "contracts\\SoulBoundToken.sol:19"
             },
             {
               "label": "_ownerToTokenId",
               "offset": 0,
-              "slot": "11",
+              "slot": "12",
               "type": "t_mapping(t_address,t_uint256)",
               "contract": "SoulBoundToken",
-              "src": "contracts\\SoulBoundToken.sol:17"
+              "src": "contracts\\SoulBoundToken.sol:20"
             }
           ],
           "types": {
@@ -2444,6 +2805,10 @@
             "t_bytes32": {
               "label": "bytes32",
               "numberOfBytes": "32"
+            },
+            "t_contract(CompanyDB)7276": {
+              "label": "contract CompanyDB",
+              "numberOfBytes": "20"
             },
             "t_mapping(t_address,t_bool)": {
               "label": "mapping(address => bool)",
@@ -2503,6 +2868,43 @@
         },
         "solcVersion": "0.8.17"
       },
+      "contracts/interfaces/IBondDB.sol:IBondDB": {
+        "src": "contracts\\interfaces\\IBondDB.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "registerPeriphery(address[])",
+          "registerFactory(address)",
+          "incrementFundsRaisedByToken(uint256,address)",
+          "incrementFundsRaisedByTokenAndCategory(uint256,address,uint256)",
+          "incrementFundsRaisedByCompanyAndToken(uint256,address,address)",
+          "incrementFundsRaisedByCompanyAndTokenAndCategory(uint256,address,address,uint256)",
+          "incrementNumberOfIssuedBondsByCategory(uint256)",
+          "incrementNumberOfIssuedBondsByCompanyAndCategory(address,uint256)",
+          "incrementNumberOfTimesDefaultedByCompany(address)",
+          "incrementNumberOfTimesDefaultedByCompanyAndCategory(address,uint256)",
+          "owner()",
+          "isPeriphery(address)",
+          "isFactory(address)",
+          "fundsRaisedByToken(address)",
+          "fundsRaisedByTokenAndCategory(address,uint256)",
+          "fundsRaisedByCompanyAndToken(address,address)",
+          "fundsRaisedByCompanyAndTokenAndCategory(address,address,uint256)",
+          "numberOfIssuedBondsByCategory(uint256)",
+          "numberOfIssuedBondsByCompanyAndCategory(address,uint256)",
+          "numberOfTimesDefaultedByCompany(address)",
+          "numberOfTimesDefaultedByCompanyAndCategory(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.17"
+      },
       "contracts/interfaces/ISoulBoundToken.sol:ISoulBoundToken": {
         "src": "contracts\\interfaces\\ISoulBoundToken.sol:4",
         "inherit": [],
@@ -2511,7 +2913,2940 @@
           "hasActiveSBT(address)",
           "ownerToTokenId(address)",
           "accessTier(uint256)",
-          "accessTier(address)"
+          "accessTier(address)",
+          "safeMint(address,uint8,bytes32)",
+          "modifyTier(uint256,uint8)",
+          "deactivate(uint256)",
+          "activate(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.17"
+      }
+    },
+    {
+      "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol:AggregatorV3Interface": {
+        "src": "@chainlink\\contracts\\src\\v0.8\\interfaces\\AggregatorV3Interface.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "decimals()",
+          "description()",
+          "version()",
+          "getRoundData(uint80)",
+          "latestRoundData()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.17"
+      },
+      "@openzeppelin/contracts/access/Ownable.sol:Ownable": {
+        "src": "@openzeppelin\\contracts\\access\\Ownable.sol:20",
+        "inherit": [
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "owner()",
+          "renounceOwnership()",
+          "transferOwnership(address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "Ownable",
+            "src": "@openzeppelin\\contracts\\access\\Ownable.sol:28"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "Ownable",
+              "src": "@openzeppelin\\contracts\\access\\Ownable.sol:21"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.17"
+      },
+      "@openzeppelin/contracts/token/ERC1155/ERC1155.sol:ERC1155": {
+        "src": "@openzeppelin\\contracts\\token\\ERC1155\\ERC1155.sol:20",
+        "version": {
+          "withMetadata": "4a4ace96d365c9d72514b4d5f67028f1d5924635374f55b5fdd54d62bf80922c",
+          "withoutMetadata": "b5905581a491aa47a4f3b0489e91566927385b66e6c306f67ce5af2f89473364",
+          "linkedWithoutMetadata": "b5905581a491aa47a4f3b0489e91566927385b66e6c306f67ce5af2f89473364"
+        },
+        "inherit": [
+          "@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol:IERC1155MetadataURI",
+          "@openzeppelin/contracts/token/ERC1155/IERC1155.sol:IERC1155",
+          "@openzeppelin/contracts/utils/introspection/ERC165.sol:ERC165",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [
+          "@openzeppelin/contracts/utils/Address.sol:Address"
+        ],
+        "methods": [
+          "(string)",
+          "supportsInterface(bytes4)",
+          "uri(uint256)",
+          "balanceOf(address,uint256)",
+          "balanceOfBatch(address[],uint256[])",
+          "setApprovalForAll(address,bool)",
+          "isApprovedForAll(address,address)",
+          "safeTransferFrom(address,address,uint256,uint256,bytes)",
+          "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC1155",
+            "src": "@openzeppelin\\contracts\\token\\ERC1155\\ERC1155.sol:35"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_uint256,t_mapping(t_address,t_uint256))",
+              "contract": "ERC1155",
+              "src": "@openzeppelin\\contracts\\token\\ERC1155\\ERC1155.sol:24"
+            },
+            {
+              "label": "_operatorApprovals",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "contract": "ERC1155",
+              "src": "@openzeppelin\\contracts\\token\\ERC1155\\ERC1155.sol:27"
+            },
+            {
+              "label": "_uri",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_string_storage",
+              "contract": "ERC1155",
+              "src": "@openzeppelin\\contracts\\token\\ERC1155\\ERC1155.sol:30"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(uint256 => mapping(address => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.17"
+      },
+      "@openzeppelin/contracts/token/ERC1155/IERC1155.sol:IERC1155": {
+        "src": "@openzeppelin\\contracts\\token\\ERC1155\\IERC1155.sol:14",
+        "inherit": [
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165"
+        ],
+        "libraries": [],
+        "methods": [
+          "balanceOf(address,uint256)",
+          "balanceOfBatch(address[],uint256[])",
+          "setApprovalForAll(address,bool)",
+          "isApprovedForAll(address,address)",
+          "safeTransferFrom(address,address,uint256,uint256,bytes)",
+          "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.17"
+      },
+      "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol:IERC1155Receiver": {
+        "src": "@openzeppelin\\contracts\\token\\ERC1155\\IERC1155Receiver.sol:11",
+        "inherit": [
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165"
+        ],
+        "libraries": [],
+        "methods": [
+          "onERC1155Received(address,address,uint256,uint256,bytes)",
+          "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.17"
+      },
+      "@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol:IERC1155MetadataURI": {
+        "src": "@openzeppelin\\contracts\\token\\ERC1155\\extensions\\IERC1155MetadataURI.sol:14",
+        "inherit": [
+          "@openzeppelin/contracts/token/ERC1155/IERC1155.sol:IERC1155",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165"
+        ],
+        "libraries": [],
+        "methods": [
+          "uri(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.17"
+      },
+      "@openzeppelin/contracts/token/ERC20/IERC20.sol:IERC20": {
+        "src": "@openzeppelin\\contracts\\token\\ERC20\\IERC20.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.17"
+      },
+      "@openzeppelin/contracts/token/ERC721/ERC721.sol:ERC721": {
+        "src": "@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol:19",
+        "version": {
+          "withMetadata": "ea342436f467ff5beaad1813ebf4e7ad602fe79faf9ad2d9f5e9f4d8be2c8371",
+          "withoutMetadata": "c4acb14c6da5b7d41440e50f8a8676f304c2c14a54c323590328de16e8b1f843",
+          "linkedWithoutMetadata": "c4acb14c6da5b7d41440e50f8a8676f304c2c14a54c323590328de16e8b1f843"
+        },
+        "inherit": [
+          "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol:IERC721Metadata",
+          "@openzeppelin/contracts/token/ERC721/IERC721.sol:IERC721",
+          "@openzeppelin/contracts/utils/introspection/ERC165.sol:ERC165",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [
+          "@openzeppelin/contracts/utils/Address.sol:Address",
+          "@openzeppelin/contracts/utils/Strings.sol:Strings"
+        ],
+        "methods": [
+          "(string,string)",
+          "supportsInterface(bytes4)",
+          "balanceOf(address)",
+          "ownerOf(uint256)",
+          "name()",
+          "symbol()",
+          "tokenURI(uint256)",
+          "approve(address,uint256)",
+          "getApproved(uint256)",
+          "setApprovalForAll(address,bool)",
+          "isApprovedForAll(address,address)",
+          "transferFrom(address,address,uint256)",
+          "safeTransferFrom(address,address,uint256)",
+          "safeTransferFrom(address,address,uint256,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC721",
+            "src": "@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol:44"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_name",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_string_storage",
+              "contract": "ERC721",
+              "src": "@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol:24"
+            },
+            {
+              "label": "_symbol",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_string_storage",
+              "contract": "ERC721",
+              "src": "@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol:27"
+            },
+            {
+              "label": "_owners",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_uint256,t_address)",
+              "contract": "ERC721",
+              "src": "@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol:30"
+            },
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "ERC721",
+              "src": "@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol:33"
+            },
+            {
+              "label": "_tokenApprovals",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_uint256,t_address)",
+              "contract": "ERC721",
+              "src": "@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol:36"
+            },
+            {
+              "label": "_operatorApprovals",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "contract": "ERC721",
+              "src": "@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol:39"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_address)": {
+              "label": "mapping(uint256 => address)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.17"
+      },
+      "@openzeppelin/contracts/token/ERC721/IERC721.sol:IERC721": {
+        "src": "@openzeppelin\\contracts\\token\\ERC721\\IERC721.sol:11",
+        "inherit": [
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165"
+        ],
+        "libraries": [],
+        "methods": [
+          "balanceOf(address)",
+          "ownerOf(uint256)",
+          "safeTransferFrom(address,address,uint256,bytes)",
+          "safeTransferFrom(address,address,uint256)",
+          "transferFrom(address,address,uint256)",
+          "approve(address,uint256)",
+          "setApprovalForAll(address,bool)",
+          "getApproved(uint256)",
+          "isApprovedForAll(address,address)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.17"
+      },
+      "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol:IERC721Receiver": {
+        "src": "@openzeppelin\\contracts\\token\\ERC721\\IERC721Receiver.sol:11",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "onERC721Received(address,address,uint256,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.17"
+      },
+      "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol:IERC721Metadata": {
+        "src": "@openzeppelin\\contracts\\token\\ERC721\\extensions\\IERC721Metadata.sol:12",
+        "inherit": [
+          "@openzeppelin/contracts/token/ERC721/IERC721.sol:IERC721",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165"
+        ],
+        "libraries": [],
+        "methods": [
+          "name()",
+          "symbol()",
+          "tokenURI(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.17"
+      },
+      "@openzeppelin/contracts/utils/Address.sol:Address": {
+        "src": "@openzeppelin\\contracts\\utils\\Address.sol:9",
+        "version": {
+          "withMetadata": "c01fa026eba41cbaaa7449f2e391abb1ad5c05c3d433e87f190cd120f13307b0",
+          "withoutMetadata": "08d24783a787f8a51dea0c166bb6f91a4f0865e02d03d749f102d332e6ead0ff",
+          "linkedWithoutMetadata": "08d24783a787f8a51dea0c166bb6f91a4f0865e02d03d749f102d332e6ead0ff"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin\\contracts\\utils\\Address.sol:185"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.17"
+      },
+      "@openzeppelin/contracts/utils/Context.sol:Context": {
+        "src": "@openzeppelin\\contracts\\utils\\Context.sol:16",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.17"
+      },
+      "@openzeppelin/contracts/utils/Counters.sol:Counters": {
+        "src": "@openzeppelin\\contracts\\utils\\Counters.sol:14",
+        "version": {
+          "withMetadata": "f540c5ecb8ba8ac6cdef0a26f7f84442dcf2ed180f78932be591709682950503",
+          "withoutMetadata": "08d24783a787f8a51dea0c166bb6f91a4f0865e02d03d749f102d332e6ead0ff",
+          "linkedWithoutMetadata": "08d24783a787f8a51dea0c166bb6f91a4f0865e02d03d749f102d332e6ead0ff"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.17"
+      },
+      "@openzeppelin/contracts/utils/Strings.sol:Strings": {
+        "src": "@openzeppelin\\contracts\\utils\\Strings.sol:11",
+        "version": {
+          "withMetadata": "c12afa5e73482a0beed3b3897025589568c5560a1eafcc3ef556ea3ebcf855bc",
+          "withoutMetadata": "08d24783a787f8a51dea0c166bb6f91a4f0865e02d03d749f102d332e6ead0ff",
+          "linkedWithoutMetadata": "08d24783a787f8a51dea0c166bb6f91a4f0865e02d03d749f102d332e6ead0ff"
+        },
+        "inherit": [],
+        "libraries": [
+          "@openzeppelin/contracts/utils/math/Math.sol:Math"
+        ],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.17"
+      },
+      "@openzeppelin/contracts/utils/introspection/ERC165.sol:ERC165": {
+        "src": "@openzeppelin\\contracts\\utils\\introspection\\ERC165.sol:22",
+        "inherit": [
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165"
+        ],
+        "libraries": [],
+        "methods": [
+          "supportsInterface(bytes4)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.17"
+      },
+      "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165": {
+        "src": "@openzeppelin\\contracts\\utils\\introspection\\IERC165.sol:15",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "supportsInterface(bytes4)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.17"
+      },
+      "@openzeppelin/contracts/utils/math/Math.sol:Math": {
+        "src": "@openzeppelin\\contracts\\utils\\math\\Math.sol:9",
+        "version": {
+          "withMetadata": "27789be326274200c4d0ca0f809987199e8a5fcd129848ff36bc0f2372f8cd2f",
+          "withoutMetadata": "08d24783a787f8a51dea0c166bb6f91a4f0865e02d03d749f102d332e6ead0ff",
+          "linkedWithoutMetadata": "08d24783a787f8a51dea0c166bb6f91a4f0865e02d03d749f102d332e6ead0ff"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/BondDB.sol:BondDB": {
+        "src": "contracts\\BondDB.sol:16",
+        "version": {
+          "withMetadata": "638092819bfae45565045b02b17188bc8910292dde9b18b2f60d56e8a13b59ea",
+          "withoutMetadata": "ddd73e8605d4a1d2652fec4f4113adc8c887250e7b744d388400cae0307d1570",
+          "linkedWithoutMetadata": "ddd73e8605d4a1d2652fec4f4113adc8c887250e7b744d388400cae0307d1570"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "()",
+          "registerPeriphery(address[])",
+          "registerFactory(address)",
+          "incrementFundsRaisedByToken(uint256,address)",
+          "incrementFundsRaisedByTokenAndCategory(uint256,address,uint256)",
+          "incrementFundsRaisedByCompanyAndToken(uint256,address,address)",
+          "incrementFundsRaisedByCompanyAndTokenAndCategory(uint256,address,address,uint256)",
+          "incrementNumberOfIssuedBondsByCategory(uint256)",
+          "incrementNumberOfIssuedBondsByCompanyAndCategory(address,uint256)",
+          "incrementNumberOfTimesDefaultedByCompany(address)",
+          "incrementNumberOfTimesDefaultedByCompanyAndCategory(address,uint256)",
+          "owner()",
+          "isPeriphery(address)",
+          "isFactory(address)",
+          "fundsRaisedByToken(address)",
+          "fundsRaisedByTokenAndCategory(address,uint256)",
+          "fundsRaisedByCompanyAndToken(address,address)",
+          "fundsRaisedByCompanyAndTokenAndCategory(address,address,uint256)",
+          "numberOfIssuedBondsByCategory(uint256)",
+          "numberOfIssuedBondsByCompanyAndCategory(address,uint256)",
+          "numberOfTimesDefaultedByCompany(address)",
+          "numberOfTimesDefaultedByCompanyAndCategory(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "BondDB",
+            "src": "contracts\\BondDB.sol:31"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_owner",
+            "src": "contracts\\BondDB.sol:17"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_isPeriphery",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "BondDB",
+              "src": "contracts\\BondDB.sol:19"
+            },
+            {
+              "label": "_isFactory",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "BondDB",
+              "src": "contracts\\BondDB.sol:20"
+            },
+            {
+              "label": "_fundsRaisedByToken",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "BondDB",
+              "src": "contracts\\BondDB.sol:22"
+            },
+            {
+              "label": "_fundsRaisedByTokenAndCategory",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_mapping(t_address,t_mapping(t_uint256,t_uint256))",
+              "contract": "BondDB",
+              "src": "contracts\\BondDB.sol:23"
+            },
+            {
+              "label": "_fundsRaisedByCompanyAndToken",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+              "contract": "BondDB",
+              "src": "contracts\\BondDB.sol:24"
+            },
+            {
+              "label": "_fundsRaisedByCompanyAndTokenAndCategory",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_mapping(t_uint256,t_uint256)))",
+              "contract": "BondDB",
+              "src": "contracts\\BondDB.sol:25"
+            },
+            {
+              "label": "_numberOfIssuedBondsByCategory",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondDB",
+              "src": "contracts\\BondDB.sol:26"
+            },
+            {
+              "label": "_numberOfIssuedBondsByCompanyAndCategory",
+              "offset": 0,
+              "slot": "7",
+              "type": "t_mapping(t_address,t_mapping(t_uint256,t_uint256))",
+              "contract": "BondDB",
+              "src": "contracts\\BondDB.sol:27"
+            },
+            {
+              "label": "_numberOfTimesDefaultedByCompany",
+              "offset": 0,
+              "slot": "8",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "BondDB",
+              "src": "contracts\\BondDB.sol:28"
+            },
+            {
+              "label": "_numberOfTimesDefaultedByCompanyAndCategory",
+              "offset": 0,
+              "slot": "9",
+              "type": "t_mapping(t_address,t_mapping(t_uint256,t_uint256))",
+              "contract": "BondDB",
+              "src": "contracts\\BondDB.sol:29"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_mapping(t_uint256,t_uint256)))": {
+              "label": "mapping(address => mapping(address => mapping(uint256 => uint256)))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(address => mapping(address => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_uint256,t_uint256))": {
+              "label": "mapping(address => mapping(uint256 => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_uint256)": {
+              "label": "mapping(uint256 => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/BondFactory.sol:BondFactory": {
+        "src": "contracts\\BondFactory.sol:11",
+        "version": {
+          "withMetadata": "99c831310e14842e5419868d21833083feb8f8eb9e14b4c4332fa1bd776ccfa9",
+          "withoutMetadata": "6f051f3debcd397473272358af48538838d9bce84cf0f1dcfc32fb94caf3fa31",
+          "linkedWithoutMetadata": "6f051f3debcd397473272358af48538838d9bce84cf0f1dcfc32fb94caf3fa31"
+        },
+        "inherit": [
+          "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol:IERC1155Receiver",
+          "@openzeppelin/contracts/token/ERC1155/ERC1155.sol:ERC1155",
+          "@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol:IERC1155MetadataURI",
+          "@openzeppelin/contracts/token/ERC1155/IERC1155.sol:IERC1155",
+          "@openzeppelin/contracts/utils/introspection/ERC165.sol:ERC165",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [
+          "@openzeppelin/contracts/utils/Counters.sol:Counters"
+        ],
+        "methods": [
+          "(string,address,address,address)",
+          "issue(uint256,uint256,uint256,string,uint256,uint256,uint256)",
+          "purchase(uint256,uint256)",
+          "withdraw(uint256,uint256)",
+          "withdrawExcess(uint256)",
+          "redeem(uint256,uint256)",
+          "deposit(uint256,uint256)",
+          "preMaturityDefault(uint256)",
+          "markAsDefaulted(uint256)",
+          "markAsCompleted(uint256)",
+          "onERC1155Received(address,address,uint256,uint256,bytes)",
+          "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)",
+          "remainingQuantity(uint256)",
+          "timeElapsed(uint256)",
+          "timeRemainingToMaturity(uint256)",
+          "timeRemainingToEndOfActive(uint256)",
+          "couponRate(uint256)",
+          "principal(uint256)",
+          "principalWithInterest(uint256)",
+          "poolAmount(uint256)",
+          "tvl()",
+          "isFullyRedeemed(uint256)",
+          "isActive(uint256)",
+          "isFulfilled(uint256)",
+          "isCanceled(uint256)",
+          "hasReachedMaturity(uint256)",
+          "isCompleted(uint256)",
+          "isCompletedInTheory(uint256)",
+          "isDefaultedInTheory(uint256)",
+          "isDefaulted(uint256)",
+          "bondMetadata(uint256)",
+          "baseToken()",
+          "owner()",
+          "designatedTokenPool(uint256)",
+          "numBondsIssued()"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "BondFactory",
+            "src": "contracts\\BondFactory.sol:66"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_owner",
+            "src": "contracts\\BondFactory.sol:15"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_baseToken",
+            "src": "contracts\\BondFactory.sol:16"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_bondDB",
+            "src": "contracts\\BondFactory.sol:17"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_uint256,t_mapping(t_address,t_uint256))",
+              "contract": "ERC1155",
+              "src": "@openzeppelin\\contracts\\token\\ERC1155\\ERC1155.sol:24"
+            },
+            {
+              "label": "_operatorApprovals",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "contract": "ERC1155",
+              "src": "@openzeppelin\\contracts\\token\\ERC1155\\ERC1155.sol:27"
+            },
+            {
+              "label": "_uri",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_string_storage",
+              "contract": "ERC1155",
+              "src": "@openzeppelin\\contracts\\token\\ERC1155\\ERC1155.sol:30"
+            },
+            {
+              "label": "_id",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_struct(Counter)3101_storage",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:13"
+            },
+            {
+              "label": "_bondMetadata",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_uint256,t_struct(BondMetadata)4802_storage)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:35"
+            },
+            {
+              "label": "_purchasedQuantity",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:36"
+            },
+            {
+              "label": "_redeemedQuantity",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:37"
+            },
+            {
+              "label": "_designatedTokenPool",
+              "offset": 0,
+              "slot": "7",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:38"
+            },
+            {
+              "label": "_tokenAmountPerBondAfterDefault",
+              "offset": 0,
+              "slot": "8",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:39"
+            },
+            {
+              "label": "_tokenAmountPerBondAfterComplete",
+              "offset": 0,
+              "slot": "9",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:40"
+            },
+            {
+              "label": "_isDefaulted",
+              "offset": 0,
+              "slot": "10",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:42"
+            },
+            {
+              "label": "_isCompleted",
+              "offset": 0,
+              "slot": "11",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:43"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bool)": {
+              "label": "mapping(uint256 => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(uint256 => mapping(address => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_struct(BondMetadata)4802_storage)": {
+              "label": "mapping(uint256 => struct BondFactory.BondMetadata)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_uint256)": {
+              "label": "mapping(uint256 => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_struct(BondMetadata)4802_storage": {
+              "label": "struct BondFactory.BondMetadata",
+              "members": [
+                {
+                  "label": "ticker",
+                  "type": "t_string_storage",
+                  "offset": 0,
+                  "slot": "0"
+                },
+                {
+                  "label": "tokenAmountPerBond",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "1"
+                },
+                {
+                  "label": "initBlock",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "2"
+                },
+                {
+                  "label": "maturityBlock",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "3"
+                },
+                {
+                  "label": "endOfActiveBlock",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "4"
+                },
+                {
+                  "label": "activeDurationInDays",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "5"
+                },
+                {
+                  "label": "durationInDays",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "6"
+                },
+                {
+                  "label": "issuedQuantity",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "7"
+                },
+                {
+                  "label": "minPurchasedQuantity",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "8"
+                },
+                {
+                  "label": "couponRate",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "9"
+                }
+              ],
+              "numberOfBytes": "320"
+            },
+            "t_struct(Counter)3101_storage": {
+              "label": "struct Counters.Counter",
+              "members": [
+                {
+                  "label": "_value",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "0"
+                }
+              ],
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/BondPeriphery.sol:BondPeriphery": {
+        "src": "contracts\\BondPeriphery.sol:10",
+        "version": {
+          "withMetadata": "80b9ef2eeab36ee20b09907382a86af169d9b0794fc50d31f9ae5add5a63252f",
+          "withoutMetadata": "f50b5e0c673b82bb555e2f2bcc664d0c02c00000f5fdb4389364cae690463fdf",
+          "linkedWithoutMetadata": "f50b5e0c673b82bb555e2f2bcc664d0c02c00000f5fdb4389364cae690463fdf"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "(address,address)",
+          "register()",
+          "createBondFactory(string,address)",
+          "owner()",
+          "entities()",
+          "isRegistered(address)",
+          "bondFactories(address)",
+          "bondFactoryIsInitialized(address,address)",
+          "bondDB()"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "BondPeriphery",
+            "src": "contracts\\BondPeriphery.sol:47"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_owner",
+            "src": "contracts\\BondPeriphery.sol:11"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_sbt",
+            "src": "contracts\\BondPeriphery.sol:12"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_bondDB",
+            "src": "contracts\\BondPeriphery.sol:13"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_entities",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_array(t_address)dyn_storage",
+              "contract": "BondPeriphery",
+              "src": "contracts\\BondPeriphery.sol:15"
+            },
+            {
+              "label": "_isRegistered",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "BondPeriphery",
+              "src": "contracts\\BondPeriphery.sol:17"
+            },
+            {
+              "label": "_isAllowedCurrency",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "BondPeriphery",
+              "src": "contracts\\BondPeriphery.sol:19"
+            },
+            {
+              "label": "_bondFactories",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_mapping(t_address,t_array(t_address)dyn_storage)",
+              "contract": "BondPeriphery",
+              "src": "contracts\\BondPeriphery.sol:21"
+            },
+            {
+              "label": "_bondFactoryIsInitialized",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "contract": "BondPeriphery",
+              "src": "contracts\\BondPeriphery.sol:23"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_array(t_address)dyn_storage": {
+              "label": "address[]",
+              "numberOfBytes": "32"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_mapping(t_address,t_array(t_address)dyn_storage)": {
+              "label": "mapping(address => address[])",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/CallableBondFactory.sol:CallableBondFactory": {
+        "src": "contracts\\CallableBondFactory.sol:6",
+        "version": {
+          "withMetadata": "f317cf32d18215800278d080807533e8438498940dc871a1998713de010fe909",
+          "withoutMetadata": "38d48a3420a75f1328c5208320cbd95968bbf190500d396ce0c52e7d5ec3d4ac",
+          "linkedWithoutMetadata": "38d48a3420a75f1328c5208320cbd95968bbf190500d396ce0c52e7d5ec3d4ac"
+        },
+        "inherit": [
+          "contracts/BondFactory.sol:BondFactory",
+          "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol:IERC1155Receiver",
+          "@openzeppelin/contracts/token/ERC1155/ERC1155.sol:ERC1155",
+          "@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol:IERC1155MetadataURI",
+          "@openzeppelin/contracts/token/ERC1155/IERC1155.sol:IERC1155",
+          "@openzeppelin/contracts/utils/introspection/ERC165.sol:ERC165",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [
+          "@openzeppelin/contracts/utils/Counters.sol:Counters"
+        ],
+        "methods": [
+          "(string,address,address,address)",
+          "call(uint256)",
+          "issue(uint256,uint256,uint256,string,uint256,uint256,uint256)",
+          "principalWithInterest(uint256)",
+          "couponRateOnCall(uint256)",
+          "isCalled(uint256)",
+          "minObligationPeriod(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "CallableBondFactory",
+            "src": "contracts\\CallableBondFactory.sol:23"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_uint256,t_mapping(t_address,t_uint256))",
+              "contract": "ERC1155",
+              "src": "@openzeppelin\\contracts\\token\\ERC1155\\ERC1155.sol:24"
+            },
+            {
+              "label": "_operatorApprovals",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "contract": "ERC1155",
+              "src": "@openzeppelin\\contracts\\token\\ERC1155\\ERC1155.sol:27"
+            },
+            {
+              "label": "_uri",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_string_storage",
+              "contract": "ERC1155",
+              "src": "@openzeppelin\\contracts\\token\\ERC1155\\ERC1155.sol:30"
+            },
+            {
+              "label": "_id",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_struct(Counter)3101_storage",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:13"
+            },
+            {
+              "label": "_bondMetadata",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_uint256,t_struct(BondMetadata)4802_storage)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:35"
+            },
+            {
+              "label": "_purchasedQuantity",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:36"
+            },
+            {
+              "label": "_redeemedQuantity",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:37"
+            },
+            {
+              "label": "_designatedTokenPool",
+              "offset": 0,
+              "slot": "7",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:38"
+            },
+            {
+              "label": "_tokenAmountPerBondAfterDefault",
+              "offset": 0,
+              "slot": "8",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:39"
+            },
+            {
+              "label": "_tokenAmountPerBondAfterComplete",
+              "offset": 0,
+              "slot": "9",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:40"
+            },
+            {
+              "label": "_isDefaulted",
+              "offset": 0,
+              "slot": "10",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:42"
+            },
+            {
+              "label": "_isCompleted",
+              "offset": 0,
+              "slot": "11",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:43"
+            },
+            {
+              "label": "_id",
+              "offset": 0,
+              "slot": "12",
+              "type": "t_struct(Counter)3101_storage",
+              "contract": "CallableBondFactory",
+              "src": "contracts\\CallableBondFactory.sol:8"
+            },
+            {
+              "label": "_minObligationPeriod",
+              "offset": 0,
+              "slot": "13",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "CallableBondFactory",
+              "src": "contracts\\CallableBondFactory.sol:13"
+            },
+            {
+              "label": "_couponRateOnCall",
+              "offset": 0,
+              "slot": "14",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "CallableBondFactory",
+              "src": "contracts\\CallableBondFactory.sol:14"
+            },
+            {
+              "label": "_isCalled",
+              "offset": 0,
+              "slot": "15",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "CallableBondFactory",
+              "src": "contracts\\CallableBondFactory.sol:15"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bool)": {
+              "label": "mapping(uint256 => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(uint256 => mapping(address => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_struct(BondMetadata)4802_storage)": {
+              "label": "mapping(uint256 => struct BondFactory.BondMetadata)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_uint256)": {
+              "label": "mapping(uint256 => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_struct(BondMetadata)4802_storage": {
+              "label": "struct BondFactory.BondMetadata",
+              "members": [
+                {
+                  "label": "ticker",
+                  "type": "t_string_storage",
+                  "offset": 0,
+                  "slot": "0"
+                },
+                {
+                  "label": "tokenAmountPerBond",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "1"
+                },
+                {
+                  "label": "initBlock",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "2"
+                },
+                {
+                  "label": "maturityBlock",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "3"
+                },
+                {
+                  "label": "endOfActiveBlock",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "4"
+                },
+                {
+                  "label": "activeDurationInDays",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "5"
+                },
+                {
+                  "label": "durationInDays",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "6"
+                },
+                {
+                  "label": "issuedQuantity",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "7"
+                },
+                {
+                  "label": "minPurchasedQuantity",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "8"
+                },
+                {
+                  "label": "couponRate",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "9"
+                }
+              ],
+              "numberOfBytes": "320"
+            },
+            "t_struct(Counter)3101_storage": {
+              "label": "struct Counters.Counter",
+              "members": [
+                {
+                  "label": "_value",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "0"
+                }
+              ],
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/CallableBondPeriphery.sol:CallableBondPeriphery": {
+        "src": "contracts\\CallableBondPeriphery.sol:9",
+        "version": {
+          "withMetadata": "a13fd4a0b0e1c0dbbd579007f72543357fa22a26289d72e6fd3f9a1eef28a4eb",
+          "withoutMetadata": "218d521ee2d8736e0f46b547527235f4ffcf063f753f7855ef6e3b084a05d7d9",
+          "linkedWithoutMetadata": "218d521ee2d8736e0f46b547527235f4ffcf063f753f7855ef6e3b084a05d7d9"
+        },
+        "inherit": [
+          "contracts/BondPeriphery.sol:BondPeriphery"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,address)",
+          "register()",
+          "createBondFactory(string,address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "CallableBondPeriphery",
+            "src": "contracts\\CallableBondPeriphery.sol:10"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_entities",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_array(t_address)dyn_storage",
+              "contract": "BondPeriphery",
+              "src": "contracts\\BondPeriphery.sol:15"
+            },
+            {
+              "label": "_isRegistered",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "BondPeriphery",
+              "src": "contracts\\BondPeriphery.sol:17"
+            },
+            {
+              "label": "_isAllowedCurrency",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "BondPeriphery",
+              "src": "contracts\\BondPeriphery.sol:19"
+            },
+            {
+              "label": "_bondFactories",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_mapping(t_address,t_array(t_address)dyn_storage)",
+              "contract": "BondPeriphery",
+              "src": "contracts\\BondPeriphery.sol:21"
+            },
+            {
+              "label": "_bondFactoryIsInitialized",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "contract": "BondPeriphery",
+              "src": "contracts\\BondPeriphery.sol:23"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_array(t_address)dyn_storage": {
+              "label": "address[]",
+              "numberOfBytes": "32"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_mapping(t_address,t_array(t_address)dyn_storage)": {
+              "label": "mapping(address => address[])",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/CompanyDB.sol:CompanyDB": {
+        "src": "contracts\\CompanyDB.sol:6",
+        "version": {
+          "withMetadata": "82838be257cf7307756cc15e28ebe1cfbe158b59ec27f5b1d8cc57ccb88acbb7",
+          "withoutMetadata": "fc56059663bcd0b8667c3e683286e74463c694c6edf8599e368d5a35b08ae0a0",
+          "linkedWithoutMetadata": "fc56059663bcd0b8667c3e683286e74463c694c6edf8599e368d5a35b08ae0a0"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "(address)",
+          "registerCompany(address,string,bytes32,uint8)",
+          "reissueSBT(address,bytes32,uint8)",
+          "deactivateSBT(address)",
+          "activateSBT(address)",
+          "modifyTier(address,uint8)",
+          "isRegisteredCompany(address)",
+          "registeredCompanies()",
+          "companyMetadata(address)",
+          "owner()",
+          "soulBoundToken()"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "CompanyDB",
+            "src": "contracts\\CompanyDB.sol:30"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_owner",
+            "src": "contracts\\CompanyDB.sol:17"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_soulBoundToken",
+            "src": "contracts\\CompanyDB.sol:18"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_registeredCompanies",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_array(t_address)dyn_storage",
+              "contract": "CompanyDB",
+              "src": "contracts\\CompanyDB.sol:13"
+            },
+            {
+              "label": "_isRegisteredCompany",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "CompanyDB",
+              "src": "contracts\\CompanyDB.sol:14"
+            },
+            {
+              "label": "_companyMetadata",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_address,t_struct(CompanyMetadata)6952_storage)",
+              "contract": "CompanyDB",
+              "src": "contracts\\CompanyDB.sol:15"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_array(t_address)dyn_storage": {
+              "label": "address[]",
+              "numberOfBytes": "32"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_struct(CompanyMetadata)6952_storage)": {
+              "label": "mapping(address => struct CompanyDB.CompanyMetadata)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_struct(CompanyMetadata)6952_storage": {
+              "label": "struct CompanyDB.CompanyMetadata",
+              "members": [
+                {
+                  "label": "name",
+                  "type": "t_string_storage",
+                  "offset": 0,
+                  "slot": "0"
+                },
+                {
+                  "label": "hashedIdentity",
+                  "type": "t_bytes32",
+                  "offset": 0,
+                  "slot": "1"
+                },
+                {
+                  "label": "tier",
+                  "type": "t_uint8",
+                  "offset": 0,
+                  "slot": "2"
+                }
+              ],
+              "numberOfBytes": "96"
+            },
+            "t_uint8": {
+              "label": "uint8",
+              "numberOfBytes": "1"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/DualCurrencyBondFactory.sol:DualCurrencyBondFactory": {
+        "src": "contracts\\DualCurrencyBondFactory.sol:12",
+        "version": {
+          "withMetadata": "8dccf64bf81eec6de3caed0a0c0ac7afccda504b27b584c151590cc0b2a90aaf",
+          "withoutMetadata": "939f5e881e6e9ff142fa1a803e8355e434741077441221ca687acdf250bf715b",
+          "linkedWithoutMetadata": "939f5e881e6e9ff142fa1a803e8355e434741077441221ca687acdf250bf715b"
+        },
+        "inherit": [
+          "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol:IERC1155Receiver",
+          "@openzeppelin/contracts/token/ERC1155/ERC1155.sol:ERC1155",
+          "@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol:IERC1155MetadataURI",
+          "@openzeppelin/contracts/token/ERC1155/IERC1155.sol:IERC1155",
+          "@openzeppelin/contracts/utils/introspection/ERC165.sol:ERC165",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [
+          "@openzeppelin/contracts/utils/Counters.sol:Counters"
+        ],
+        "methods": [
+          "(string,address,address,address,address,address,address)",
+          "getLatestPriceA()",
+          "getLatestPriceB()",
+          "getAtoBExchangeRate()",
+          "issue(uint256,uint256,uint256,string,uint256,uint256,uint256)",
+          "purchase(uint256,uint256)",
+          "withdraw(uint256,uint256)",
+          "withdrawExcess(uint256)",
+          "redeem(uint256,uint256)",
+          "deposit(uint256,uint256)",
+          "preMaturityDefault(uint256)",
+          "markAsDefaulted(uint256)",
+          "markAsCompleted(uint256)",
+          "onERC1155Received(address,address,uint256,uint256,bytes)",
+          "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)",
+          "remainingQuantity(uint256)",
+          "timeElapsed(uint256)",
+          "timeRemainingToMaturity(uint256)",
+          "timeRemainingToEndOfActive(uint256)",
+          "couponRate(uint256)",
+          "principal(uint256)",
+          "principalWithInterest(uint256)",
+          "poolAAmount(uint256)",
+          "poolBAmount(uint256)",
+          "tvlA()",
+          "tvlB()",
+          "isFullyRedeemed(uint256)",
+          "isActive(uint256)",
+          "isFulfilled(uint256)",
+          "isCanceled(uint256)",
+          "hasReachedMaturity(uint256)",
+          "isCompleted(uint256)",
+          "isCompletedInTheory(uint256)",
+          "isDefaultedInTheory(uint256)",
+          "isDefaulted(uint256)",
+          "bondmetaData(uint256)",
+          "designatedTokenAPool(uint256)",
+          "designatedTokenBPool(uint256)",
+          "tokenA()",
+          "tokenB()",
+          "owner()",
+          "numBondsIssued()"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "DualCurrencyBondFactory",
+            "src": "contracts\\DualCurrencyBondFactory.sol:79"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_priceFeedA",
+            "src": "contracts\\DualCurrencyBondFactory.sol:16"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_priceFeedB",
+            "src": "contracts\\DualCurrencyBondFactory.sol:17"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_owner",
+            "src": "contracts\\DualCurrencyBondFactory.sol:19"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_tokenA",
+            "src": "contracts\\DualCurrencyBondFactory.sol:20"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_tokenB",
+            "src": "contracts\\DualCurrencyBondFactory.sol:21"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_bondDB",
+            "src": "contracts\\DualCurrencyBondFactory.sol:22"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_uint256,t_mapping(t_address,t_uint256))",
+              "contract": "ERC1155",
+              "src": "@openzeppelin\\contracts\\token\\ERC1155\\ERC1155.sol:24"
+            },
+            {
+              "label": "_operatorApprovals",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "contract": "ERC1155",
+              "src": "@openzeppelin\\contracts\\token\\ERC1155\\ERC1155.sol:27"
+            },
+            {
+              "label": "_uri",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_string_storage",
+              "contract": "ERC1155",
+              "src": "@openzeppelin\\contracts\\token\\ERC1155\\ERC1155.sol:30"
+            },
+            {
+              "label": "_id",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_struct(Counter)3101_storage",
+              "contract": "DualCurrencyBondFactory",
+              "src": "contracts\\DualCurrencyBondFactory.sol:14"
+            },
+            {
+              "label": "_bondMetadata",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_uint256,t_struct(BondMetadata)7338_storage)",
+              "contract": "DualCurrencyBondFactory",
+              "src": "contracts\\DualCurrencyBondFactory.sol:40"
+            },
+            {
+              "label": "_purchasedQuantity",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "DualCurrencyBondFactory",
+              "src": "contracts\\DualCurrencyBondFactory.sol:41"
+            },
+            {
+              "label": "_redeemedQuantity",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "DualCurrencyBondFactory",
+              "src": "contracts\\DualCurrencyBondFactory.sol:42"
+            },
+            {
+              "label": "_designatedTokenAPool",
+              "offset": 0,
+              "slot": "7",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "DualCurrencyBondFactory",
+              "src": "contracts\\DualCurrencyBondFactory.sol:43"
+            },
+            {
+              "label": "_designatedTokenBPool",
+              "offset": 0,
+              "slot": "8",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "DualCurrencyBondFactory",
+              "src": "contracts\\DualCurrencyBondFactory.sol:44"
+            },
+            {
+              "label": "_tokenAAmountPerBondAfterDefault",
+              "offset": 0,
+              "slot": "9",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "DualCurrencyBondFactory",
+              "src": "contracts\\DualCurrencyBondFactory.sol:45"
+            },
+            {
+              "label": "_tokenBAmountPerBondAfterDefault",
+              "offset": 0,
+              "slot": "10",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "DualCurrencyBondFactory",
+              "src": "contracts\\DualCurrencyBondFactory.sol:46"
+            },
+            {
+              "label": "_tokenBAmountPerBondAfterComplete",
+              "offset": 0,
+              "slot": "11",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "DualCurrencyBondFactory",
+              "src": "contracts\\DualCurrencyBondFactory.sol:47"
+            },
+            {
+              "label": "_isDefaulted",
+              "offset": 0,
+              "slot": "12",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "DualCurrencyBondFactory",
+              "src": "contracts\\DualCurrencyBondFactory.sol:49"
+            },
+            {
+              "label": "_isCompleted",
+              "offset": 0,
+              "slot": "13",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "DualCurrencyBondFactory",
+              "src": "contracts\\DualCurrencyBondFactory.sol:50"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bool)": {
+              "label": "mapping(uint256 => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(uint256 => mapping(address => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_struct(BondMetadata)7338_storage)": {
+              "label": "mapping(uint256 => struct DualCurrencyBondFactory.BondMetadata)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_uint256)": {
+              "label": "mapping(uint256 => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_struct(BondMetadata)7338_storage": {
+              "label": "struct DualCurrencyBondFactory.BondMetadata",
+              "members": [
+                {
+                  "label": "ticker",
+                  "type": "t_string_storage",
+                  "offset": 0,
+                  "slot": "0"
+                },
+                {
+                  "label": "tokenAAmountPerBond",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "1"
+                },
+                {
+                  "label": "tokenBAmountPerBond",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "2"
+                },
+                {
+                  "label": "initBlock",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "3"
+                },
+                {
+                  "label": "maturityBlock",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "4"
+                },
+                {
+                  "label": "endOfActiveBlock",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "5"
+                },
+                {
+                  "label": "activeDurationInDays",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "6"
+                },
+                {
+                  "label": "durationInDays",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "7"
+                },
+                {
+                  "label": "issuedQuantity",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "8"
+                },
+                {
+                  "label": "minPurchasedQuantity",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "9"
+                },
+                {
+                  "label": "couponRate",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "10"
+                }
+              ],
+              "numberOfBytes": "352"
+            },
+            "t_struct(Counter)3101_storage": {
+              "label": "struct Counters.Counter",
+              "members": [
+                {
+                  "label": "_value",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "0"
+                }
+              ],
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/DualCurrencyBondPeriphery.sol:DualCurrencyBondPeriphery": {
+        "src": "contracts\\DualCurrencyBondPeriphery.sol:9",
+        "version": {
+          "withMetadata": "329a9d906b0016cfbc271cc38f9967f5783f83f0b2288edc0f13015fdea63534",
+          "withoutMetadata": "a3498bbeee5389ea67b60be57a24165854173df62560d5db53c0b2fd110a1488",
+          "linkedWithoutMetadata": "a3498bbeee5389ea67b60be57a24165854173df62560d5db53c0b2fd110a1488"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "(address,address)",
+          "register()",
+          "createDualCurrencyBondFactory(string,address,address)",
+          "registerPriceFeed(address,address)",
+          "deregisterPriceFeed(address)",
+          "owner()",
+          "entities()",
+          "isRegistered(address)",
+          "dualCurrencyBondFactories(address)",
+          "dualCurrencyBondFactoryIsInitialized(address,address,address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "DualCurrencyBondPeriphery",
+            "src": "contracts\\DualCurrencyBondPeriphery.sol:44"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_owner",
+            "src": "contracts\\DualCurrencyBondPeriphery.sol:10"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_sbt",
+            "src": "contracts\\DualCurrencyBondPeriphery.sol:11"
+          },
+          {
+            "kind": "state-variable-immutable",
+            "name": "_bondDB",
+            "src": "contracts\\DualCurrencyBondPeriphery.sol:12"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_entities",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_array(t_address)dyn_storage",
+              "contract": "DualCurrencyBondPeriphery",
+              "src": "contracts\\DualCurrencyBondPeriphery.sol:14"
+            },
+            {
+              "label": "_priceFeeds",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_address)",
+              "contract": "DualCurrencyBondPeriphery",
+              "src": "contracts\\DualCurrencyBondPeriphery.sol:16"
+            },
+            {
+              "label": "_isRegistered",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "DualCurrencyBondPeriphery",
+              "src": "contracts\\DualCurrencyBondPeriphery.sol:17"
+            },
+            {
+              "label": "_dualCurrencyBondFactories",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_mapping(t_address,t_array(t_address)dyn_storage)",
+              "contract": "DualCurrencyBondPeriphery",
+              "src": "contracts\\DualCurrencyBondPeriphery.sol:19"
+            },
+            {
+              "label": "_dualCurrencyBondFactoryIsInitialized",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_mapping(t_address,t_bool)))",
+              "contract": "DualCurrencyBondPeriphery",
+              "src": "contracts\\DualCurrencyBondPeriphery.sol:21"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_array(t_address)dyn_storage": {
+              "label": "address[]",
+              "numberOfBytes": "32"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_mapping(t_address,t_address)": {
+              "label": "mapping(address => address)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_array(t_address)dyn_storage)": {
+              "label": "mapping(address => address[])",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_mapping(t_address,t_bool)))": {
+              "label": "mapping(address => mapping(address => mapping(address => bool)))",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/InstallmentBondFactory.sol:InstallmentBondFactory": {
+        "src": "contracts\\InstallmentBondFactory.sol:6",
+        "version": {
+          "withMetadata": "b3b5ad68a96c220921d740a8e71069cbd14612aa28436cbed9b965b41c4513a5",
+          "withoutMetadata": "205a704589031901ae09d2b9dd51ba872cfd0713361948f53567e26e1ba6a6f8",
+          "linkedWithoutMetadata": "205a704589031901ae09d2b9dd51ba872cfd0713361948f53567e26e1ba6a6f8"
+        },
+        "inherit": [
+          "contracts/BondFactory.sol:BondFactory",
+          "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol:IERC1155Receiver",
+          "@openzeppelin/contracts/token/ERC1155/ERC1155.sol:ERC1155",
+          "@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol:IERC1155MetadataURI",
+          "@openzeppelin/contracts/token/ERC1155/IERC1155.sol:IERC1155",
+          "@openzeppelin/contracts/utils/introspection/ERC165.sol:ERC165",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [
+          "@openzeppelin/contracts/utils/Counters.sol:Counters"
+        ],
+        "methods": [
+          "(string,address,address,address)",
+          "issue(uint256,uint256,uint256,string,uint256,uint256,uint256)",
+          "fulfillObligationsAndLock(uint256,uint256)",
+          "withdraw(uint256,uint256)",
+          "isDefaultedInTheory(uint256)",
+          "lockedTokenAmountPerBond(uint256)",
+          "yearOptionToDays(uint256)",
+          "yearOptionToObligationRateList(uint256)",
+          "retrieveMinObligationList(uint256,uint256)",
+          "nextObligationDate(uint256)",
+          "minObligationTokenAmountPerBondList(uint256)",
+          "lockedTokenAmount(uint256)",
+          "numberOfTimesFulfilled(uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "InstallmentBondFactory",
+            "src": "contracts\\InstallmentBondFactory.sol:28"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "THREE",
+            "src": "contracts\\InstallmentBondFactory.sol:14"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "FIVE",
+            "src": "contracts\\InstallmentBondFactory.sol:15"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "TEN",
+            "src": "contracts\\InstallmentBondFactory.sol:16"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_mapping(t_uint256,t_mapping(t_address,t_uint256))",
+              "contract": "ERC1155",
+              "src": "@openzeppelin\\contracts\\token\\ERC1155\\ERC1155.sol:24"
+            },
+            {
+              "label": "_operatorApprovals",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "contract": "ERC1155",
+              "src": "@openzeppelin\\contracts\\token\\ERC1155\\ERC1155.sol:27"
+            },
+            {
+              "label": "_uri",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_string_storage",
+              "contract": "ERC1155",
+              "src": "@openzeppelin\\contracts\\token\\ERC1155\\ERC1155.sol:30"
+            },
+            {
+              "label": "_id",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_struct(Counter)3101_storage",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:13"
+            },
+            {
+              "label": "_bondMetadata",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_uint256,t_struct(BondMetadata)4802_storage)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:35"
+            },
+            {
+              "label": "_purchasedQuantity",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:36"
+            },
+            {
+              "label": "_redeemedQuantity",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:37"
+            },
+            {
+              "label": "_designatedTokenPool",
+              "offset": 0,
+              "slot": "7",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:38"
+            },
+            {
+              "label": "_tokenAmountPerBondAfterDefault",
+              "offset": 0,
+              "slot": "8",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:39"
+            },
+            {
+              "label": "_tokenAmountPerBondAfterComplete",
+              "offset": 0,
+              "slot": "9",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:40"
+            },
+            {
+              "label": "_isDefaulted",
+              "offset": 0,
+              "slot": "10",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:42"
+            },
+            {
+              "label": "_isCompleted",
+              "offset": 0,
+              "slot": "11",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "BondFactory",
+              "src": "contracts\\BondFactory.sol:43"
+            },
+            {
+              "label": "_id",
+              "offset": 0,
+              "slot": "12",
+              "type": "t_struct(Counter)3101_storage",
+              "contract": "InstallmentBondFactory",
+              "src": "contracts\\InstallmentBondFactory.sol:8"
+            },
+            {
+              "label": "THREE",
+              "offset": 0,
+              "slot": "13",
+              "type": "t_array(t_uint256)dyn_storage",
+              "contract": "InstallmentBondFactory",
+              "src": "contracts\\InstallmentBondFactory.sol:14"
+            },
+            {
+              "label": "FIVE",
+              "offset": 0,
+              "slot": "14",
+              "type": "t_array(t_uint256)dyn_storage",
+              "contract": "InstallmentBondFactory",
+              "src": "contracts\\InstallmentBondFactory.sol:15"
+            },
+            {
+              "label": "TEN",
+              "offset": 0,
+              "slot": "15",
+              "type": "t_array(t_uint256)dyn_storage",
+              "contract": "InstallmentBondFactory",
+              "src": "contracts\\InstallmentBondFactory.sol:16"
+            },
+            {
+              "label": "_nextObligationDate",
+              "offset": 0,
+              "slot": "16",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "InstallmentBondFactory",
+              "src": "contracts\\InstallmentBondFactory.sol:18"
+            },
+            {
+              "label": "_minObligationTokenAmountPerBondList",
+              "offset": 0,
+              "slot": "17",
+              "type": "t_mapping(t_uint256,t_array(t_uint256)dyn_storage)",
+              "contract": "InstallmentBondFactory",
+              "src": "contracts\\InstallmentBondFactory.sol:19"
+            },
+            {
+              "label": "_lockedTokenAmount",
+              "offset": 0,
+              "slot": "18",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "InstallmentBondFactory",
+              "src": "contracts\\InstallmentBondFactory.sol:20"
+            },
+            {
+              "label": "_numberOfTimesFulfilled",
+              "offset": 0,
+              "slot": "19",
+              "type": "t_mapping(t_uint256,t_uint256)",
+              "contract": "InstallmentBondFactory",
+              "src": "contracts\\InstallmentBondFactory.sol:21"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_array(t_uint256)dyn_storage": {
+              "label": "uint256[]",
+              "numberOfBytes": "32"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_array(t_uint256)dyn_storage)": {
+              "label": "mapping(uint256 => uint256[])",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bool)": {
+              "label": "mapping(uint256 => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_mapping(t_address,t_uint256))": {
+              "label": "mapping(uint256 => mapping(address => uint256))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_struct(BondMetadata)4802_storage)": {
+              "label": "mapping(uint256 => struct BondFactory.BondMetadata)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_uint256)": {
+              "label": "mapping(uint256 => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_struct(BondMetadata)4802_storage": {
+              "label": "struct BondFactory.BondMetadata",
+              "members": [
+                {
+                  "label": "ticker",
+                  "type": "t_string_storage",
+                  "offset": 0,
+                  "slot": "0"
+                },
+                {
+                  "label": "tokenAmountPerBond",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "1"
+                },
+                {
+                  "label": "initBlock",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "2"
+                },
+                {
+                  "label": "maturityBlock",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "3"
+                },
+                {
+                  "label": "endOfActiveBlock",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "4"
+                },
+                {
+                  "label": "activeDurationInDays",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "5"
+                },
+                {
+                  "label": "durationInDays",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "6"
+                },
+                {
+                  "label": "issuedQuantity",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "7"
+                },
+                {
+                  "label": "minPurchasedQuantity",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "8"
+                },
+                {
+                  "label": "couponRate",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "9"
+                }
+              ],
+              "numberOfBytes": "320"
+            },
+            "t_struct(Counter)3101_storage": {
+              "label": "struct Counters.Counter",
+              "members": [
+                {
+                  "label": "_value",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "0"
+                }
+              ],
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/InstallmentBondPeriphery.sol:InstallmentBondPeriphery": {
+        "src": "contracts\\InstallmentBondPeriphery.sol:10",
+        "version": {
+          "withMetadata": "725587a83aa314e70f285647f9630edc077d571401d16037f2425620464aed3f",
+          "withoutMetadata": "0e3c6dfbd16a834f610dfbbc2fc1594d8e03acba98450bdf8593583dca4eae05",
+          "linkedWithoutMetadata": "0e3c6dfbd16a834f610dfbbc2fc1594d8e03acba98450bdf8593583dca4eae05"
+        },
+        "inherit": [
+          "contracts/BondPeriphery.sol:BondPeriphery"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,address)",
+          "register()",
+          "createBondFactory(string,address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "InstallmentBondPeriphery",
+            "src": "contracts\\InstallmentBondPeriphery.sol:11"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_entities",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_array(t_address)dyn_storage",
+              "contract": "BondPeriphery",
+              "src": "contracts\\BondPeriphery.sol:15"
+            },
+            {
+              "label": "_isRegistered",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "BondPeriphery",
+              "src": "contracts\\BondPeriphery.sol:17"
+            },
+            {
+              "label": "_isAllowedCurrency",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_address,t_bool)",
+              "contract": "BondPeriphery",
+              "src": "contracts\\BondPeriphery.sol:19"
+            },
+            {
+              "label": "_bondFactories",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_mapping(t_address,t_array(t_address)dyn_storage)",
+              "contract": "BondPeriphery",
+              "src": "contracts\\BondPeriphery.sol:21"
+            },
+            {
+              "label": "_bondFactoryIsInitialized",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "contract": "BondPeriphery",
+              "src": "contracts\\BondPeriphery.sol:23"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_array(t_address)dyn_storage": {
+              "label": "address[]",
+              "numberOfBytes": "32"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_mapping(t_address,t_array(t_address)dyn_storage)": {
+              "label": "mapping(address => address[])",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/SoulBoundToken.sol:SoulBoundToken": {
+        "src": "contracts\\SoulBoundToken.sol:10",
+        "version": {
+          "withMetadata": "ce3b4e7413948f57a5f6d5dbc518e014aed22f392c94718e34df8126f540ae56",
+          "withoutMetadata": "333d2347543a1b4a80ddad02fc64ad434a98e10034b2c60420d5ccd11840b1e1",
+          "linkedWithoutMetadata": "333d2347543a1b4a80ddad02fc64ad434a98e10034b2c60420d5ccd11840b1e1"
+        },
+        "inherit": [
+          "contracts/interfaces/ISoulBoundToken.sol:ISoulBoundToken",
+          "@openzeppelin/contracts/access/Ownable.sol:Ownable",
+          "@openzeppelin/contracts/token/ERC721/ERC721.sol:ERC721",
+          "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol:IERC721Metadata",
+          "@openzeppelin/contracts/token/ERC721/IERC721.sol:IERC721",
+          "@openzeppelin/contracts/utils/introspection/ERC165.sol:ERC165",
+          "@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165",
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [
+          "@openzeppelin/contracts/utils/Counters.sol:Counters"
+        ],
+        "methods": [
+          "()",
+          "registerDbAdmin(address)",
+          "safeMint(address,uint8,bytes32)",
+          "modifyTier(uint256,uint8)",
+          "deactivate(uint256)",
+          "activate(uint256)",
+          "accessTier(uint256)",
+          "accessTier(address)",
+          "isActive(uint256)",
+          "hashedIdentity(uint256)",
+          "hasActiveSBT(address)",
+          "hasSBT(address)",
+          "ownerToTokenId(address)",
+          "dbAdmin()"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "SoulBoundToken",
+            "src": "contracts\\SoulBoundToken.sol:27"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_name",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_string_storage",
+              "contract": "ERC721",
+              "src": "@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol:24"
+            },
+            {
+              "label": "_symbol",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_string_storage",
+              "contract": "ERC721",
+              "src": "@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol:27"
+            },
+            {
+              "label": "_owners",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_uint256,t_address)",
+              "contract": "ERC721",
+              "src": "@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol:30"
+            },
+            {
+              "label": "_balances",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "ERC721",
+              "src": "@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol:33"
+            },
+            {
+              "label": "_tokenApprovals",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_mapping(t_uint256,t_address)",
+              "contract": "ERC721",
+              "src": "@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol:36"
+            },
+            {
+              "label": "_operatorApprovals",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "contract": "ERC721",
+              "src": "@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol:39"
+            },
+            {
+              "label": "_owner",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_address",
+              "contract": "Ownable",
+              "src": "@openzeppelin\\contracts\\access\\Ownable.sol:21"
+            },
+            {
+              "label": "_tokenIdCounter",
+              "offset": 0,
+              "slot": "7",
+              "type": "t_struct(Counter)3101_storage",
+              "contract": "SoulBoundToken",
+              "src": "contracts\\SoulBoundToken.sol:13"
+            },
+            {
+              "label": "_dbAdmin",
+              "offset": 0,
+              "slot": "8",
+              "type": "t_contract(CompanyDB)7276",
+              "contract": "SoulBoundToken",
+              "src": "contracts\\SoulBoundToken.sol:15"
+            },
+            {
+              "label": "_accessTier",
+              "offset": 0,
+              "slot": "9",
+              "type": "t_mapping(t_uint256,t_uint8)",
+              "contract": "SoulBoundToken",
+              "src": "contracts\\SoulBoundToken.sol:17"
+            },
+            {
+              "label": "_isActive",
+              "offset": 0,
+              "slot": "10",
+              "type": "t_mapping(t_uint256,t_bool)",
+              "contract": "SoulBoundToken",
+              "src": "contracts\\SoulBoundToken.sol:18"
+            },
+            {
+              "label": "_hashedIdentity",
+              "offset": 0,
+              "slot": "11",
+              "type": "t_mapping(t_uint256,t_bytes32)",
+              "contract": "SoulBoundToken",
+              "src": "contracts\\SoulBoundToken.sol:19"
+            },
+            {
+              "label": "_ownerToTokenId",
+              "offset": 0,
+              "slot": "12",
+              "type": "t_mapping(t_address,t_uint256)",
+              "contract": "SoulBoundToken",
+              "src": "contracts\\SoulBoundToken.sol:20"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bool": {
+              "label": "bool",
+              "numberOfBytes": "1"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_contract(CompanyDB)7276": {
+              "label": "contract CompanyDB",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_address)": {
+              "label": "mapping(uint256 => address)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bool)": {
+              "label": "mapping(uint256 => bool)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_bytes32)": {
+              "label": "mapping(uint256 => bytes32)",
+              "numberOfBytes": "32"
+            },
+            "t_mapping(t_uint256,t_uint8)": {
+              "label": "mapping(uint256 => uint8)",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_struct(Counter)3101_storage": {
+              "label": "struct Counters.Counter",
+              "members": [
+                {
+                  "label": "_value",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "0"
+                }
+              ],
+              "numberOfBytes": "32"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            },
+            "t_uint8": {
+              "label": "uint8",
+              "numberOfBytes": "1"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/IBondDB.sol:IBondDB": {
+        "src": "contracts\\interfaces\\IBondDB.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "registerPeriphery(address[])",
+          "registerFactory(address)",
+          "incrementFundsRaisedByToken(uint256,address)",
+          "incrementFundsRaisedByTokenAndCategory(uint256,address,uint256)",
+          "incrementFundsRaisedByCompanyAndToken(uint256,address,address)",
+          "incrementFundsRaisedByCompanyAndTokenAndCategory(uint256,address,address,uint256)",
+          "incrementNumberOfIssuedBondsByCategory(uint256)",
+          "incrementNumberOfIssuedBondsByCompanyAndCategory(address,uint256)",
+          "incrementNumberOfTimesDefaultedByCompany(address)",
+          "incrementNumberOfTimesDefaultedByCompanyAndCategory(address,uint256)",
+          "owner()",
+          "isPeriphery(address)",
+          "isFactory(address)",
+          "fundsRaisedByToken(address)",
+          "fundsRaisedByTokenAndCategory(address,uint256)",
+          "fundsRaisedByCompanyAndToken(address,address)",
+          "fundsRaisedByCompanyAndTokenAndCategory(address,address,uint256)",
+          "numberOfIssuedBondsByCategory(uint256)",
+          "numberOfIssuedBondsByCompanyAndCategory(address,uint256)",
+          "numberOfTimesDefaultedByCompany(address)",
+          "numberOfTimesDefaultedByCompanyAndCategory(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.17"
+      },
+      "contracts/interfaces/ISoulBoundToken.sol:ISoulBoundToken": {
+        "src": "contracts\\interfaces\\ISoulBoundToken.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "hasActiveSBT(address)",
+          "ownerToTokenId(address)",
+          "accessTier(uint256)",
+          "accessTier(address)",
+          "safeMint(address,uint8,bytes32)",
+          "modifyTier(uint256,uint8)",
+          "deactivate(uint256)",
+          "activate(uint256)"
         ],
         "linkReferences": [],
         "errors": [],

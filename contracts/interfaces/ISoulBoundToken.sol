@@ -9,4 +9,16 @@ interface ISoulBoundToken {
     function accessTier(uint256 id) external view returns (uint8);
 
     function accessTier(address owner) external view returns (uint8);
+
+    function safeMint(
+        address to,
+        uint8 tier,
+        bytes32 hashed
+    ) external returns (uint256 tokenId);
+
+    function modifyTier(uint256 id, uint8 tier) external;
+
+    function deactivate(uint256 id) external;
+
+    function activate(uint256 id) external;
 }

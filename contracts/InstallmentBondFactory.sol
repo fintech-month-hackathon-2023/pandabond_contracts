@@ -4,6 +4,11 @@ pragma solidity ^0.8.17;
 import "./BondFactory.sol";
 
 contract InstallmentBondFactory is BondFactory {
+    using Counters for Counters.Counter;
+    Counters.Counter private _id;
+
+    uint256 private constant CATEGORY = 3;
+
     uint256 constant FACTOR = 180;
     uint256[] THREE = [5, 5, 10, 15, 15];
     uint256[] FIVE = [2, 2, 2, 2, 2, 5, 10, 10, 15];
@@ -22,8 +27,9 @@ contract InstallmentBondFactory is BondFactory {
     constructor(
         string memory uri,
         address token,
+        address db,
         address deployer
-    ) BondFactory(uri, token, deployer) {}
+    ) BondFactory(uri, token, db, deployer) {}
 
     function issue(
         uint256 bondQuantity,
@@ -45,7 +51,9 @@ contract InstallmentBondFactory is BondFactory {
 
         uint256 durationDays = yearOptionToDays(yearOption);
 
-        id = _id + 1;
+        id = _id.current();
+        _id.increment();
+
         _mint(msg.sender, id, bondQuantity, "");
         _bondMetadata[id] = BondMetadata(
             ticker,
@@ -64,6 +72,12 @@ contract InstallmentBondFactory is BondFactory {
         _minObligationTokenAmountPerBondList[id] = retrieveMinObligationList(
             tokenAmountPerBond,
             yearOption
+        );
+
+        _bondDB.incrementNumberOfIssuedBondsByCategory(CATEGORY);
+        _bondDB.incrementNumberOfIssuedBondsByCompanyAndCategory(
+            _owner,
+            CATEGORY
         );
 
         emit Issued(

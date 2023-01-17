@@ -8,7 +8,7 @@ import "./interfaces/ISoulBoundToken.sol";
 import "./BondPeriphery.sol";
 
 contract InstallmentBondPeriphery is BondPeriphery {
-    constructor(address sbt) BondPeriphery(sbt) {}
+    constructor(address sbt, address db) BondPeriphery(sbt, db) {}
 
     function register() external override hasActiveSBT {
         require(!_isRegistered[msg.sender], "AR");
@@ -31,9 +31,12 @@ contract InstallmentBondPeriphery is BondPeriphery {
     {
         require(_sbt.accessTier(msg.sender) >= 3, "NVAT");
         require(!_bondFactoryIsInitialized[msg.sender][token], "AI");
-        factory = address(new InstallmentBondFactory(uri, token, msg.sender));
+        factory = address(
+            new InstallmentBondFactory(uri, token, address(_bondDB), msg.sender)
+        );
         _bondFactories[msg.sender].push(factory);
         _bondFactoryIsInitialized[msg.sender][token] = true;
+        _bondDB.registerFactory(factory);
 
         emit FactoryInitialized(msg.sender, token);
     }
