@@ -5,8 +5,7 @@ import "./BondFactory.sol";
 
 contract CallableBondFactory is BondFactory {
     using Counters for Counters.Counter;
-    Counters.Counter private _id;
-
+    Counters.Counter private _numBonds; 
     uint256 private constant CATEGORY = 2;
 
     mapping(uint256 => uint256) _minObligationPeriod; // in days
@@ -20,53 +19,62 @@ contract CallableBondFactory is BondFactory {
     );
 
     constructor(
-        string memory uri,
         address token,
+        address bondToken,
         address db,
         address deployer
-    ) BondFactory(uri, token, db, deployer) {}
+    ) BondFactory(token, bondToken, db, deployer) {}
 
     function call(uint256 id) external {
         require(!isCompleted(id) && !isCanceled(id) && !isDefaulted(id), "CBC");
         require(timeElapsed(id) > _minObligationPeriod[id] * 1 days, "MOPNW");
         _couponRateOnCall[id] =
-            (_bondMetadata[id].couponRate * timeElapsed(id)) /
-            (_bondMetadata[id].durationInDays * 1 days);
+            (_bondToken.bondMetadataAsStruct(id).couponRate * timeElapsed(id)) /
+            (_bondToken.bondMetadataAsStruct(id).durationInDays * 1 days);
         _isCalled[id] = true;
         _isCompleted[id] = true;
 
-        emit Called(id, _bondMetadata[id].couponRate, _couponRateOnCall[id]);
+        emit Called(id, _bondToken.bondMetadataAsStruct(id).couponRate, _couponRateOnCall[id]);
     }
 
     function issue(
         uint256 bondQuantity,
         uint256 minPurchasedQuantity,
         uint256 tokenAmountPerBond,
-        string calldata ticker,
-        uint256 durationDays,
+        string memory ticker,
+        uint256 durationInDays,
         uint256 activeDurationInDays,
         uint256 rate // coupon rate
     ) external override onlyOwner returns (uint256 id) {
         require(minPurchasedQuantity < bondQuantity, "MPQGTBQ");
-        require(durationDays >= 180, "DB6M");
+        require(durationInDays >= 180, "DB6M");
         require(activeDurationInDays <= 7, "ADA7D");
-        id = _id.current();
-        _id.increment();
-        _mint(msg.sender, id, bondQuantity, "");
-        _bondMetadata[id] = BondMetadata(
+        _numBonds.increment();
+
+        IBond.BondMetadata memory metadata = IBond.BondMetadata(
             ticker,
+            address(_baseToken),
+            msg.sender,
             tokenAmountPerBond,
             block.timestamp,
-            block.timestamp + durationDays * 1 days,
+            block.timestamp + durationInDays * 1 days,
             block.timestamp + activeDurationInDays * 1 days,
             activeDurationInDays,
-            durationDays,
+            durationInDays,
             bondQuantity,
             minPurchasedQuantity,
             rate
         );
 
-        _minObligationPeriod[id] = durationDays / 2;
+        id = _bondToken.mint(
+            address(this),
+            bondQuantity,
+            metadata
+        );
+        _bonds.push(id);
+        _isIssuedByFactory[id] = true;
+
+        _minObligationPeriod[id] = durationInDays / 2;
 
         _bondDB.incrementNumberOfIssuedBondsByCategory(CATEGORY);
         _bondDB.incrementNumberOfIssuedBondsByCompanyAndCategory(
@@ -79,7 +87,7 @@ contract CallableBondFactory is BondFactory {
             bondQuantity,
             tokenAmountPerBond,
             rate,
-            block.timestamp + durationDays * 1 days
+            block.timestamp + durationInDays * 1 days
         );
     }
 
@@ -88,7 +96,7 @@ contract CallableBondFactory is BondFactory {
     function principalWithInterest(
         uint256 id
     ) public view override returns (uint256) {
-        uint256 couponRate = _bondMetadata[id].couponRate;
+        uint256 couponRate = _bondToken.bondMetadataAsStruct(id).couponRate;
         if (_isCalled[id]) couponRate = couponRateOnCall(id);
 
         return principal(id) + (principal(id) * couponRate) / 1e18;

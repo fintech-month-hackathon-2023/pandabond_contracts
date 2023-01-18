@@ -145,6 +145,19 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "activate",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "to",
 						"type": "address"
@@ -180,16 +193,16 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
+				"inputs": [],
+				"name": "dbAdmin",
+				"outputs": [
 					{
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "",
+						"type": "address"
 					}
 				],
-				"name": "burn",
-				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -233,6 +246,25 @@
 					}
 				],
 				"name": "hasActiveSBT",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "hasSBT",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -318,7 +350,7 @@
 						"type": "uint8"
 					}
 				],
-				"name": "modifyLevel",
+				"name": "modifyTier",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -390,12 +422,12 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "id",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "addr",
+						"type": "address"
 					}
 				],
-				"name": "reactivate",
+				"name": "registerDbAdmin",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -426,7 +458,13 @@
 					}
 				],
 				"name": "safeMint",
-				"outputs": [],
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -657,7 +695,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
@@ -759,20 +797,28 @@
 				"dweb:/ipfs/Qmct36zWXv3j7LZB83uwbg7TXwnZSN1fqHNDZ93GG98bGz"
 			]
 		},
-		"contracts/SoulBoundToken.sol": {
-			"keccak256": "0x0cfef71ab41c71315a06ddd61ff2372cddd0669d1a05831c8cd360723cd9e1c0",
+		"contracts/CompanyDB.sol": {
+			"keccak256": "0x5884f033c3f92f99bff9274d4654b14da4d9c56dda00297b4c7e6e58b6b1f21d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://1376f882e7beb63f6ebb561d30f2d3317822eb7533966983408b479aa7e8b0c5",
-				"dweb:/ipfs/QmYwRFFWpi38jzGpEp2abmZq77kofTtshd6frbwtpcezqi"
+				"bzz-raw://e2f6f006eaf4e7fce435a4dc2c88ce7622c6f59dc735c7958fbb87225dd78ff1",
+				"dweb:/ipfs/QmePuAZd8Rj3PkHEcDqQVEEDxyC6xQGjYy9DctzoHWZtGK"
+			]
+		},
+		"contracts/SoulBoundToken.sol": {
+			"keccak256": "0xa3ae89969013dc732e0ab2ecc2bb399fc09645c3aaf99ec02821c18846747e92",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e76c1013b5af30554e3be7e3dec7d072a1ca30a3991c5406874c6a51db9e9bea",
+				"dweb:/ipfs/QmNzssthSfDaLCwGc5uCBw9VBDJTPnpTWPGfeZDAjJHynb"
 			]
 		},
 		"contracts/interfaces/ISoulBoundToken.sol": {
-			"keccak256": "0xe8b14dbe680f41d2e431b927278b24f44357e25b3cd9fb4ac6d8d4386a851e1e",
+			"keccak256": "0x7db5ac8567f0b9c2c154f17b94f47763d78d1a33514829ed0d75babb9617ab91",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7195cfac583dc105c07515e381c64a419aed4688cad3ec62b37f74e9923ef43c",
-				"dweb:/ipfs/QmW977FtbCb6oXEUPiFWDYi48HKobdGfFcDZgf9xuM1scz"
+				"bzz-raw://5b84afadef0ccc5a44d16c3d1677c237055a16ed64a36b395cc45dced1f902b1",
+				"dweb:/ipfs/QmP4SWY5XNgja5ond8zKit5iDnqacDA6TvVfpjCS7TVgYD"
 			]
 		}
 	},

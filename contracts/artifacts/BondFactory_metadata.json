@@ -19,6 +19,11 @@
 					},
 					{
 						"internalType": "address",
+						"name": "db",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
 						"name": "deployer",
 						"type": "address"
 					}
@@ -433,19 +438,6 @@
 					}
 				],
 				"name": "designatedTokenPool",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "fundsRaised",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -1287,6 +1279,14 @@
 				"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3"
 			]
 		},
+		"@openzeppelin/contracts/utils/Counters.sol": {
+			"keccak256": "0xf0018c2440fbe238dd3a8732fa8e17a0f9dce84d31451dc8a32f6d62b349c9f1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://59e1c62884d55b70f3ae5432b44bb3166ad71ae3acd19c57ab6ddc3c87c325ee",
+				"dweb:/ipfs/QmezuXg5GK5oeA4F91EZhozBFekhq5TD966bHPH18cCqhu"
+			]
+		},
 		"@openzeppelin/contracts/utils/introspection/ERC165.sol": {
 			"keccak256": "0xd10975de010d89fd1c78dc5e8a9a7e7f496198085c151648f20cba166b32582b",
 			"license": "MIT",
@@ -1304,11 +1304,19 @@
 			]
 		},
 		"contracts/BondFactory.sol": {
-			"keccak256": "0x23480ba7bb8f2e9590c20f9c820d6c92529ad4f6c92cd8f6fb7c6a2b53b21f76",
+			"keccak256": "0x0af6fad1fc36f15f9bef97ababbee0e1dbe9b68c7a015081e04f64459480322e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://9bc805e65d7e2167170bc1d68e9f8efcfd252a72eb42a357c5e6bbe9c3dab285",
-				"dweb:/ipfs/QmZ8r83rjjKNgUqVQEqxAb7fuWY6zhfN2KArx8KbFvuYq9"
+				"bzz-raw://0d8754e8821ef1c5b7ea26ea4cee32ab17cc8130d5414e447244d70258b1aac7",
+				"dweb:/ipfs/Qme1eYTkuMobyNbK6vvVHUtaAXeofRpctboD1AvhBk1VCs"
+			]
+		},
+		"contracts/interfaces/IBondDB.sol": {
+			"keccak256": "0x3ad7524ce3d027012fb3d957ff210b6a65a67acb6d467f71cda25996f64a5c35",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ea73e7ea3bbe6ac74559f34583509e9ae3ca33b8c8f2c93a562847cd5ff9ae6c",
+				"dweb:/ipfs/QmeeqkeuJGJak2A9hjggPJC6aUWbfW5svxj9zmSRJXnszh"
 			]
 		}
 	},

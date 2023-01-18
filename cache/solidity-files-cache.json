@@ -38,8 +38,8 @@
       ]
     },
     "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\BondFactory.sol": {
-      "lastModificationDate": 1673935427804,
-      "contentHash": "3e6af7b36a8f576fa2f55a44969360bd",
+      "lastModificationDate": 1674032237800,
+      "contentHash": "d548c319a4bb3a001a2199950bd37fc9",
       "sourceName": "contracts/BondFactory.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -66,11 +66,11 @@
         }
       },
       "imports": [
-        "@openzeppelin/contracts/token/ERC1155/ERC1155.sol",
-        "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol",
+        "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol",
         "@openzeppelin/contracts/token/ERC20/IERC20.sol",
         "@openzeppelin/contracts/utils/Counters.sol",
-        "./interfaces/IBondDB.sol"
+        "./interfaces/IBondDB.sol",
+        "./interfaces/IBond.sol"
       ],
       "versionPragmas": [
         "^0.8.17"
@@ -80,8 +80,8 @@
       ]
     },
     "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\interfaces\\IBondDB.sol": {
-      "lastModificationDate": 1673935422773,
-      "contentHash": "cc0adce8ab2d6362ef77d49e2c8735f5",
+      "lastModificationDate": 1674023772704,
+      "contentHash": "81a757c987b1b364936c52f914675484",
       "sourceName": "contracts/interfaces/IBondDB.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -491,8 +491,8 @@
       ]
     },
     "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\InstallmentBondFactory.sol": {
-      "lastModificationDate": 1673935422739,
-      "contentHash": "6825cdc8e6b32fac3b080aa18d9cdb32",
+      "lastModificationDate": 1674032222687,
+      "contentHash": "b7be0ae9c83bd3a65764f6648f3a3360",
       "sourceName": "contracts/InstallmentBondFactory.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -529,8 +529,8 @@
       ]
     },
     "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\InstallmentBondPeriphery.sol": {
-      "lastModificationDate": 1673935422762,
-      "contentHash": "1e216bb1e4456c3ee02dc6fba19d6523",
+      "lastModificationDate": 1674030969687,
+      "contentHash": "dd1fbad59f32a0b546c3e02239a8da1c",
       "sourceName": "contracts/InstallmentBondPeriphery.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -606,8 +606,8 @@
       ]
     },
     "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\BondPeriphery.sol": {
-      "lastModificationDate": 1673935422225,
-      "contentHash": "0e4f5a39381f707a1afe7aa11bd3a84c",
+      "lastModificationDate": 1674030879996,
+      "contentHash": "6eb32394bbdf4d3bab3929690df73eb8",
       "sourceName": "contracts/BondPeriphery.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -637,7 +637,8 @@
         "@openzeppelin/contracts/token/ERC20/IERC20.sol",
         "./BondFactory.sol",
         "./interfaces/ISoulBoundToken.sol",
-        "./interfaces/IBondDB.sol"
+        "./interfaces/IBondDB.sol",
+        "./interfaces/IBond.sol"
       ],
       "versionPragmas": [
         "^0.8.17"
@@ -647,7 +648,7 @@
       ]
     },
     "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\DualCurrencyBondPeriphery.sol": {
-      "lastModificationDate": 1673935364063,
+      "lastModificationDate": 1673936730730,
       "contentHash": "be3b567818e9206d617aec1a3807311d",
       "sourceName": "contracts/DualCurrencyBondPeriphery.sol",
       "solcConfig": {
@@ -1115,8 +1116,8 @@
       ]
     },
     "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\CallableBondPeriphery.sol": {
-      "lastModificationDate": 1673935422330,
-      "contentHash": "ae9cbbd7490f97b96217f4c9a4222604",
+      "lastModificationDate": 1674030889178,
+      "contentHash": "500af85586469e9d59bbe408745367dc",
       "sourceName": "contracts/CallableBondPeriphery.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -1156,8 +1157,8 @@
       ]
     },
     "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\CallableBondFactory.sol": {
-      "lastModificationDate": 1673935422300,
-      "contentHash": "780fef0ca85729cc456e18b92193949c",
+      "lastModificationDate": 1674032269823,
+      "contentHash": "5951dfbd5c2fd7983776a954ec09d074",
       "sourceName": "contracts/CallableBondFactory.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -1191,6 +1192,160 @@
       ],
       "artifacts": [
         "CallableBondFactory"
+      ]
+    },
+    "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\Bond.sol": {
+      "lastModificationDate": 1674031900262,
+      "contentHash": "339928c788099042ab56a148a5d88940",
+      "sourceName": "contracts/Bond.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC1155/ERC1155.sol",
+        "@openzeppelin/contracts/utils/Counters.sol",
+        "./interfaces/IBondDB.sol",
+        "./interfaces/IBond.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.17"
+      ],
+      "artifacts": [
+        "Bond"
+      ]
+    },
+    "C:\\Users\\SJ\\pandabond-smart-contracts\\contracts\\interfaces\\IBond.sol": {
+      "lastModificationDate": 1674032000227,
+      "contentHash": "dc603451a72a535c93891dced4d38b9d",
+      "sourceName": "contracts/interfaces/IBond.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.17"
+      ],
+      "artifacts": [
+        "IBond"
+      ]
+    },
+    "C:\\Users\\SJ\\pandabond-smart-contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC1155\\utils\\ERC1155Receiver.sol": {
+      "lastModificationDate": 1673662676879,
+      "contentHash": "55b180cf664783e9a2baac20e82683fb",
+      "sourceName": "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Receiver.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../IERC1155Receiver.sol",
+        "../../../utils/introspection/ERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ERC1155Receiver"
+      ]
+    },
+    "C:\\Users\\SJ\\pandabond-smart-contracts\\node_modules\\@openzeppelin\\contracts\\token\\ERC1155\\utils\\ERC1155Holder.sol": {
+      "lastModificationDate": 1673662676876,
+      "contentHash": "88079762e28b246888129028f757e047",
+      "sourceName": "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./ERC1155Receiver.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ERC1155Holder"
       ]
     }
   }

@@ -44,41 +44,41 @@ interface IBondDB {
         uint256 category
     ) external;
 
-    function owner() external view;
+    function owner() external view returns(address);
 
-    function isPeriphery(address account) external view;
+    function isPeriphery(address account) external view returns(bool);
 
-    function isFactory(address account) external view;
+    function isFactory(address account) external view returns(bool);
 
-    function fundsRaisedByToken(address token) external view;
+    function fundsRaisedByToken(address token) external view returns(uint256);
 
     function fundsRaisedByTokenAndCategory(
         address token,
         uint256 category
-    ) external view;
+    ) external view returns(uint256);
 
     function fundsRaisedByCompanyAndToken(
         address company,
         address token
-    ) external view;
+    ) external view returns(uint256);
 
     function fundsRaisedByCompanyAndTokenAndCategory(
         address company,
         address token,
         uint256 category
-    ) external view;
+    ) external view returns(uint256);
 
     function numberOfIssuedBondsByCategory(uint256 category) external view;
 
     function numberOfIssuedBondsByCompanyAndCategory(
         address company,
         uint256 category
-    ) external view;
+    ) external view returns(uint256);
 
-    function numberOfTimesDefaultedByCompany(address company) external view;
+    function numberOfTimesDefaultedByCompany(address company) external view returns(uint256);
 
     function numberOfTimesDefaultedByCompanyAndCategory(
         address company,
         uint256 category
-    ) external view;
+    ) external view returns(uint256);
 }

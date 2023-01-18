@@ -5,7 +5,7 @@ import "./BondFactory.sol";
 
 contract InstallmentBondFactory is BondFactory {
     using Counters for Counters.Counter;
-    Counters.Counter private _id;
+    Counters.Counter private _numBonds; 
 
     uint256 private constant CATEGORY = 3;
 
@@ -25,11 +25,11 @@ contract InstallmentBondFactory is BondFactory {
     }
 
     constructor(
-        string memory uri,
         address token,
+        address bondToken,
         address db,
         address deployer
-    ) BondFactory(uri, token, db, deployer) {}
+    ) BondFactory(token, bondToken, db, deployer) {}
 
     function issue(
         uint256 bondQuantity,
@@ -49,24 +49,32 @@ contract InstallmentBondFactory is BondFactory {
         require(minPurchasedQuantity < bondQuantity, "MPQGTBQ");
         require(activeDurationInDays <= 7, "ADA7D");
 
-        uint256 durationDays = yearOptionToDays(yearOption);
+        uint256 durationInDays = yearOptionToDays(yearOption);
 
-        id = _id.current();
-        _id.increment();
+        _numBonds.increment();
 
-        _mint(msg.sender, id, bondQuantity, "");
-        _bondMetadata[id] = BondMetadata(
+        IBond.BondMetadata memory metadata = IBond.BondMetadata(
             ticker,
+            address(_baseToken),
+            msg.sender,
             tokenAmountPerBond,
             block.timestamp,
-            block.timestamp + durationDays * 1 days,
+            block.timestamp + durationInDays * 1 days,
             block.timestamp + activeDurationInDays * 1 days,
             activeDurationInDays,
-            durationDays,
+            durationInDays,
             bondQuantity,
             minPurchasedQuantity,
             rate
         );
+
+        id = _bondToken.mint(
+            address(this),
+            bondQuantity,
+            metadata
+        );
+        _bonds.push(id);
+        _isIssuedByFactory[id] = true;
 
         _nextObligationDate[id] = block.timestamp + FACTOR * 1 days;
         _minObligationTokenAmountPerBondList[id] = retrieveMinObligationList(
@@ -85,7 +93,7 @@ contract InstallmentBondFactory is BondFactory {
             bondQuantity,
             tokenAmountPerBond,
             rate,
-            block.timestamp + durationDays * 1 days
+            block.timestamp + durationInDays * 1 days
         );
     }
 
@@ -96,7 +104,7 @@ contract InstallmentBondFactory is BondFactory {
         require(!(isDefaulted(id) || isDefaultedInTheory(id)), "WNA");
         require(
             (_numberOfTimesFulfilled[id] + 1) * FACTOR !=
-                _bondMetadata[id].durationInDays,
+                _bondToken.bondMetadataAsStruct(id).durationInDays,
             "OAF"
         );
         require(
@@ -118,7 +126,7 @@ contract InstallmentBondFactory is BondFactory {
         );
 
         uint256 tokenAmount = tokenAmountPerBond *
-            _bondMetadata[id].issuedQuantity;
+            _bondToken.bondMetadataAsStruct(id).issuedQuantity;
         _lockedTokenAmount[id] += tokenAmount;
         _nextObligationDate[id] = _nextObligationDate[id] + FACTOR * 1 days;
         _numberOfTimesFulfilled[id] += 1;
@@ -164,7 +172,7 @@ contract InstallmentBondFactory is BondFactory {
     ) public view returns (uint256) {
         return
             (lockedTokenAmount(id) * 1e18) /
-            _bondMetadata[id].issuedQuantity /
+            _bondToken.bondMetadataAsStruct(id).issuedQuantity /
             1e18;
     }
 

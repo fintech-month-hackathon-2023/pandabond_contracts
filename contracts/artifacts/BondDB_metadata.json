@@ -14,26 +14,266 @@
 				"inputs": [
 					{
 						"internalType": "address",
+						"name": "company",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					}
+				],
+				"name": "fundsRaisedByCompanyAndToken",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "company",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "category",
+						"type": "uint256"
+					}
+				],
+				"name": "fundsRaisedByCompanyAndTokenAndCategory",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					}
+				],
+				"name": "fundsRaisedByToken",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "category",
+						"type": "uint256"
+					}
+				],
+				"name": "fundsRaisedByTokenAndCategory",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "company",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					}
+				],
+				"name": "incrementFundsRaisedByCompanyAndToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "company",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "category",
+						"type": "uint256"
+					}
+				],
+				"name": "incrementFundsRaisedByCompanyAndTokenAndCategory",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					}
+				],
+				"name": "incrementFundsRaisedByToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "category",
+						"type": "uint256"
+					}
+				],
+				"name": "incrementFundsRaisedByTokenAndCategory",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "category",
+						"type": "uint256"
+					}
+				],
+				"name": "incrementNumberOfIssuedBondsByCategory",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "company",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "category",
+						"type": "uint256"
+					}
+				],
+				"name": "incrementNumberOfIssuedBondsByCompanyAndCategory",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "company",
+						"type": "address"
+					}
+				],
+				"name": "incrementNumberOfTimesDefaultedByCompany",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "company",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "category",
+						"type": "uint256"
+					}
+				],
+				"name": "incrementNumberOfTimesDefaultedByCompanyAndCategory",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
 						"name": "account",
 						"type": "address"
 					}
 				],
-				"name": "companyMetadata",
+				"name": "isFactory",
 				"outputs": [
 					{
-						"internalType": "string",
+						"internalType": "bool",
 						"name": "",
-						"type": "string"
-					},
-					{
-						"internalType": "bytes32",
-						"name": "",
-						"type": "bytes32"
-					},
-					{
-						"internalType": "uint8",
-						"name": "",
-						"type": "uint8"
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -47,12 +287,98 @@
 						"type": "address"
 					}
 				],
-				"name": "isRegisteredCompany",
+				"name": "isPeriphery",
 				"outputs": [
 					{
 						"internalType": "bool",
 						"name": "",
 						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "category",
+						"type": "uint256"
+					}
+				],
+				"name": "numberOfIssuedBondsByCategory",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "company",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "category",
+						"type": "uint256"
+					}
+				],
+				"name": "numberOfIssuedBondsByCompanyAndCategory",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "company",
+						"type": "address"
+					}
+				],
+				"name": "numberOfTimesDefaultedByCompany",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "company",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "category",
+						"type": "uint256"
+					}
+				],
+				"name": "numberOfTimesDefaultedByCompanyAndCategory",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -75,41 +401,26 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "account",
+						"name": "factory",
 						"type": "address"
-					},
-					{
-						"internalType": "string",
-						"name": "name",
-						"type": "string"
-					},
-					{
-						"internalType": "bytes32",
-						"name": "hashedIdentity",
-						"type": "bytes32"
-					},
-					{
-						"internalType": "uint8",
-						"name": "tier",
-						"type": "uint8"
 					}
 				],
-				"name": "registerCompany",
+				"name": "registerFactory",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "registeredCompanies",
-				"outputs": [
+				"inputs": [
 					{
 						"internalType": "address[]",
-						"name": "",
+						"name": "peripheries",
 						"type": "address[]"
 					}
 				],
-				"stateMutability": "view",
+				"name": "registerPeriphery",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
@@ -121,6 +432,7 @@
 		"userdoc": {
 			"kind": "user",
 			"methods": {},
+			"notice": "PandaBond Data Aggregator Includes: Total Funds Raised in each currency: _fundsRaisedByToken Total Funds Raised in each currency by category: _fundsRaisedByTokenAndCategory Total Funds Raised in each currency by company: _fundsRaisedByCompanyAndToken Total Funds Raised in each currency by company and category: _fundsRaisedByCompanyAndTokenAndCategory Number of Issued Bonds by category: _numberOfIssuedBondsByCategory Number of Issued Bonds by company and category: _numberOfIssuedBondsByCompanyAndCategory Number of times defaulted by company: _numberOfTimesDefaultedByCompany Number of times defaulted by company and category: _numberOfTimesDefaultedByCompanyAndCategory",
 			"version": 1
 		}
 	},
@@ -141,11 +453,11 @@
 	},
 	"sources": {
 		"contracts/BondDB.sol": {
-			"keccak256": "0x27e4571976e3bb740c61d51ca2294abb6ba7bae871fdb7e701d995c37eb8b633",
+			"keccak256": "0xf257d6165a3c12ae2bd9817c747e9a0584854f732465e82b14dbf7341a929203",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://45623d161105787b20b34562357d29f23e9257e2db57d917ea5329316c302305",
-				"dweb:/ipfs/QmT2J79kjd5q8Ws63ZBWCKafoXcw4o5HbzDcMznHzPjH5D"
+				"bzz-raw://fb6bf4ac4540f1d221d903bb615e3fb70d15d32791b4f88ab343d0db0b8054e7",
+				"dweb:/ipfs/QmYFx7A3NHczDTqpYZvLYUCwkxD9yQp3HyvFuNBZ5SzjmZ"
 			]
 		}
 	},

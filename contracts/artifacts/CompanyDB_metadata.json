@@ -1,0 +1,259 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "sbt",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "activateSBT",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "companyMetadata",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "deactivateSBT",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "isRegisteredCompany",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "uint8",
+						"name": "tier",
+						"type": "uint8"
+					}
+				],
+				"name": "modifyTier",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "hashedIdentity",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint8",
+						"name": "tier",
+						"type": "uint8"
+					}
+				],
+				"name": "registerCompany",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "sbtId",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "registeredCompanies",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "hashedIdentity",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint8",
+						"name": "tier",
+						"type": "uint8"
+					}
+				],
+				"name": "reissueSBT",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "sbtId",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "soulBoundToken",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/CompanyDB.sol": "CompanyDB"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/CompanyDB.sol": {
+			"keccak256": "0x5884f033c3f92f99bff9274d4654b14da4d9c56dda00297b4c7e6e58b6b1f21d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e2f6f006eaf4e7fce435a4dc2c88ce7622c6f59dc735c7958fbb87225dd78ff1",
+				"dweb:/ipfs/QmePuAZd8Rj3PkHEcDqQVEEDxyC6xQGjYy9DctzoHWZtGK"
+			]
+		},
+		"contracts/interfaces/ISoulBoundToken.sol": {
+			"keccak256": "0x7db5ac8567f0b9c2c154f17b94f47763d78d1a33514829ed0d75babb9617ab91",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5b84afadef0ccc5a44d16c3d1677c237055a16ed64a36b395cc45dced1f902b1",
+				"dweb:/ipfs/QmP4SWY5XNgja5ond8zKit5iDnqacDA6TvVfpjCS7TVgYD"
+			]
+		}
+	},
+	"version": 1
+}
