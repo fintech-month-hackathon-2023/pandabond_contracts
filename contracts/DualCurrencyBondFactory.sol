@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
-import "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
+import "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "./interfaces/IBondDB.sol";
+import "./interfaces/IDualCurrencyBond.sol";
 
-contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
+contract DualCurrencyBondFactory is ERC1155Holder {
     using Counters for Counters.Counter;
-    Counters.Counter private _id;
+    Counters.Counter private _numBonds; 
 
     AggregatorV3Interface immutable _priceFeedA;
     AggregatorV3Interface immutable _priceFeedB;
@@ -19,24 +19,12 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
     IERC20 immutable _tokenA;
     IERC20 immutable _tokenB;
     IBondDB immutable _bondDB;
+    IDualCurrencyBond immutable _bondToken;
 
     uint256 private constant CATEGORY = 4;
 
-    struct BondMetadata {
-        string ticker;
-        uint256 tokenAAmountPerBond;
-        uint256 tokenBAmountPerBond;
-        uint256 initBlock;
-        uint256 maturityBlock;
-        uint256 endOfActiveBlock;
-        uint256 activeDurationInDays;
-        uint256 durationInDays; // x days
-        uint256 issuedQuantity;
-        uint256 minPurchasedQuantity;
-        uint256 couponRate; // 1e18 -> 100%
-    }
+    uint256[] _bonds;
 
-    mapping(uint256 => BondMetadata) _bondMetadata;
     mapping(uint256 => uint256) _purchasedQuantity;
     mapping(uint256 => uint256) _redeemedQuantity;
     mapping(uint256 => uint256) _designatedTokenAPool;
@@ -45,6 +33,7 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
     mapping(uint256 => uint256) _tokenBAmountPerBondAfterDefault;
     mapping(uint256 => uint256) _tokenBAmountPerBondAfterComplete;
 
+    mapping(uint256 => bool) _isIssuedByFactory;
     mapping(uint256 => bool) _isDefaulted;
     mapping(uint256 => bool) _isCompleted;
 
@@ -76,22 +65,22 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
     );
 
     constructor(
-        string memory uri,
         address a,
         address b,
+        address bondToken,
         address priceFeedA,
         address priceFeedB,
         address db,
         address deployer
-    ) ERC1155(uri) {
+    ) {
         _owner = deployer;
         _tokenA = IERC20(a);
         _tokenB = IERC20(b);
         _bondDB = IBondDB(db);
+        _bondToken = IDualCurrencyBond(bondToken);
 
         _priceFeedA = AggregatorV3Interface(priceFeedA);
         _priceFeedB = AggregatorV3Interface(priceFeedB);
-        _id.increment();
     }
 
     function getLatestPriceA() public view returns (int) {
@@ -124,33 +113,45 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
         uint256 bondQuantity,
         uint256 minPurchasedQuantity,
         uint256 tokenAAmountPerBond,
-        string calldata ticker,
-        uint256 durationDays,
+        string memory ticker,
+        uint256 durationInDays,
         uint256 activeDurationInDays,
         uint256 rate // coupon rate
     ) external virtual onlyOwner returns (uint256 id) {
         require(minPurchasedQuantity < bondQuantity, "MPQGTBQ");
-        require(durationDays >= 180, "DB6M");
+        require(durationInDays >= 180, "DB6M");
         require(activeDurationInDays <= 7, "ADA7D");
-        id = _id.current();
-        _id.increment();
-        _mint(address(this), id, bondQuantity, "");
+
+        _numBonds.increment();
+
         uint256 exchangeRate = getAtoBExchangeRate();
         uint256 tokenBAmountPerBond = (exchangeRate * tokenAAmountPerBond) /
             1e9;
-        _bondMetadata[id] = BondMetadata(
+        IDualCurrencyBond.BondMetadata memory metadata = IDualCurrencyBond.BondMetadata(
             ticker,
+            address(_tokenA),
+            address(_tokenB),
+            msg.sender,
             tokenAAmountPerBond,
             tokenBAmountPerBond,
             block.timestamp,
-            block.timestamp + durationDays * 1 days,
+            block.timestamp + durationInDays * 1 days,
             block.timestamp + activeDurationInDays * 1 days,
             activeDurationInDays,
-            durationDays,
+            durationInDays,
             bondQuantity,
             minPurchasedQuantity,
             rate
         );
+
+        id = _bondToken.mint(
+            address(this),
+            bondQuantity,
+            metadata
+        );
+
+        _bonds.push(id);
+        _isIssuedByFactory[id] = true;
 
         _bondDB.incrementNumberOfIssuedBondsByCategory(CATEGORY);
         _bondDB.incrementNumberOfIssuedBondsByCompanyAndCategory(
@@ -164,7 +165,7 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
             tokenAAmountPerBond,
             tokenBAmountPerBond,
             rate,
-            block.timestamp + durationDays * 1 days
+            block.timestamp + durationInDays * 1 days
         );
     }
 
@@ -172,8 +173,7 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
         require(isActive(id), "IB");
         require(remainingQuantity(id) >= bondQuantity, "IQ");
 
-        BondMetadata memory metadata = _bondMetadata[id];
-        uint256 tokenAmount = bondQuantity * metadata.tokenAAmountPerBond;
+        uint256 tokenAmount = _bondToken.bondMetadataAsStruct(id).tokenAAmountPerBond;
 
         _purchasedQuantity[id] += bondQuantity;
         _designatedTokenAPool[id] += tokenAmount;
@@ -197,8 +197,9 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
         );
 
         // requires approve
+        _bondToken.safeTransferFrom(address(this), msg.sender, id, bondQuantity, "");
         _tokenA.transferFrom(msg.sender, address(this), tokenAmount);
-        safeTransferFrom(address(this), msg.sender, id, bondQuantity, "");
+        
     }
 
     function withdraw(
@@ -227,7 +228,7 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
     }
 
     function redeem(uint256 id, uint256 bondQuantity) external {
-        require(balanceOf(msg.sender, id) >= bondQuantity, "IQ");
+        require(_bondToken.balanceOf(msg.sender, id) >= bondQuantity, "IQ");
 
         require(isCompleted(id) || isCanceled(id) || isDefaulted(id), "RNA");
 
@@ -239,7 +240,7 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
             tokenBAmountPerBond = _tokenBAmountPerBondAfterComplete[id];
             state = 0;
         } else if (isCanceled(id)) {
-            tokenAAmountPerBond = _bondMetadata[id].tokenAAmountPerBond;
+            tokenAAmountPerBond = _bondToken.bondMetadataAsStruct(id).tokenAAmountPerBond;
             state = 1;
         } else if (isDefaulted(id)) {
             tokenAAmountPerBond = _tokenAAmountPerBondAfterDefault[id];
@@ -249,7 +250,7 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
             revert();
         }
 
-        _burn(msg.sender, id, bondQuantity);
+        _bondToken.burn(msg.sender, id, bondQuantity);
         _redeemedQuantity[id] += bondQuantity;
 
         if (state == 0) {
@@ -263,11 +264,11 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
         } else if (state == 1) {
             _tokenA.transfer(
                 msg.sender,
-                bondQuantity * _bondMetadata[id].tokenAAmountPerBond
+                bondQuantity * _bondToken.bondMetadataAsStruct(id).tokenAAmountPerBond
             );
             _designatedTokenAPool[id] -=
                 bondQuantity *
-                _bondMetadata[id].tokenAAmountPerBond;
+                _bondToken.bondMetadataAsStruct(id).tokenAAmountPerBond;
         } else if (state == 2) {
             _tokenA.transfer(
                 msg.sender,
@@ -385,50 +386,30 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
         emit Completed(id, totalDebt, paidDebt);
     }
 
-    function onERC1155Received(
-        address,
-        address,
-        uint256,
-        uint256,
-        bytes memory
-    ) public virtual returns (bytes4) {
-        return this.onERC1155Received.selector;
-    }
-
-    function onERC1155BatchReceived(
-        address,
-        address,
-        uint256[] memory,
-        uint256[] memory,
-        bytes memory
-    ) public virtual returns (bytes4) {
-        return this.onERC1155BatchReceived.selector;
-    }
-
     function remainingQuantity(uint256 id) public view returns (uint256) {
-        return _bondMetadata[id].issuedQuantity - _purchasedQuantity[id];
+        return _bondToken.bondMetadataAsStruct(id).issuedQuantity - _purchasedQuantity[id];
     }
 
     function timeElapsed(uint256 id) public view returns (uint256) {
-        return block.timestamp - _bondMetadata[id].initBlock;
+        return block.timestamp - _bondToken.bondMetadataAsStruct(id).initBlock;
     }
 
     function timeRemainingToMaturity(uint256 id) public view returns (uint256) {
-        return _bondMetadata[id].maturityBlock - block.timestamp;
+        return _bondToken.bondMetadataAsStruct(id).maturityBlock - block.timestamp;
     }
 
     function timeRemainingToEndOfActive(
         uint256 id
     ) public view returns (uint256) {
-        return _bondMetadata[id].endOfActiveBlock - block.timestamp;
+        return _bondToken.bondMetadataAsStruct(id).endOfActiveBlock - block.timestamp;
     }
 
     function couponRate(uint256 id) public view returns (uint256) {
-        return _bondMetadata[id].couponRate;
+        return _bondToken.bondMetadataAsStruct(id).couponRate;
     }
 
     function principal(uint256 id) public view returns (uint256) {
-        return _bondMetadata[id].tokenBAmountPerBond * _purchasedQuantity[id];
+        return _bondToken.bondMetadataAsStruct(id).tokenBAmountPerBond * _purchasedQuantity[id];
     }
 
     function principalWithInterest(
@@ -436,7 +417,7 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
     ) public view virtual returns (uint256) {
         return
             principal(id) +
-            (principal(id) * _bondMetadata[id].couponRate) /
+            (principal(id) * _bondToken.bondMetadataAsStruct(id).couponRate) /
             1e18;
     }
 
@@ -461,11 +442,11 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
     }
 
     function isActive(uint256 id) public view returns (bool) {
-        return block.timestamp <= _bondMetadata[id].endOfActiveBlock;
+        return block.timestamp <= _bondToken.bondMetadataAsStruct(id).endOfActiveBlock;
     }
 
     function isFulfilled(uint256 id) public view returns (bool) {
-        return _purchasedQuantity[id] >= _bondMetadata[id].minPurchasedQuantity;
+        return _purchasedQuantity[id] >= _bondToken.bondMetadataAsStruct(id).minPurchasedQuantity;
     }
 
     function isCanceled(uint256 id) public view returns (bool) {
@@ -473,7 +454,7 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
     }
 
     function hasReachedMaturity(uint256 id) public view returns (bool) {
-        return block.timestamp > _bondMetadata[id].maturityBlock;
+        return block.timestamp > _bondToken.bondMetadataAsStruct(id).maturityBlock;
     }
 
     function isCompleted(uint256 id) public view returns (bool) {
@@ -498,42 +479,6 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
         return _isDefaulted[id];
     }
 
-    function bondmetaData(
-        uint256 id
-    )
-        public
-        view
-        virtual
-        returns (
-            string memory,
-            uint256,
-            uint256,
-            uint256,
-            uint256,
-            uint256,
-            uint256,
-            uint256,
-            uint256,
-            uint256,
-            uint256
-        )
-    {
-        BondMetadata memory bm = _bondMetadata[id];
-        return (
-            bm.ticker,
-            bm.tokenAAmountPerBond,
-            bm.tokenBAmountPerBond,
-            bm.initBlock,
-            bm.maturityBlock,
-            bm.endOfActiveBlock,
-            bm.activeDurationInDays,
-            bm.durationInDays,
-            bm.issuedQuantity,
-            bm.minPurchasedQuantity,
-            bm.couponRate
-        );
-    }
-
     function designatedTokenAPool(uint256 id) public view returns (uint256) {
         return _designatedTokenAPool[id];
     }
@@ -554,7 +499,12 @@ contract DualCurrencyBondFactory is ERC1155, IERC1155Receiver {
         return _owner;
     }
 
-    function numBondsIssued() public view returns (uint256) {
-        return _id.current() - 1;
+    function isIssuedByFactory(uint256 id) public view returns (bool) {
+        return _isIssuedByFactory[id];
     }
+
+    function bonds() public view returns(uint256[] memory) {
+        return _bonds;
+    }
+
 }

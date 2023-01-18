@@ -5,11 +5,14 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./DualCurrencyBondFactory.sol";
 import "./interfaces/ISoulBoundToken.sol";
 import "./interfaces/IBondDB.sol";
+import "./interfaces/IDualCurrencyBond.sol";
 
 contract DualCurrencyBondPeriphery {
     address immutable _owner;
     ISoulBoundToken immutable _sbt;
     IBondDB immutable _bondDB;
+
+    IDualCurrencyBond immutable _bondToken;
 
     address[] _entities;
 
@@ -41,10 +44,11 @@ contract DualCurrencyBondPeriphery {
         _;
     }
 
-    constructor(address sbt, address db) {
+    constructor(address sbt, address db, address bt) {
         _owner = msg.sender;
         _sbt = ISoulBoundToken(sbt);
         _bondDB = IBondDB(db);
+        _bondToken = IDualCurrencyBond(bt);
         _priceFeeds[
             0x21C8a148933E6CA502B47D729a485579c22E8A69
         ] = 0x0d79df66BE487753B02D015Fb622DED7f0E9798d; // DAI/USD
@@ -70,7 +74,6 @@ contract DualCurrencyBondPeriphery {
     }
 
     function createDualCurrencyBondFactory(
-        string memory uri,
         address tokenA,
         address tokenB
     ) external onlyIsRegistered hasActiveSBT returns (address factory) {
@@ -87,9 +90,9 @@ contract DualCurrencyBondPeriphery {
 
         factory = address(
             new DualCurrencyBondFactory(
-                uri,
                 tokenA,
                 tokenB,
+                address(_bondToken),
                 _priceFeeds[tokenA],
                 _priceFeeds[tokenB],
                 address(_bondDB),

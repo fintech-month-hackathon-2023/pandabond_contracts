@@ -372,4 +372,12 @@ contract BondFactory is ERC1155Holder {
         return _designatedTokenPool[id];
     }
 
+    function isIssuedByFactory(uint256 id) public view returns (bool) {
+        return _isIssuedByFactory[id];
+    }
+
+    function bonds() public view returns(uint256[] memory) {
+        return _bonds;
+    }
+
 }
