@@ -68,7 +68,7 @@ contract DualCurrencyBondPeriphery {
 
     function register() external hasActiveSBT {
         require(!_isRegistered[msg.sender], "AR");
-        require(_sbt.accessTier(msg.sender) >= 3, "NVAT");
+        require(_sbt.accessTier(msg.sender) >= 1, "NVAT");
         _isRegistered[msg.sender] = true;
         _entities.push(msg.sender);
     }
@@ -77,7 +77,7 @@ contract DualCurrencyBondPeriphery {
         address tokenA,
         address tokenB
     ) external onlyIsRegistered hasActiveSBT returns (address factory) {
-        require(_sbt.accessTier(msg.sender) >= 3, "NVAT");
+        require(_sbt.accessTier(msg.sender) >= 1, "NVAT");
         require(
             _priceFeeds[tokenA] != address(0) &&
                 _priceFeeds[tokenB] != address(0),
