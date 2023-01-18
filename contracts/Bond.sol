@@ -8,14 +8,18 @@ import "./interfaces/IBond.sol";
 
 contract Bond is ERC1155 {
     using Counters for Counters.Counter;
+    mapping(uint256 => IBond.BondData) _bondData;
     mapping(uint256 => IBond.BondMetadata) _bondMetadata;
 
     address immutable _owner;
     Counters.Counter private _id;
     IBondDB immutable _bondDB;
 
-    modifier onlyFactory(){
-        require(_bondDB.isFactory(msg.sender), "Caller is not a Factory Contract");
+    modifier onlyFactory() {
+        require(
+            _bondDB.isFactory(msg.sender),
+            "Caller is not a Factory Contract"
+        );
         _;
     }
 
@@ -25,17 +29,25 @@ contract Bond is ERC1155 {
         _id.increment();
     }
 
-
-    function mint(address to, uint256 bondQuantity, IBond.BondMetadata memory metadata) public onlyFactory returns(uint256 id) {
+    function mint(
+        address to,
+        uint256 bondQuantity,
+        IBond.BondData memory data,
+        IBond.BondMetadata memory metadata
+    ) public onlyFactory returns (uint256 id) {
         id = _id.current();
         _id.increment();
+        _bondData[id] = data;
         _bondMetadata[id] = metadata;
 
-        _mint(to, id, bondQuantity, '');
-
+        _mint(to, id, bondQuantity, "");
     }
 
-    function burn(address account, uint256 id, uint256 quantity) public virtual {
+    function burn(
+        address account,
+        uint256 id,
+        uint256 quantity
+    ) public virtual {
         require(
             account == _msgSender() || isApprovedForAll(account, _msgSender()),
             "ERC1155: caller is not token owner or approved"
@@ -44,38 +56,54 @@ contract Bond is ERC1155 {
         _burn(account, id, quantity);
     }
 
-    function bondMetadata(uint256 id) public view returns (string memory,
-        address,
-        address,
-        uint256,
-        uint256,
-        uint256,
-        uint256,
-        uint256,
-        uint256, // x days
-        uint256,
-        uint256,
-        uint256){
-
-            IBond.BondMetadata memory bm = _bondMetadata[id];
-            return (
-                bm.ticker,
-        bm.currency,
-        bm.issuer,
-        bm.tokenAmountPerBond,
-        bm.initBlock,
-        bm.maturityBlock,
-        bm.endOfActiveBlock,
-        bm.activeDurationInDays,
-        bm.durationInDays,
-        bm.issuedQuantity,
-        bm.minPurchasedQuantity,
-        bm.couponRate
-            );
+    function bondData(
+        uint256 id
+    )
+        public
+        view
+        returns (
+            uint256,
+            uint256,
+            uint256,
+            uint256,
+            uint256,
+            uint256, // x days
+            uint256,
+            uint256,
+            uint256
+        )
+    {
+        IBond.BondData memory bd = _bondData[id];
+        return (
+            bd.tokenAmountPerBond,
+            bd.initBlock,
+            bd.maturityBlock,
+            bd.endOfActiveBlock,
+            bd.activeDurationInDays,
+            bd.durationInDays,
+            bd.issuedQuantity,
+            bd.minPurchasedQuantity,
+            bd.couponRate
+        );
     }
 
-    function bondMetadataAsStruct(uint256 id) public view returns (IBond.BondMetadata memory){
-            return _bondMetadata[id];
+    function bondMetadata(
+        uint256 id
+    ) public view returns (string memory, address, address) {
+        IBond.BondMetadata memory bm = _bondMetadata[id];
+        return (bm.ticker, bm.currency, bm.issuer);
+    }
+
+    function bondDataAsStruct(
+        uint256 id
+    ) public view returns (IBond.BondData memory) {
+        return _bondData[id];
+    }
+
+    function bondMetadataAsStruct(
+        uint256 id
+    ) public view returns (IBond.BondMetadata memory) {
+        return _bondMetadata[id];
     }
 
     function numBondsIssued() public view returns (uint256) {

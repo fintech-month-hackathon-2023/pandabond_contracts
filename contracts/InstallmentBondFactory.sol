@@ -5,7 +5,7 @@ import "./BondFactory.sol";
 
 contract InstallmentBondFactory is BondFactory {
     using Counters for Counters.Counter;
-    Counters.Counter private _numBonds; 
+    Counters.Counter private _numBonds;
 
     uint256 private constant CATEGORY = 3;
 
@@ -56,7 +56,10 @@ contract InstallmentBondFactory is BondFactory {
         IBond.BondMetadata memory metadata = IBond.BondMetadata(
             ticker,
             address(_baseToken),
-            msg.sender,
+            msg.sender
+        );
+
+        IBond.BondData memory data = IBond.BondData(
             tokenAmountPerBond,
             block.timestamp,
             block.timestamp + durationInDays * 1 days,
@@ -68,11 +71,8 @@ contract InstallmentBondFactory is BondFactory {
             rate
         );
 
-        id = _bondToken.mint(
-            address(this),
-            bondQuantity,
-            metadata
-        );
+        id = _bondToken.mint(address(this), bondQuantity, data, metadata);
+
         _bonds.push(id);
         _isIssuedByFactory[id] = true;
 
@@ -104,7 +104,7 @@ contract InstallmentBondFactory is BondFactory {
         require(!(isDefaulted(id) || isDefaultedInTheory(id)), "WNA");
         require(
             (_numberOfTimesFulfilled[id] + 1) * FACTOR !=
-                _bondToken.bondMetadataAsStruct(id).durationInDays,
+                _bondToken.bondDataAsStruct(id).durationInDays,
             "OAF"
         );
         require(
@@ -126,7 +126,7 @@ contract InstallmentBondFactory is BondFactory {
         );
 
         uint256 tokenAmount = tokenAmountPerBond *
-            _bondToken.bondMetadataAsStruct(id).issuedQuantity;
+            _bondToken.bondDataAsStruct(id).issuedQuantity;
         _lockedTokenAmount[id] += tokenAmount;
         _nextObligationDate[id] = _nextObligationDate[id] + FACTOR * 1 days;
         _numberOfTimesFulfilled[id] += 1;
@@ -172,7 +172,7 @@ contract InstallmentBondFactory is BondFactory {
     ) public view returns (uint256) {
         return
             (lockedTokenAmount(id) * 1e18) /
-            _bondToken.bondMetadataAsStruct(id).issuedQuantity /
+            _bondToken.bondDataAsStruct(id).issuedQuantity /
             1e18;
     }
 

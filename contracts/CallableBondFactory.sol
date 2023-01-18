@@ -5,7 +5,7 @@ import "./BondFactory.sol";
 
 contract CallableBondFactory is BondFactory {
     using Counters for Counters.Counter;
-    Counters.Counter private _numBonds; 
+    Counters.Counter private _numBonds;
     uint256 private constant CATEGORY = 2;
 
     mapping(uint256 => uint256) _minObligationPeriod; // in days
@@ -29,12 +29,16 @@ contract CallableBondFactory is BondFactory {
         require(!isCompleted(id) && !isCanceled(id) && !isDefaulted(id), "CBC");
         require(timeElapsed(id) > _minObligationPeriod[id] * 1 days, "MOPNW");
         _couponRateOnCall[id] =
-            (_bondToken.bondMetadataAsStruct(id).couponRate * timeElapsed(id)) /
-            (_bondToken.bondMetadataAsStruct(id).durationInDays * 1 days);
+            (_bondToken.bondDataAsStruct(id).couponRate * timeElapsed(id)) /
+            (_bondToken.bondDataAsStruct(id).durationInDays * 1 days);
         _isCalled[id] = true;
         _isCompleted[id] = true;
 
-        emit Called(id, _bondToken.bondMetadataAsStruct(id).couponRate, _couponRateOnCall[id]);
+        emit Called(
+            id,
+            _bondToken.bondDataAsStruct(id).couponRate,
+            _couponRateOnCall[id]
+        );
     }
 
     function issue(
@@ -54,7 +58,10 @@ contract CallableBondFactory is BondFactory {
         IBond.BondMetadata memory metadata = IBond.BondMetadata(
             ticker,
             address(_baseToken),
-            msg.sender,
+            msg.sender
+        );
+
+        IBond.BondData memory data = IBond.BondData(
             tokenAmountPerBond,
             block.timestamp,
             block.timestamp + durationInDays * 1 days,
@@ -66,11 +73,7 @@ contract CallableBondFactory is BondFactory {
             rate
         );
 
-        id = _bondToken.mint(
-            address(this),
-            bondQuantity,
-            metadata
-        );
+        id = _bondToken.mint(address(this), bondQuantity, data, metadata);
         _bonds.push(id);
         _isIssuedByFactory[id] = true;
 
@@ -96,7 +99,7 @@ contract CallableBondFactory is BondFactory {
     function principalWithInterest(
         uint256 id
     ) public view override returns (uint256) {
-        uint256 couponRate = _bondToken.bondMetadataAsStruct(id).couponRate;
+        uint256 couponRate = _bondToken.bondDataAsStruct(id).couponRate;
         if (_isCalled[id]) couponRate = couponRateOnCall(id);
 
         return principal(id) + (principal(id) * couponRate) / 1e18;

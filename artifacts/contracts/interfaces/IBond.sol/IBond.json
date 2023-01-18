@@ -35,23 +35,8 @@
           "type": "uint256"
         }
       ],
-      "name": "bondMetadata",
+      "name": "bondData",
       "outputs": [
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        },
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        },
         {
           "internalType": "uint256",
           "name": "",
@@ -109,25 +94,10 @@
           "type": "uint256"
         }
       ],
-      "name": "bondMetadataAsStruct",
+      "name": "bondDataAsStruct",
       "outputs": [
         {
           "components": [
-            {
-              "internalType": "string",
-              "name": "ticker",
-              "type": "string"
-            },
-            {
-              "internalType": "address",
-              "name": "currency",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "issuer",
-              "type": "address"
-            },
             {
               "internalType": "uint256",
               "name": "tokenAmountPerBond",
@@ -172,6 +142,71 @@
               "internalType": "uint256",
               "name": "couponRate",
               "type": "uint256"
+            }
+          ],
+          "internalType": "struct IBond.BondData",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "bondMetadata",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "bondMetadataAsStruct",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "ticker",
+              "type": "string"
+            },
+            {
+              "internalType": "address",
+              "name": "currency",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "issuer",
+              "type": "address"
             }
           ],
           "internalType": "struct IBond.BondMetadata",
@@ -220,21 +255,6 @@
         {
           "components": [
             {
-              "internalType": "string",
-              "name": "ticker",
-              "type": "string"
-            },
-            {
-              "internalType": "address",
-              "name": "currency",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "issuer",
-              "type": "address"
-            },
-            {
               "internalType": "uint256",
               "name": "tokenAmountPerBond",
               "type": "uint256"
@@ -278,6 +298,28 @@
               "internalType": "uint256",
               "name": "couponRate",
               "type": "uint256"
+            }
+          ],
+          "internalType": "struct IBond.BondData",
+          "name": "data",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "ticker",
+              "type": "string"
+            },
+            {
+              "internalType": "address",
+              "name": "currency",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "issuer",
+              "type": "address"
             }
           ],
           "internalType": "struct IBond.BondMetadata",

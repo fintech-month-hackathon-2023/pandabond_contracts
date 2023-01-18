@@ -10,7 +10,7 @@ import "./interfaces/IBond.sol";
 
 contract BondFactory is ERC1155Holder {
     using Counters for Counters.Counter;
-    Counters.Counter private _numBonds; 
+    Counters.Counter private _numBonds;
 
     address immutable _owner;
     IERC20 immutable _baseToken;
@@ -73,7 +73,6 @@ contract BondFactory is ERC1155Holder {
         uint256 activeDurationInDays,
         uint256 rate // coupon rate
     ) external virtual onlyOwner returns (uint256 id) {
-        
         require(minPurchasedQuantity < bondQuantity, "MPQGTBQ");
         require(durationInDays >= 180, "DB6M");
         require(activeDurationInDays <= 7, "ADA7D");
@@ -83,7 +82,10 @@ contract BondFactory is ERC1155Holder {
         IBond.BondMetadata memory metadata = IBond.BondMetadata(
             ticker,
             address(_baseToken),
-            msg.sender,
+            msg.sender
+        );
+
+        IBond.BondData memory data = IBond.BondData(
             tokenAmountPerBond,
             block.timestamp,
             block.timestamp + durationInDays * 1 days,
@@ -95,11 +97,7 @@ contract BondFactory is ERC1155Holder {
             rate
         );
 
-        id = _bondToken.mint(
-            address(this),
-            bondQuantity,
-            metadata
-        );
+        id = _bondToken.mint(address(this), bondQuantity, data, metadata);
 
         _bonds.push(id);
         _isIssuedByFactory[id] = true;
@@ -123,7 +121,8 @@ contract BondFactory is ERC1155Holder {
         require(isActive(id), "IB");
         require(remainingQuantity(id) >= bondQuantity, "IQ");
 
-        uint256 tokenAmount = bondQuantity * _bondToken.bondMetadataAsStruct(id).tokenAmountPerBond;
+        uint256 tokenAmount = bondQuantity *
+            _bondToken.bondDataAsStruct(id).tokenAmountPerBond;
 
         _purchasedQuantity[id] += bondQuantity;
         _designatedTokenPool[id] += tokenAmount;
@@ -145,7 +144,13 @@ contract BondFactory is ERC1155Holder {
             CATEGORY
         );
 
-        _bondToken.safeTransferFrom(address(this), msg.sender, id, bondQuantity, "");
+        _bondToken.safeTransferFrom(
+            address(this),
+            msg.sender,
+            id,
+            bondQuantity,
+            ""
+        );
         _baseToken.transferFrom(msg.sender, address(this), tokenAmount);
     }
 
@@ -187,7 +192,9 @@ contract BondFactory is ERC1155Holder {
             tokenAmountPerBond = _tokenAmountPerBondAfterComplete[id];
             state = 0;
         } else if (isCanceled(id)) {
-            tokenAmountPerBond = _bondToken.bondMetadataAsStruct(id).tokenAmountPerBond;
+            tokenAmountPerBond = _bondToken
+                .bondDataAsStruct(id)
+                .tokenAmountPerBond;
             state = 1;
         } else if (isDefaulted(id)) {
             tokenAmountPerBond = _tokenAmountPerBondAfterDefault[id];
@@ -280,25 +287,30 @@ contract BondFactory is ERC1155Holder {
     }
 
     function remainingQuantity(uint256 id) public view returns (uint256) {
-        return _bondToken.bondMetadataAsStruct(id).issuedQuantity - _purchasedQuantity[id];
+        return
+            _bondToken.bondDataAsStruct(id).issuedQuantity -
+            _purchasedQuantity[id];
     }
 
     function timeElapsed(uint256 id) public view returns (uint256) {
-        return block.timestamp - _bondToken.bondMetadataAsStruct(id).initBlock;
+        return block.timestamp - _bondToken.bondDataAsStruct(id).initBlock;
     }
 
     function timeRemainingToMaturity(uint256 id) public view returns (uint256) {
-        return _bondToken.bondMetadataAsStruct(id).maturityBlock - block.timestamp;
+        return _bondToken.bondDataAsStruct(id).maturityBlock - block.timestamp;
     }
 
     function timeRemainingToEndOfActive(
         uint256 id
     ) public view returns (uint256) {
-        return _bondToken.bondMetadataAsStruct(id).endOfActiveBlock - block.timestamp;
+        return
+            _bondToken.bondDataAsStruct(id).endOfActiveBlock - block.timestamp;
     }
 
     function principal(uint256 id) public view returns (uint256) {
-        return _bondToken.bondMetadataAsStruct(id).tokenAmountPerBond * _purchasedQuantity[id];
+        return
+            _bondToken.bondDataAsStruct(id).tokenAmountPerBond *
+            _purchasedQuantity[id];
     }
 
     function principalWithInterest(
@@ -306,7 +318,7 @@ contract BondFactory is ERC1155Holder {
     ) public view virtual returns (uint256) {
         return
             principal(id) +
-            (principal(id) * _bondToken.bondMetadataAsStruct(id).couponRate) /
+            (principal(id) * _bondToken.bondDataAsStruct(id).couponRate) /
             1e18;
     }
 
@@ -323,11 +335,14 @@ contract BondFactory is ERC1155Holder {
     }
 
     function isActive(uint256 id) public view returns (bool) {
-        return block.timestamp <= _bondToken.bondMetadataAsStruct(id).endOfActiveBlock;
+        return
+            block.timestamp <= _bondToken.bondDataAsStruct(id).endOfActiveBlock;
     }
 
     function isFulfilled(uint256 id) public view returns (bool) {
-        return _purchasedQuantity[id] >= _bondToken.bondMetadataAsStruct(id).minPurchasedQuantity;
+        return
+            _purchasedQuantity[id] >=
+            _bondToken.bondDataAsStruct(id).minPurchasedQuantity;
     }
 
     function isCanceled(uint256 id) public view returns (bool) {
@@ -335,7 +350,7 @@ contract BondFactory is ERC1155Holder {
     }
 
     function hasReachedMaturity(uint256 id) public view returns (bool) {
-        return block.timestamp > _bondToken.bondMetadataAsStruct(id).maturityBlock;
+        return block.timestamp > _bondToken.bondDataAsStruct(id).maturityBlock;
     }
 
     function isCompleted(uint256 id) public view returns (bool) {
@@ -376,8 +391,7 @@ contract BondFactory is ERC1155Holder {
         return _isIssuedByFactory[id];
     }
 
-    function bonds() public view returns(uint256[] memory) {
+    function bonds() public view returns (uint256[] memory) {
         return _bonds;
     }
-
 }

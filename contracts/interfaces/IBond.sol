@@ -1,13 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-
-interface IBond{
-
+interface IBond {
     struct BondMetadata {
         string ticker;
         address currency;
         address issuer;
+    }
+
+    struct BondData {
         uint256 tokenAmountPerBond;
         uint256 initBlock;
         uint256 maturityBlock;
@@ -19,29 +20,56 @@ interface IBond{
         uint256 couponRate; // 1e18 -> 100%
     }
 
-    function safeTransferFrom(address from, address to, uint256 id, uint256 value, bytes memory data) external;
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 id,
+        uint256 value,
+        bytes memory data
+    ) external;
 
-    function mint(address to, uint256 bondQuantity, BondMetadata memory metadata) external returns(uint256 id);
-
+    function mint(
+        address to,
+        uint256 bondQuantity,
+        BondData memory data,
+        BondMetadata memory metadata
+    ) external returns (uint256 id);
 
     function burn(address account, uint256 id, uint256 quantity) external;
 
-    function bondMetadata(uint256 id) external view returns (string memory,
-        address,
-        address,
-        uint256,
-        uint256,
-        uint256,
-        uint256,
-        uint256,
-        uint256, // x days
-        uint256,
-        uint256,
-        uint256);
+    function bondData(
+        uint256 id
+    )
+        external
+        view
+        returns (
+            uint256,
+            uint256,
+            uint256,
+            uint256,
+            uint256,
+            uint256, // x days
+            uint256,
+            uint256,
+            uint256
+        );
 
-    function bondMetadataAsStruct(uint256 id) external view returns (BondMetadata memory);
+    function bondMetadata(
+        uint256 id
+    ) external view returns (string memory, address, address);
+
+    function bondDataAsStruct(
+        uint256 id
+    ) external view returns (BondData memory);
+
+    function bondMetadataAsStruct(
+        uint256 id
+    ) external view returns (BondMetadata memory);
 
     function numBondsIssued() external view returns (uint256);
 
-    function balanceOf(address owner, uint256 id) external view returns (uint256);
+    function balanceOf(
+        address owner,
+        uint256 id
+    ) external view returns (uint256);
 }

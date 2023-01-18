@@ -78,7 +78,12 @@ contract BondPeriphery {
         require(_sbt.accessTier(msg.sender) >= 2, "NVAT");
         require(!_bondFactoryIsInitialized[msg.sender][token], "AI");
         factory = address(
-            new BondFactory(token, address(_bondToken), address(_bondDB), msg.sender)
+            new BondFactory(
+                token,
+                address(_bondToken),
+                address(_bondDB),
+                msg.sender
+            )
         );
         _bondFactories[msg.sender].push(factory);
         _bondFactoryIsInitialized[msg.sender][token] = true;
