@@ -1,4 +1,6 @@
 # pandabond_contracts
+## deployed network
+Ethereum Goerli Testnet
 
 ## deployed contract addresses
 - BondDB.sol 0x37181Bc92EAa4D87157Cf9af8f41C9c1B42EbE38
