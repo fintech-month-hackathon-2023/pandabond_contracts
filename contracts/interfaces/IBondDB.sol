@@ -68,7 +68,9 @@ interface IBondDB {
         uint256 category
     ) external view returns (uint256);
 
-    function numberOfIssuedBondsByCategory(uint256 category) external view;
+    function numberOfIssuedBondsByCategory(
+        uint256 category
+    ) external view returns (uint256);
 
     function numberOfIssuedBondsByCompanyAndCategory(
         address company,
@@ -83,4 +85,10 @@ interface IBondDB {
         address company,
         uint256 category
     ) external view returns (uint256);
+
+    function incrementTVLByToken(uint256 amount, address token) external;
+
+    function decrementTVLByToken(uint256 amount, address token) external;
+
+    function tvlByToken(address token) external view returns (uint256);
 }

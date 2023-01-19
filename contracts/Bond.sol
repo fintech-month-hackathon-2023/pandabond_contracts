@@ -109,4 +109,26 @@ contract Bond is ERC1155 {
     function numBondsIssued() public view returns (uint256) {
         return _id.current() - 1;
     }
+
+    function timeElapsed(uint256 id) public view returns (uint256) {
+        return block.timestamp - _bondData[id].initBlock;
+    }
+
+    function timeRemainingToMaturity(uint256 id) public view returns (uint256) {
+        return _bondData[id].maturityBlock - block.timestamp;
+    }
+
+    function timeRemainingToEndOfActive(
+        uint256 id
+    ) public view returns (uint256) {
+        return _bondData[id].endOfActiveBlock - block.timestamp;
+    }
+
+    function hasReachedMaturity(uint256 id) public view returns (bool) {
+        return block.timestamp > _bondData[id].maturityBlock;
+    }
+
+    function isActive(uint256 id) public view returns (bool) {
+        return block.timestamp <= _bondData[id].endOfActiveBlock;
+    }
 }

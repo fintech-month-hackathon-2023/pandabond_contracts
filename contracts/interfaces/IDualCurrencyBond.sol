@@ -75,4 +75,18 @@ interface IDualCurrencyBond {
         address owner,
         uint256 id
     ) external view returns (uint256);
+
+    function timeElapsed(uint256 id) external view returns (uint256);
+
+    function timeRemainingToMaturity(
+        uint256 id
+    ) external view returns (uint256);
+
+    function timeRemainingToEndOfActive(
+        uint256 id
+    ) external view returns (uint256);
+
+    function hasReachedMaturity(uint256 id) external view returns (bool);
+
+    function isActive(uint256 id) external view returns (bool);
 }

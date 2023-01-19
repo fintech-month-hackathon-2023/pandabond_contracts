@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
+import "./interfaces/IBondDB.sol";
+
 /** PandaBond Data Aggregator
  * Includes:
  * Total Funds Raised in each currency: _fundsRaisedByToken
@@ -13,7 +15,7 @@ pragma solidity ^0.8.17;
  * Number of times defaulted by company and category: _numberOfTimesDefaultedByCompanyAndCategory
  */
 
-contract BondDB {
+contract BondDB is IBondDB {
     address immutable _owner;
 
     mapping(address => bool) _isPeriphery;
@@ -27,24 +29,28 @@ contract BondDB {
     mapping(address => mapping(uint256 => uint256)) _numberOfIssuedBondsByCompanyAndCategory;
     mapping(address => uint256) _numberOfTimesDefaultedByCompany;
     mapping(address => mapping(uint256 => uint256)) _numberOfTimesDefaultedByCompanyAndCategory;
+    mapping(address => uint256) _tvlByToken;
 
     constructor() {
         _owner = msg.sender;
     }
 
-    function registerPeriphery(address[] memory peripheries) public {
+    function registerPeriphery(address[] memory peripheries) external {
         require(_owner == msg.sender, "NTO");
         for (uint i = 0; i < peripheries.length; i++) {
             _isPeriphery[peripheries[i]] = true;
         }
     }
 
-    function registerFactory(address factory) public {
+    function registerFactory(address factory) external {
         require(_isPeriphery[msg.sender], "NAP");
         _isFactory[factory] = true;
     }
 
-    function incrementFundsRaisedByToken(uint256 amount, address token) public {
+    function incrementFundsRaisedByToken(
+        uint256 amount,
+        address token
+    ) external {
         require(_isFactory[msg.sender] || _isPeriphery[msg.sender], "NAPOF");
         _fundsRaisedByToken[token] += amount;
     }
@@ -53,7 +59,7 @@ contract BondDB {
         uint256 amount,
         address token,
         uint256 category
-    ) public {
+    ) external {
         require(_isFactory[msg.sender] || _isPeriphery[msg.sender], "NAPOF");
         _fundsRaisedByTokenAndCategory[token][category] += amount;
     }
@@ -62,7 +68,7 @@ contract BondDB {
         uint256 amount,
         address company,
         address token
-    ) public {
+    ) external {
         require(_isFactory[msg.sender] || _isPeriphery[msg.sender], "NAPOF");
         _fundsRaisedByCompanyAndToken[company][token] += amount;
     }
@@ -72,14 +78,14 @@ contract BondDB {
         address company,
         address token,
         uint256 category
-    ) public {
+    ) external {
         require(_isFactory[msg.sender] || _isPeriphery[msg.sender], "NAPOF");
         _fundsRaisedByCompanyAndTokenAndCategory[company][token][
             category
         ] += amount;
     }
 
-    function incrementNumberOfIssuedBondsByCategory(uint256 category) public {
+    function incrementNumberOfIssuedBondsByCategory(uint256 category) external {
         require(_isFactory[msg.sender] || _isPeriphery[msg.sender], "NAPOF");
         _numberOfIssuedBondsByCategory[category] += 1;
     }
@@ -87,12 +93,14 @@ contract BondDB {
     function incrementNumberOfIssuedBondsByCompanyAndCategory(
         address company,
         uint256 category
-    ) public {
+    ) external {
         require(_isFactory[msg.sender] || _isPeriphery[msg.sender], "NAPOF");
         _numberOfIssuedBondsByCompanyAndCategory[company][category] += 1;
     }
 
-    function incrementNumberOfTimesDefaultedByCompany(address company) public {
+    function incrementNumberOfTimesDefaultedByCompany(
+        address company
+    ) external {
         require(_isFactory[msg.sender] || _isPeriphery[msg.sender], "NAPOF");
         _numberOfTimesDefaultedByCompany[company] += 1;
     }
@@ -100,38 +108,49 @@ contract BondDB {
     function incrementNumberOfTimesDefaultedByCompanyAndCategory(
         address company,
         uint256 category
-    ) public {
+    ) external {
         require(_isFactory[msg.sender] || _isPeriphery[msg.sender], "NAPOF");
         _numberOfTimesDefaultedByCompanyAndCategory[company][category] += 1;
     }
 
-    function owner() public view returns (address) {
+    function incrementTVLByToken(uint256 amount, address token) external {
+        require(_isFactory[msg.sender] || _isPeriphery[msg.sender], "NAPOF");
+        _tvlByToken[token] += amount;
+    }
+
+    function decrementTVLByToken(uint256 amount, address token) external {
+        require(_isFactory[msg.sender] || _isPeriphery[msg.sender], "NAPOF");
+        require(_tvlByToken[token] >= amount, "AETVL");
+        _tvlByToken[token] -= amount;
+    }
+
+    function owner() external view returns (address) {
         return _owner;
     }
 
-    function isPeriphery(address account) public view returns (bool) {
+    function isPeriphery(address account) external view returns (bool) {
         return _isPeriphery[account];
     }
 
-    function isFactory(address account) public view returns (bool) {
+    function isFactory(address account) external view returns (bool) {
         return _isFactory[account];
     }
 
-    function fundsRaisedByToken(address token) public view returns (uint256) {
+    function fundsRaisedByToken(address token) external view returns (uint256) {
         return _fundsRaisedByToken[token];
     }
 
     function fundsRaisedByTokenAndCategory(
         address token,
         uint256 category
-    ) public view returns (uint256) {
+    ) external view returns (uint256) {
         return _fundsRaisedByTokenAndCategory[token][category];
     }
 
     function fundsRaisedByCompanyAndToken(
         address company,
         address token
-    ) public view returns (uint256) {
+    ) external view returns (uint256) {
         return _fundsRaisedByCompanyAndToken[company][token];
     }
 
@@ -139,34 +158,38 @@ contract BondDB {
         address company,
         address token,
         uint256 category
-    ) public view returns (uint256) {
+    ) external view returns (uint256) {
         return
             _fundsRaisedByCompanyAndTokenAndCategory[company][token][category];
     }
 
     function numberOfIssuedBondsByCategory(
         uint256 category
-    ) public view returns (uint256) {
+    ) external view returns (uint256) {
         return _numberOfIssuedBondsByCategory[category];
     }
 
     function numberOfIssuedBondsByCompanyAndCategory(
         address company,
         uint256 category
-    ) public view returns (uint256) {
+    ) external view returns (uint256) {
         return _numberOfIssuedBondsByCompanyAndCategory[company][category];
     }
 
     function numberOfTimesDefaultedByCompany(
         address company
-    ) public view returns (uint256) {
+    ) external view returns (uint256) {
         return _numberOfTimesDefaultedByCompany[company];
     }
 
     function numberOfTimesDefaultedByCompanyAndCategory(
         address company,
         uint256 category
-    ) public view returns (uint256) {
+    ) external view returns (uint256) {
         return _numberOfTimesDefaultedByCompanyAndCategory[company][category];
+    }
+
+    function tvlByToken(address token) external view returns (uint256) {
+        return _tvlByToken[token];
     }
 }
