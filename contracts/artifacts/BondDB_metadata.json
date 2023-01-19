@@ -13,6 +13,24 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					}
+				],
+				"name": "decrementTVLByToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "company",
 						"type": "address"
@@ -263,6 +281,24 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					}
+				],
+				"name": "incrementTVLByToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "account",
 						"type": "address"
@@ -422,6 +458,25 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					}
+				],
+				"name": "tvlByToken",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -453,11 +508,19 @@
 	},
 	"sources": {
 		"contracts/BondDB.sol": {
-			"keccak256": "0xf257d6165a3c12ae2bd9817c747e9a0584854f732465e82b14dbf7341a929203",
+			"keccak256": "0xf3428832c27fc055622e26be6bdca0e9eb6c627dcd1cd9a3b9a901d4d8e932a5",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://fb6bf4ac4540f1d221d903bb615e3fb70d15d32791b4f88ab343d0db0b8054e7",
-				"dweb:/ipfs/QmYFx7A3NHczDTqpYZvLYUCwkxD9yQp3HyvFuNBZ5SzjmZ"
+				"bzz-raw://dfe19b69cadedca2878e0049f36369afe558f4ed3a0d91976b7ec52e5a6137e5",
+				"dweb:/ipfs/QmbxA9tnkpXZbx4nnzF3327UZorPMkeUU5QxWES4JTE8Rv"
+			]
+		},
+		"contracts/interfaces/IBondDB.sol": {
+			"keccak256": "0x7973b820a643e2077816d7b8807ab8a3978548e393717ae016773bf7ff392fa0",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://11a6a498f742cbf9862ad2614560c27d63c0ba26d1561a68735119ebcbbd89b3",
+				"dweb:/ipfs/QmeYYzZG8iuS3S9sP5z7jxQt5VwPefd6KkyhvUT1PPaN2P"
 			]
 		}
 	},

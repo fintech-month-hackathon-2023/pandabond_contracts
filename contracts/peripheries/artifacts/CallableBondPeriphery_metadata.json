@@ -1,0 +1,317 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "sbt",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "db",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "bt",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					}
+				],
+				"name": "FactoryInitialized",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "bondDB",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "caller",
+						"type": "address"
+					}
+				],
+				"name": "bondFactories",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "caller",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					}
+				],
+				"name": "bondFactoryIsInitialized",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					}
+				],
+				"name": "createBondFactory",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "factory",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "entities",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "caller",
+						"type": "address"
+					}
+				],
+				"name": "isRegistered",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "register",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/peripheries/CallableBondPeriphery.sol": "CallableBondPeriphery"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol": {
+			"keccak256": "0xeb373f1fdc7b755c6a750123a9b9e3a8a02c1470042fd6505d875000a80bde0b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0e28648f994abf1d6bc345644a361cc0b7efa544f8bc0c8ec26011fed85a91ec",
+				"dweb:/ipfs/QmVVE7AiRjKaQYYji7TkjmTeVzGpNmms5eoxqTCfvvpj6D"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol": {
+			"keccak256": "0x2e024ca51ce5abe16c0d34e6992a1104f356e2244eb4ccbec970435e8b3405e3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a74009db3c6fc8db851ba69ddb6795b5c1ef1120c5a00fd1a8dc3a717dd9d519",
+				"dweb:/ipfs/QmZMk8Yh2X3gPS51ckUVLEXjZUhMSEeGApnA53WtjvLb9h"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC1155/utils/ERC1155Receiver.sol": {
+			"keccak256": "0x3dd5e1a66a56f30302108a1da97d677a42b1daa60e503696b2bcbbf3e4c95bcb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0808de0ae4918c664643c885ca7fa6503e8ef2bd75609dfc85152c0128a3422d",
+				"dweb:/ipfs/QmNrhFC1XgBKuuxfahFeiwi1MCdu3FLNpHj2uStgmf4iJj"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5a7d5b1ef5d8d5889ad2ed89d8619c09383b80b72ab226e0fe7bde1636481e34",
+				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
+			]
+		},
+		"@openzeppelin/contracts/utils/Counters.sol": {
+			"keccak256": "0xf0018c2440fbe238dd3a8732fa8e17a0f9dce84d31451dc8a32f6d62b349c9f1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://59e1c62884d55b70f3ae5432b44bb3166ad71ae3acd19c57ab6ddc3c87c325ee",
+				"dweb:/ipfs/QmezuXg5GK5oeA4F91EZhozBFekhq5TD966bHPH18cCqhu"
+			]
+		},
+		"@openzeppelin/contracts/utils/introspection/ERC165.sol": {
+			"keccak256": "0xd10975de010d89fd1c78dc5e8a9a7e7f496198085c151648f20cba166b32582b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fb0048dee081f6fffa5f74afc3fb328483c2a30504e94a0ddd2a5114d731ec4d",
+				"dweb:/ipfs/QmZptt1nmYoA5SgjwnSgWqgUSDgm4q52Yos3xhnMv3MV43"
+			]
+		},
+		"@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+			"keccak256": "0x447a5f3ddc18419d41ff92b3773fb86471b1db25773e07f877f548918a185bf1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://be161e54f24e5c6fae81a12db1a8ae87bc5ae1b0ddc805d82a1440a68455088f",
+				"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy"
+			]
+		},
+		"contracts/factories/BondFactory.sol": {
+			"keccak256": "0x32b1182a51a807356ef17af37120f32064d33b6b412e445bee71ff0dc8c1b409",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c1ded9bda91f8000579757b444c678bbfaea8186cfc55c0731955c1a74394eeb",
+				"dweb:/ipfs/QmPQb1uFjkeZ14paUc8psrvLC7ZJ4LRKofqjGqDrav6PWZ"
+			]
+		},
+		"contracts/factories/CallableBondFactory.sol": {
+			"keccak256": "0xf3756b785d3cc8782dde423670d8dd126ef86ac4ed6942f79c8a4e08f7b4a126",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c533f26379553a06d008d4a6eb7e758e663a4a702b8616877f2367497f1ead40",
+				"dweb:/ipfs/QmYnZGfX7PpKqb7HxgCEbfJv7ccnavhzm39rrdfcv3aLzq"
+			]
+		},
+		"contracts/interfaces/IBond.sol": {
+			"keccak256": "0xeda7c946f4fc064cbf9edd138cbac6391c272326139ddd56c8d7dd5890881205",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9d5a62cb34bc8cb11a81e1dee3bb5a179150ac711ab6ff8dcbb3012c6b2b619f",
+				"dweb:/ipfs/QmfBjEDEpST4aCReZ1nduSvYCVH1sJnudftScN8JF5BxgJ"
+			]
+		},
+		"contracts/interfaces/IBondDB.sol": {
+			"keccak256": "0x7973b820a643e2077816d7b8807ab8a3978548e393717ae016773bf7ff392fa0",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://11a6a498f742cbf9862ad2614560c27d63c0ba26d1561a68735119ebcbbd89b3",
+				"dweb:/ipfs/QmeYYzZG8iuS3S9sP5z7jxQt5VwPefd6KkyhvUT1PPaN2P"
+			]
+		},
+		"contracts/interfaces/ISoulBoundToken.sol": {
+			"keccak256": "0x7db5ac8567f0b9c2c154f17b94f47763d78d1a33514829ed0d75babb9617ab91",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5b84afadef0ccc5a44d16c3d1677c237055a16ed64a36b395cc45dced1f902b1",
+				"dweb:/ipfs/QmP4SWY5XNgja5ond8zKit5iDnqacDA6TvVfpjCS7TVgYD"
+			]
+		},
+		"contracts/peripheries/BondPeriphery.sol": {
+			"keccak256": "0xf6735e585da76ee17c390b4cef1ffdf159b81de22623b762c0c6dbe452ebc7ef",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fb1ad1f59967b57fe88bf289fc6a4383ab13201f8eeda6c34cd59e137f63b296",
+				"dweb:/ipfs/QmTaVDaLk9Te1RSiLT9TfY8tGVEcA4XEXdnGvayCbpPWyN"
+			]
+		},
+		"contracts/peripheries/CallableBondPeriphery.sol": {
+			"keccak256": "0x6300ec53422fc61e7a66016f0bedfdd00af325af12c46b2e4964904ac6146b7e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fce14c7f7fd8b23247c748bf8c30508c77e9c83e69e94473731b4bcd156d1112",
+				"dweb:/ipfs/Qmeu3MohKEKtgxJTC5YiB2gG8xdiv1FmVBcnpVVvZofyCJ"
+			]
+		}
+	},
+	"version": 1
+}
